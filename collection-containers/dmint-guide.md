@@ -69,8 +69,6 @@ The following operations are based on version 0.1.46 of the atomicals-js command
 
 > ​💡 To avoid errors and unexpected discrepancies during the operation, it is recommended to test the entire process on the testnet before any actions on the mainnet.​
 
-> ​❗ When transferring to a specified address in each step, ensure that you only transfer the same amount of sats, as the tool does not support change and will consume the entire UTXO.​
-
 > ​❗ Each step that includes content with \`#container-name\` represents the container name, and it must start with \`#\`. Otherwise, some commands may identify it as a different type of Atomicals.​
 
 > ​💰 For each command in the steps with \`--satsbyte\`, please fill in the value based on the on-chain gas situation.​
