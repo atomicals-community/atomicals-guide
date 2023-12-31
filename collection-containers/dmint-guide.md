@@ -250,7 +250,7 @@ After completion, concatenate the filename and the output `dataId` as: **`atom:b
 4. ⛓️ After modifying metadata C, set it for the container.
 
 ```
-$ yarn cli set-container-data "#container-name" "path/to/container-dmint-metadata.json" --satsbyte=1
+$ yarn cli set-container-data "#container-name" "path/to/container-dmint-metadata.json" --satsbyte=1 --bitworkc "b6cf"
 ```
 
 5. Execute the command to seal the container.
