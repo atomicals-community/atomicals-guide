@@ -126,6 +126,9 @@ yarn cli prepare-dmint "path/to/folder" 0 "b1d0"
 }
 ```
 
+From here, `mint_height` can be modified to specify which block your DMINT should start.
+For example: `840000` means the DMINT of the container can only start after the `840000` height block has been confirmed.
+
 ```
 {
   "mainHash": "0099ad5961eff12096b851d9701bedfe09ec3433dad89857bcaddc5ea2172c98",
