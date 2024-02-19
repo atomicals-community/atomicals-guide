@@ -204,7 +204,7 @@ $ yarn cli mint-container "#container-name" --initialowner "yourWalletAddress" -
 
 2. ⛓️ Enable the dmint status for the container using the previously generated "dmint-timestamp.json." Replace "dmint-json-path.json" with the file path of data B \[generated in step 2 - Prepare Collection Data].
 
-> ​❗ You need to wait for 4 block confirmations (turning into verified status) after completing “Configure Container - Step 1”. You can check the container status at https://test.wizz.cash/explorer by entering the revealTxid.​
+> ​❗ You need to wait for 4 block confirmations (turning into verified status) after completing “Configure Container - Step 1”. You can check the container status at https://wizz.cash/live-mint by entering the revealTxid.​
 
 ```
 $ yarn cli enable-dmint "#container-name" "dmint-json-path.json" --satsbyte=1
