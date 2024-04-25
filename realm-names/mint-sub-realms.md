@@ -48,7 +48,7 @@ The  example demo Realm`+mycoolrealm` exists on testnet at atomical\_id`285051d5
 ```
 ````
 
-The rules file above allows anyone to mint a subrealm of length 6 to 64 characters in length for free as long as the user mines the Subrealm with [Bitwork](../bitwork-mining.md)  of `"bitworkc": "8888.8"` (about 1-2 minutes of CPU time). There is a second additional rule entry that allows subrealms to be minted less than 6 characters in length as long as a payment of 10,000 satoshis is made to the address `bc1pa5hvv3w3wjwfktd63zcng6yeccxg9aa90e34n9jrjw3thgc52reqxw6has` (`5120ed2ec645d1749c9b2dba88b1346899c60c82f7a57e6359964393a2bba31450f2` is the output script in hexadecimal format).
+The rules file above allows anyone to mint a subrealm of length 6 to 64 characters in length for free as long as the user mines the Subrealm with [Bitwork](../bitwork-mining.md)  of `"bitworkc": "8888.8"` (about 1-2 minutes of CPU time). There is a second additional rule entry that allows subrealms to be minted less than 6 characters in length as long as a payment of 10,000 satoshis is made to the address.
 
 Recall that you can convert between output script hex format to addresses and vice versa using the CLI tool. See [Rules Guide](../rules-subrealms-and-dmint.md) for more details.
 

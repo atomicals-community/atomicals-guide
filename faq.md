@@ -38,22 +38,3 @@ Learn more about how the protocol works by visiting the Protocol Specification p
 ## Why are Atomicals called "digital objects" instead of "NFTs"?
 
 A non-fungible token (NFT) is a highly technical term that does not convey the diverse set of usages available. Atomicals uses the term "digital objects" to elicit all of the potential uses of the protocol. It is far more familiar to the average person and is also very developer friendly in the sense that we already work with digital objects and understand their properties.
-
-## Where can I learn more and discuss the Atomicals Protocol?
-
-Learn more at the [BIP](https://github.com/atomicals/atomicals-project/blob/main/bip.mediawiki)
-
-Where can I donate to support Atomicals Protocol development?
-
-## Donate to Atomicals Development
-
-We greatly appreciate any donation to help support Atomicals Protocol development. We worked out of passion and kindness for the world, we believe this technology must exist and be free for all to use. Bitcoin is our one hope for freedom and digital sovereignty and we intend to do our best to make it a reality.
-
-Note: All donations are voluntary are an expression of gratitude for past work completed. There is no expectation of any features or development goals. Show your appreciation with a donation of any kind or amount.
-
-BTC: bc1pa5hvv3w3wjwfktd63zcng6yeccxg9aa90e34n9jrjw3thgc52reqxw6has
-
-
-
-<figure><img src=".gitbook/assets/bc1pa5hvv3w3wjwfktd63zcng6yeccxg9aa90e34n9jrjw3thgc52reqxw6has.png" alt="" width="375"><figcaption><p>BTC Donation address: bc1pa5hvv3w3wjwfktd63zcng6yeccxg9aa90e34n9jrjw3thgc52reqxw6has</p></figcaption></figure>
-
