@@ -4,7 +4,7 @@ description: Learn about Atomicals Non-Fungible Tokens (NFT) Transfer Rules
 
 # Normal Transfer Rules
 
-The normal operation of an NFTs such as Realms and contaners is using First-In First-Out (FIFO) allocations from inputs to outputs. The way to imagine as the the earliest inputs which contain NFTs will go to the first available output, then the next inputs which contain NFTS go to the next output, and so on until all the input NFTs have been allocated. In the case that an expected output is an unspendable OP\_RETURN or there are not enough outputs to accomodate the input sequence, then the NFTs are always assigned to the 0'th output.
+The normal operation of an NFTs such as Realms and containers is using First-In First-Out (FIFO) allocations from inputs to outputs. The way to imagine as the the earliest inputs which contain NFTs will go to the first available output, then the next inputs which contain NFTS go to the next output, and so on until all the input NFTs have been allocated. In the case that an expected output is an unspendable OP\_RETURN or there are not enough outputs to accomodate the input sequence, then the NFTs are always assigned to the 0'th output.
 
 ## Transfers of Non-Fungible Tokens (NFT)
 
