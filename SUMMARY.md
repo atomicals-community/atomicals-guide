@@ -24,5 +24,5 @@
 ## Reference & Tools
 
 * [Specification](reference-and-tools/specification.md)
-* [ElectrumX API and Public Endpoints](reference-and-tools/electrumx-api-and-public-endpoints.md)
+* [ElectrumX API](reference-and-tools/electrumx-api.md)
 * [Javascript Library (CLI)](reference-and-tools/javascript-library-cli.md)
