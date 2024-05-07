@@ -1,0 +1,643 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Recursion and References · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="Create hierarchies and includes of Atomicals digital objects with recursion and references">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="permanent-file-storage.html" />
+    
+    
+    <link rel="prev" href="bitwork-mining.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="nfts/">
+            
+                <a href="nfts/">
+            
+                    
+                    NFTs
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="nfts/normal-transfer-rules.html">
+            
+                <a href="nfts/normal-transfer-rules.html">
+            
+                    
+                    Normal Transfer Rules
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="nfts/swap-transfer-rules.html">
+            
+                <a href="nfts/swap-transfer-rules.html">
+            
+                    
+                    Swap Transfer Rules
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="nfts/splat-operation.html">
+            
+                <a href="nfts/splat-operation.html">
+            
+                    
+                    Splat Operation
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="arc20-tokens/">
+            
+                <a href="arc20-tokens/">
+            
+                    
+                    ARC20 Tokens
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="arc20-tokens/normal-transfer-rules.html">
+            
+                <a href="arc20-tokens/normal-transfer-rules.html">
+            
+                    
+                    Normal Transfer Rules
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="arc20-tokens/swap-transfer-rules.html">
+            
+                <a href="arc20-tokens/swap-transfer-rules.html">
+            
+                    
+                    Swap Transfer Rules
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="arc20-tokens/substantiation-factor.html">
+            
+                <a href="arc20-tokens/substantiation-factor.html">
+            
+                    
+                    Substantiation Factor
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="collection-containers/">
+            
+                <a href="collection-containers/">
+            
+                    
+                    Collection Containers
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="collection-containers/dmint-guide.html">
+            
+                <a href="collection-containers/dmint-guide.html">
+            
+                    
+                    DMINT Guide
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="realm-names/">
+            
+                <a href="realm-names/">
+            
+                    
+                    Realm Names
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="realm-names/payname-format.html">
+            
+                <a href="realm-names/payname-format.html">
+            
+                    
+                    Payname Format
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="realm-names/mint-sub-realms.html">
+            
+                <a href="realm-names/mint-sub-realms.html">
+            
+                    
+                    Mint Sub-Realms
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="rules-subrealms-and-dmint.html">
+            
+                <a href="rules-subrealms-and-dmint.html">
+            
+                    
+                    Rules (Subrealms & DMINT)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="bitwork-mining.html">
+            
+                <a href="bitwork-mining.html">
+            
+                    
+                    Bitwork Mining
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.8" data-path="recursion-and-references.html">
+            
+                <a href="recursion-and-references.html">
+            
+                    
+                    Recursion and References
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="permanent-file-storage.html">
+            
+                <a href="permanent-file-storage.html">
+            
+                    
+                    Permanent File Storage
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="first-is-first-candidate-system.html">
+            
+                <a href="first-is-first-candidate-system.html">
+            
+                    
+                    First is First Candidate System
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="faq.html">
+            
+                <a href="faq.html">
+            
+                    
+                    FAQ
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Reference & Tools</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="reference-and-tools/specification.html">
+            
+                <a href="reference-and-tools/specification.html">
+            
+                    
+                    Specification
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="reference-and-tools/electrumx-api.html">
+            
+                <a href="reference-and-tools/electrumx-api.html">
+            
+                    
+                    ElectrumX API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="reference-and-tools/javascript-library-cli.html">
+            
+                <a href="reference-and-tools/javascript-library-cli.html">
+            
+                    
+                    Javascript Library (CLI)
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Recursion and References</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="recursion-and-references">Recursion and References</h1>
+<p>The following URNs are defined to simplify including and referencing different Atomicals resources.</p>
+<p>NOTE: When referring to references in an Atomical, it is recommended to. use the <code>ctx</code> top level field in the data to import or include references to other Atomicals and data files. The <code>ctx</code> top level is reserved specially for this reason.</p>
+<p>Examples of Recursion with References in the <code>ctx</code> field:</p>
+<pre><code>{
+  // Any Atomical data above...
+  &quot;ctx&quot;: {
+     // Implied to always get the latest data for an atomical:
+     &quot;resourcename&quot;: &quot;atom:btc:id:&lt;atomical_id&gt;/mydata&quot;,
+     // Gets permanent data file image.png at the dat_id
+     &quot;icon&quot;: &quot;atom:btc:dat:&lt;dat_id&gt;/image.png&quot;,
+     // Gets the minted &quot;name&quot; property for a collection
+     &quot;collection-name&quot;: &quot;atom:btc:container:&lt;dat_id&gt;$name&quot;,
+     // Gets the latest version of import.js located at a realm name
+     &quot;assetbuilder.js&quot;: &quot;atom:btc:realm:&lt;realm_name&gt;/import.js&quot;,
+  },
+  // Another other Atomical data ...
+}
+</code></pre><p><strong>Note:</strong> It is preferably to use the &quot;dat&quot; command to refer to on-chain assets where applicable. When using containers, realms or the dynamic references (using slash &quot;/&quot;) it is possible the resource. </p>
+<h2 id="conventions">Conventions</h2>
+<p>The convention is to use the prefix &quot;atom:btc&quot; to indicate the Atomicals Protocol on the Bitcoin (BTC) network. It is possible to reference digital objects by atomical_id, container name, or (sub)realms and immutable file data by the data_id.</p>
+<p>The basic form of the Atomicals Universal Resource Name (URN) is:</p>
+<p><strong>atom:\<chain>:\<ref\_type>:\<identifier>[$ or /[\<file>]]</file></identifier></ref\_type></chain></strong></p>
+<p>Where:</p>
+<p><strong>chain:</strong> The referenced blockchain, set to &quot;BTC&quot; for Bitcoin</p>
+<p><strong>ref_type:</strong> The type of reference. Currently supported &quot;<strong>id&quot;, &quot;container&quot;, &quot;realm&quot;, and &quot;dat&quot;</strong></p>
+<p><strong>identifier</strong>: The identifier corresponding to the ref_type. Such as atomical_id, container name, realm name, or the reveal location of the immutable data in the case of &quot;<em>dat&quot;</em></p>
+<p><strong>$ or /:</strong> Whether to refer to the mint (original) data (using dollar sign $) or the dynamic (latest) data (using slash /) of a file for an Atomical. You will notice that for the <code>dat</code> ref_type either  $ or / is acceptable and will return the same data regardless.</p>
+<p><strong>file:</strong> The name of the file is optional, if omitted then general information about the resource is returned</p>
+<p>The philosophy is that we should be able to unambiguously reference Atomicals digital objects based on their types. At the base level every type such as container and realm can also be referenced by the atomical_id. Furthermore, we should always be able to get the original mint data, and also get the latest version of files stored, including every revision of that file either by txid, version number, or block height.</p>
+<h2 id="references-by-atomical-id">References by Atomical ID</h2>
+<p><strong>Get general information</strong></p>
+<p>atom:btc:id:\<atomical\_id></atomical\_id></p>
+<p>Ex: atom:btc:id:14a0d7c98304bf5ac9a5addceb1de0ce4e840641f82d71d84cebbdac427c1fc3i0</p>
+<p><strong>Get original minted data as JSON</strong></p>
+<p>atom:btc:id:\<atomical\_id>$</atomical\_id></p>
+<p><strong>Get original minted file</strong></p>
+<p>atom:btc:id:\<atomical\_id>$links</atomical\_id></p>
+<p>atom:btc:id:\<atomical\_id>$info.pdf</atomical\_id></p>
+<p><strong>Get latest dynamic data state</strong></p>
+<p>atom:btc:id:\<atomical\_id>/</atomical\_id></p>
+<p><strong>Get latest version of a file</strong></p>
+<p>atom:btc:id:\<atomical\_id>/image.png</atomical\_id></p>
+<p><strong>Get specific version of a file</strong></p>
+<p>atom:btc:id:\<atomical\_id>/image.png@[txid or version number or blockheight]</atomical\_id></p>
+<p>The [txid or version number or blockheight] can be of the form:</p>
+<ul>
+<li>hexadecimal of the txid that was one of the valid updates to the file</li>
+<li>Version number starting with &quot;v&quot; such as &quot;v1&quot;</li>
+<li>Block height for the state of the file as of that block height</li>
+</ul>
+<h2 id="references-by-container-name">References by Container Name</h2>
+<p><strong>Get general information</strong></p>
+<p>atom:btc:container:\<containername></containername></p>
+<p>Examples: \
+atom:btc:id:my-coolcontainer-name</p>
+<p><strong>Get original minted data</strong></p>
+<p>atom:btc:container:\<containername>$</containername></p>
+<p><strong>Get latest dynamic data state</strong></p>
+<p>atom:btc:container:\<containername>/</containername></p>
+<p><strong>Get original minted file</strong></p>
+<p>atom:btc:container:\<containername>$image.jpg</containername></p>
+<p><strong>Get latest version of a file</strong></p>
+<p>atom:btc:container:\<containername>/items</containername></p>
+<p><strong>Get specific version of a file</strong></p>
+<p>atom:btc:container:\<containername>/items@[txid or version number]</containername></p>
+<h2 id="references-by-realms">References by Realms</h2>
+<p><strong>Get general information</strong></p>
+<p>atom:btc:realm:\<realmname></realmname></p>
+<p>Where realmName can be a Top Realm or any Sub Realm</p>
+<p>Examples: \
+atom:btc:realm:myrealm\
+atom:btc:realm:myrealm.somesubrealm\
+atom:btc:realm:myrealm.somesubrealm.thirdlevel-subrealm</p>
+<p><strong>Get latest version of a file</strong></p>
+<p>atom:btc:realm:\<realmname>/profile</realmname></p>
+<p><strong>Get specific version of a file</strong></p>
+<p>atom:btc:realm:\<realmname>/profile@[txid or version number]</realmname></p>
+<p>The [txid or version number or blockheight] can be of the form:</p>
+<ul>
+<li>hexadecimal of the txid that was one of the valid updates to the file</li>
+<li>Version number starting with &quot;v&quot; such as &quot;v1&quot;</li>
+<li>Block height for the state of the file as of that block height</li>
+</ul>
+<h2 id="references-by-arc20-fungible-tokens">References by ARC20 (Fungible Tokens)</h2>
+<p><strong>Get general information</strong></p>
+<p>atom:btc:arc:\<ticker></ticker></p>
+<p>Where ticker can be a ticker name of an ARC20 token</p>
+<p><strong>Get mint original data</strong></p>
+<p>atom:btc:arc:\<ticker>$</ticker></p>
+<p>atom:btc:arc:\<ticker>/icon.png</ticker></p>
+<p><strong>Get event feed at ticker</strong></p>
+<p>atom:btc:arc:\<ticker>/events (To be determined - TBD)</ticker></p>
+<h2 id="references-to-immutable-data">References to Immutable Data</h2>
+<p>To store immutable (non digital object data) use the &quot;dat&quot; command (store-file) and reference it using the <em>dat</em> URN of the form:</p>
+<p>atom:btc:dat:\<data\_id>/image.png</data\_id></p>
+<p>Notice that the <code>dat</code> immutable data storage can use either the $ or the / since there is only one version of the immutable data and both will return the same data.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="bitwork-mining.html" class="navigation navigation-prev " aria-label="Previous page: Bitwork Mining">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="permanent-file-storage.html" class="navigation navigation-next " aria-label="Next page: Permanent File Storage">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"description":"Create hierarchies and includes of Atomicals digital objects with recursion and references","title":"Recursion and References","level":"1.8","depth":1,"next":{"title":"Permanent File Storage","level":"1.9","depth":1,"path":"permanent-file-storage.md","ref":"permanent-file-storage.md","articles":[]},"previous":{"title":"Bitwork Mining","level":"1.7","depth":1,"path":"bitwork-mining.md","ref":"bitwork-mining.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"recursion-and-references.md","mtime":"2024-05-07T03:27:46.849Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-05-07T03:28:11.016Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

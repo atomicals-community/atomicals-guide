@@ -1,0 +1,651 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>ARC20 Tokens · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="Fungible Token colored coin standard backed by Satoshis">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="normal-transfer-rules.html" />
+    
+    
+    <link rel="prev" href="../nfts/splat-operation.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../nfts/">
+            
+                <a href="../nfts/">
+            
+                    
+                    NFTs
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../nfts/normal-transfer-rules.html">
+            
+                <a href="../nfts/normal-transfer-rules.html">
+            
+                    
+                    Normal Transfer Rules
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../nfts/swap-transfer-rules.html">
+            
+                <a href="../nfts/swap-transfer-rules.html">
+            
+                    
+                    Swap Transfer Rules
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../nfts/splat-operation.html">
+            
+                <a href="../nfts/splat-operation.html">
+            
+                    
+                    Splat Operation
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    ARC20 Tokens
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="normal-transfer-rules.html">
+            
+                <a href="normal-transfer-rules.html">
+            
+                    
+                    Normal Transfer Rules
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="swap-transfer-rules.html">
+            
+                <a href="swap-transfer-rules.html">
+            
+                    
+                    Swap Transfer Rules
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="substantiation-factor.html">
+            
+                <a href="substantiation-factor.html">
+            
+                    
+                    Substantiation Factor
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../collection-containers/">
+            
+                <a href="../collection-containers/">
+            
+                    
+                    Collection Containers
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../collection-containers/dmint-guide.html">
+            
+                <a href="../collection-containers/dmint-guide.html">
+            
+                    
+                    DMINT Guide
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../realm-names/">
+            
+                <a href="../realm-names/">
+            
+                    
+                    Realm Names
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../realm-names/payname-format.html">
+            
+                <a href="../realm-names/payname-format.html">
+            
+                    
+                    Payname Format
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../realm-names/mint-sub-realms.html">
+            
+                <a href="../realm-names/mint-sub-realms.html">
+            
+                    
+                    Mint Sub-Realms
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../rules-subrealms-and-dmint.html">
+            
+                <a href="../rules-subrealms-and-dmint.html">
+            
+                    
+                    Rules (Subrealms & DMINT)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../bitwork-mining.html">
+            
+                <a href="../bitwork-mining.html">
+            
+                    
+                    Bitwork Mining
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../recursion-and-references.html">
+            
+                <a href="../recursion-and-references.html">
+            
+                    
+                    Recursion and References
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../permanent-file-storage.html">
+            
+                <a href="../permanent-file-storage.html">
+            
+                    
+                    Permanent File Storage
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../first-is-first-candidate-system.html">
+            
+                <a href="../first-is-first-candidate-system.html">
+            
+                    
+                    First is First Candidate System
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="../faq.html">
+            
+                <a href="../faq.html">
+            
+                    
+                    FAQ
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Reference & Tools</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../reference-and-tools/specification.html">
+            
+                <a href="../reference-and-tools/specification.html">
+            
+                    
+                    Specification
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../reference-and-tools/electrumx-api.html">
+            
+                <a href="../reference-and-tools/electrumx-api.html">
+            
+                    
+                    ElectrumX API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../reference-and-tools/javascript-library-cli.html">
+            
+                <a href="../reference-and-tools/javascript-library-cli.html">
+            
+                    
+                    Javascript Library (CLI)
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >ARC20 Tokens</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="arc20-tokens">ARC20 Tokens</h1>
+<p>The Atomicals Protocol solves the long standing problem of how to represent arbitrary fungible token assets on the Bitcoin blockchain. The ARC-20 fungible token standard finally brings colored coins to Bitcoin and uses each Satoshi to represent ownership units of deployed tokens. This means that every unit of the token is backed by 1 Satoshi forever.  <em>It acts as a kind of &quot;digital gold content&quot; that underpins the value of the token.</em>  It also means every token can never go below 1 Satoshi in value, by definition.</p>
+<p>ARC-20 uses the native Satoshi unit to represent each token, and they can be split and combined just like regular Bitcoins. ARC-20 tokens can be minted by anyone, and transferred to any Bitcoin address type, and works with wallets that support UTXO selection such as Sparrow Wallet <a href="https://www.sparrowwallet.com/" target="_blank">(external link)</a>. There are two modes of deployment: direct and decentralized. Learn more below about the different ways the ARC-20 can be minted and their benefits.</p>
+<p>The ARC-20 also comes with a built in ticker symbol service to provide a global unique name system for ticker symbols. The first registration of the ticker name is permanent and can never be used again.</p>
+<h2 id="decentralized-mint">Decentralized Mint</h2>
+<p>A decentralized is initialized with a ticker, per mint award, total mints allowed, start block height, and metadata. A deployer could initialize a ticker such as <code>$myticker123</code> with a mint award of <code>1,000</code> units, with a total of <code>10,000</code> mints allowed and starting at block height <code>810,000</code> with an image.jpg and even meta data such as description, links, and terms.</p>
+<h3 id="initialize-init-dft">Initialize (init-dft)</h3>
+<p>The basic format of the decentralized initialization using the <a href="../reference-and-tools/javascript-library-cli.html">Atomicals CLI </a>is given as:</p>
+<pre><code>npm run cli init-dft &lt;tick&gt; &lt;per_mint_amt&gt; &lt;mint_count&gt; 
+&lt;start_height&gt; metadata.json
+
+Optional flags:
+--mintbitworkc=&lt;prefix&gt;
+--satsbyte=&lt;number&gt;
+</code></pre><p><em><mark style="color:red;"><strong>See format of metadata.json below</strong></mark></em></p>
+<p>The decentralized initialize function <code>init-dft</code> allows minting for ticker <code>tick</code> to proceed with the <code>mint-dft</code> command (described below) only from the starting block height <code>start_height</code> and allowing a maximum of <code>mint_count</code> total mint requests, each to award <code>per_mint_amt</code> token units to the requester.  The effective total max supply is <code>per_mint_amt * mint_count</code>.</p>
+<p><em>Note:</em> It will take 3 block confirmations before the <code>tick</code> ticker will be claimed. You can query the status with <code>npm run cli get &lt;atomicalID&gt;</code> or <code>npm run cli find-tickers</code></p>
+<p><strong>Required Parameters:</strong></p>
+<p><em>tick:</em> The globally unique ticker name</p>
+<p><em>per_mint_amt: Number of units of the token to award per successful mint. Satoshi amount.</em></p>
+<p><em>mint_count:</em> Total number of permitted mints before exhausting the quota and becoming &quot;fully minted&quot;</p>
+<p><em>start_height:</em> Starting block height that mints may be begin. Can set block height to 0 or any future block height.</p>
+<p><em>image:</em> An image icon to represent the token. The name of the file will appear in the token. Use caution and rename the file first completely and include it as &quot;image.jpg&quot; or &quot;image.png&quot;</p>
+<p><strong>Optional Flags:</strong></p>
+<p><em>--mintbitworkc=\<prefix></prefix></em></p>
+<p>Define an optional <a href="../bitwork-mining.html">Bitwork</a> mining prefix target for the mints. If set, then the minters must expend CPU energy to find a match for the prefix target to be allowed to mint successfully.  This forces minters to perform proof of working mining in a similar manner to Bitcoin mining itself.</p>
+<p>It is recommended to choose a prefix between 4 and 6 hex digits. You can use any valid hex digits between <code>a-f0-9.</code> It is intended to purely be a vanity transaction id and any value is sufficient to require minters to expend energy to mint the token.</p>
+<p>Example time estimates for time required for minters:</p>
+<p><em>Note:</em> it could be any digit in the range <code>a-f0-9</code>, we use all <code>7&apos;s</code> for illustration purpose only.</p>
+<ul>
+<li>3 hex digit prefix of &quot;777&quot; will take about 4 seconds to mine</li>
+<li>4 hex digit prefix of &quot;7777&quot; will take ~1 minute to mine</li>
+<li>5 hex digit prefix of &quot;77777&quot; will take ~16 minutes to mine</li>
+<li>6 hex digit prefix of &quot;777777&quot; will take ~256 minutes to mine</li>
+</ul>
+<p><em>--satsbyte=\<number></number></em></p>
+<p>Set the satoshis per byte for the transaction and override the default.</p>
+<h3 id="mint-mint-dft">Mint (mint-dft)</h3>
+<p>The basic format of the decentralized mint using the <a href="../reference-and-tools/javascript-library-cli.html">Atomicals CLI </a>is given as:</p>
+<pre><code>npm run cli mint-dft &lt;tick&gt;
+
+Optional flags:
+--satsbyte=&lt;number&gt;
+</code></pre><p>The decentralized mint function <code>mint-dft</code> allows minting for ticker <code>tick</code> to proceed starting from block height <code>start_height</code>.</p>
+<p>Follow the on-screen instructions to mint.</p>
+<p><strong>Required Parameters:</strong></p>
+<p><em>tick:</em> The globally unique ticker name</p>
+<p><strong>Optional Flags:</strong></p>
+<p><em>--satsbyte=\<number></number></em></p>
+<p>Set the satoshis per byte for the transaction and override the default.</p>
+<h2 id="direct-mint">Direct Mint</h2>
+<p>The second way to mint or create an ARC-20 token type is to directly create a single output which contains the total supply, with each Satoshi representing a single unit of the token.</p>
+<h3 id="mint-entire-supply-in-one-step">Mint entire supply in one step</h3>
+<pre><code>npm run cli mint-ft &lt;tick&gt; &lt;total_supply&gt; metadata.json
+
+Optional flags:
+--satsbyte=&lt;number&gt;
+</code></pre><p><em><mark style="color:red;"><strong>See format of metadata.json below</strong></mark></em></p>
+<p>The second way to mint or create an ARC-20 token type is to directly create a single output which contains the total supply, with each Satoshi representing a single unit of the token.</p>
+<p>For example, to mint a token with a supply of 100,000,000, simply create a single output with exactly 1 full Bitcoin (since 1 BTC = 100,000,000 Satoshis). An advantage of using the direct minting mode is that the team who creates it must put up the required amount of Bitcoins to substantiate the total minted supply; which greatly reduces dishonest actors from printing tokens out of thin air.</p>
+<p>Direct minting of ARC-20 is ideal for when a team or company wishes to maintain control over the initial distribution and determine how to spend the tokens at a later point in time.</p>
+<p><em>Note:</em> It will take 3 block confirmations before the <code>tick</code> ticker will be claimed. You can query the status with <code>npm run cli get &lt;atomicalID&gt;</code> or <code>npm run cli find-tickers</code></p>
+<p><strong>Required Parameters:</strong></p>
+<p><em>tick:</em> The globally unique ticker name</p>
+<p><em>total_supply:</em> Total supply units to directly mint</p>
+<p><em>image:</em> An image icon to represent the token. The name of the file will appear in the token. Use caution and rename the file first completely and include it as &quot;image.jpg&quot; or &quot;image.png&quot;</p>
+<p><strong>Optional Flags:</strong></p>
+<p><em>--satsbyte=\<number></number></em></p>
+<p>Set the satoshis per byte for the transaction and override the default.</p>
+<h2 id="metadatajson-format">Metadata.json Format</h2>
+<p><strong>Define metadata details into the token.</strong> The suggested format to use follows the convention <code>sample-ft-meta.json.</code></p>
+<p>Use <a href="../permanent-file-storage.html">Permanent File Storage</a> to store an image on-chain and reference it in the &quot;image&quot; field below.</p>
+<pre><code>```json
+{
+    &quot;name&quot;: &quot;&quot;,
+    &quot;desc&quot;: &quot;&quot;,
+    &quot;image&quot;: &quot;atom:btc:dat:&lt;location of store-file data&gt;/image.png&quot;,
+    &quot;decimals&quot;: 0,
+    &quot;links&quot;: {
+        &quot;x&quot;: {
+            &quot;v&quot;: &quot;https://x.com/...&quot;
+        },
+        &quot;website&quot;: {
+            &quot;v&quot;: &quot;https://...&quot;
+        },
+        &quot;realm&quot;: {
+            &quot;v&quot;: &quot;atom:btc:realm:myrealmname.subrealm&quot;
+        },
+        &quot;discord&quot;: {
+            &quot;v&quot;: &quot;https://discord.gg/...&quot;
+        }
+    },
+    &quot;legal&quot;: {
+        &quot;terms&quot;: &quot;&quot;
+    }
+}
+```
+</code></pre><p>None of the fields in the metadata are required, and can take any shape and form as long as it is valid JSON object. However it is recommended at a minimum <em>name, description, and legal</em> are provided to inform users of usage details. You must consult legal advice and verify your applicable jurisdictions permit your intended usage.</p>
+<details>
+
+<summary>&#x26A1; Get started and mint your first Atomical Digital Object</summary>
+
+[Download and install the Atomicals Javascript CLI tool](https://github.com/atomicals/atomicals-js) and follow the quick start instructions to mint your NFT, Collection, or Realm name in less than 2 minutes.
+
+</details>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../nfts/splat-operation.html" class="navigation navigation-prev " aria-label="Previous page: Splat Operation">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="normal-transfer-rules.html" class="navigation navigation-next " aria-label="Next page: Normal Transfer Rules">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"description":"Fungible Token colored coin standard backed by Satoshis","title":"ARC20 Tokens","level":"1.3","depth":1,"next":{"title":"Normal Transfer Rules","level":"1.3.1","depth":2,"path":"arc20-tokens/normal-transfer-rules.md","ref":"arc20-tokens/normal-transfer-rules.md","articles":[]},"previous":{"title":"Splat Operation","level":"1.2.3","depth":2,"path":"nfts/splat-operation.md","ref":"nfts/splat-operation.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"arc20-tokens/README.md","mtime":"2024-05-07T03:27:46.849Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-05-07T03:28:11.016Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
