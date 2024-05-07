@@ -74,7 +74,7 @@ In the third example, we specify that if the item name starts with the number `"
 
 ### Example 4: Require a payment to a certain address to claim the item
 
-To enable "pay to claim" use the `"o"` (output script) field to indicate what output must be paid in order to successfully claim. &#x20;
+To enable "pay to claim" use the `"o"` (output script) field to indicate what output must be paid in order to successfully claim. 
 
 ````
 ```json

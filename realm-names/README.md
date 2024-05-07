@@ -4,7 +4,7 @@ description: Overview of Realm Digital Objects (Realm Name Service)
 
 # Realm Names
 
-This section describes how to mint a special type of Atomical digital object called a _Realm._ You can query and search Realm names on [https://realm.name](https://realm.name)&#x20;
+This section describes how to mint a special type of Atomical digital object called a _Realm._ You can query and search Realm names on [https://realm.name](https://realm.name)
 
 <figure><img src="../.gitbook/assets/banner2.png" alt=""><figcaption><p>Claim your Realm +name on Bitcoin @ <a href="https://realm.name">https://realm.name</a></p></figcaption></figure>
 
@@ -34,7 +34,7 @@ Download and install the [atomicals-js](https://github.com/atomicals/atomicals-j
 
 The purpose of the wallet is to create p2tr (pay-to-taproot) spend scripts and to receive change from the transactions made for the various operations. _Do not put more funds than you can afford to lose, as this is still beta!_
 
-To initialize a new `wallet.json` file that will store your address for receiving change use the `wallet-init` command.&#x20;
+To initialize a new `wallet.json` file that will store your address for receiving change use the `wallet-init` command.
 
 ```
 npm run cli wallet-init
@@ -49,7 +49,7 @@ WIF: L5Sa65gNR6QsBjqK.....r6o4YzcqNRnJ1p4a6GPxqQQ
 ------------------------------------------------------
 ```
 
-#### Step 3. Mint Realm&#x20;
+#### Step 3. Mint Realm
 
 The basic format to mint a Realm name using the [Atomicals CLI ](../reference-and-tools/javascript-library-cli.md)is:
 

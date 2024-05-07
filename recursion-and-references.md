@@ -29,7 +29,7 @@ Examples of Recursion with References in the `ctx` field:
 }
 ```
 
-**Note:** It is preferably to use the "dat" command to refer to on-chain assets where applicable. When using containers, realms or the dynamic references (using slash "/") it is possible the resource. &#x20;
+**Note:** It is preferably to use the "dat" command to refer to on-chain assets where applicable. When using containers, realms or the dynamic references (using slash "/") it is possible the resource. 
 
 ## Conventions
 
@@ -55,7 +55,7 @@ The philosophy is that we should be able to unambiguously reference Atomicals di
 
 ## References by Atomical ID
 
-**Get general information**&#x20;
+**Get general information**
 
 atom:btc:id:\<atomical\_id>
 
@@ -77,7 +77,7 @@ atom:btc:id:\<atomical\_id>/
 
 **Get latest version of a file**
 
-atom:btc:id:\<atomical\_id>/image.png&#x20;
+atom:btc:id:\<atomical\_id>/image.png
 
 **Get specific version of a file**
 
@@ -91,14 +91,14 @@ The \[txid or version number or blockheight] can be of the form:
 
 ## References by Container Name
 
-**Get general information**&#x20;
+**Get general information**
 
 atom:btc:container:\<containerName>
 
 Examples: \
 atom:btc:id:my-coolcontainer-name
 
-**Get original minted data**&#x20;
+**Get original minted data**
 
 atom:btc:container:\<containerName>$
 
@@ -120,7 +120,7 @@ atom:btc:container:\<containerName>/items@\[txid or version number]
 
 ## References by Realms
 
-**Get general information**&#x20;
+**Get general information**
 
 atom:btc:realm:\<realmName>
 
@@ -147,7 +147,7 @@ The \[txid or version number or blockheight] can be of the form:
 
 ## References by ARC20 (Fungible Tokens)
 
-**Get general information**&#x20;
+**Get general information**
 
 atom:btc:arc:\<ticker>
 
@@ -159,7 +159,7 @@ atom:btc:arc:\<ticker>$
 
 atom:btc:arc:\<ticker>/icon.png
 
-**Get event feed at ticker**&#x20;
+**Get event feed at ticker**
 
 atom:btc:arc:\<ticker>/events (To be determined - TBD)
 

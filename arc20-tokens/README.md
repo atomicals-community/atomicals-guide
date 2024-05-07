@@ -4,7 +4,7 @@ description: Fungible Token colored coin standard backed by Satoshis
 
 # ARC20 Tokens
 
-The Atomicals Protocol solves the long standing problem of how to represent arbitrary fungible token assets on the Bitcoin blockchain. The ARC-20 fungible token standard finally brings colored coins to Bitcoin and uses each Satoshi to represent ownership units of deployed tokens. This means that every unit of the token is backed by 1 Satoshi forever.  _It acts as a kind of "digital gold content" that underpins the value of the token._  It also means every token can never go below 1 Satoshi in value, by definition.&#x20;
+The Atomicals Protocol solves the long standing problem of how to represent arbitrary fungible token assets on the Bitcoin blockchain. The ARC-20 fungible token standard finally brings colored coins to Bitcoin and uses each Satoshi to represent ownership units of deployed tokens. This means that every unit of the token is backed by 1 Satoshi forever.  _It acts as a kind of "digital gold content" that underpins the value of the token._  It also means every token can never go below 1 Satoshi in value, by definition.
 
 ARC-20 uses the native Satoshi unit to represent each token, and they can be split and combined just like regular Bitcoins. ARC-20 tokens can be minted by anyone, and transferred to any Bitcoin address type, and works with wallets that support UTXO selection such as Sparrow Wallet [(external link)](https://www.sparrowwallet.com/). There are two modes of deployment: direct and decentralized. Learn more below about the different ways the ARC-20 can be minted and their benefits.
 
@@ -45,7 +45,7 @@ _start\_height:_ Starting block height that mints may be begin. Can set block he
 
 _image:_ An image icon to represent the token. The name of the file will appear in the token. Use caution and rename the file first completely and include it as "image.jpg" or "image.png"
 
-**Optional Flags:**&#x20;
+**Optional Flags:**
 
 _--mintbitworkc=\<prefix>_
 
@@ -91,9 +91,9 @@ _--satsbyte=\<number>_
 
 Set the satoshis per byte for the transaction and override the default.
 
-## Direct Mint&#x20;
+## Direct Mint
 
-The second way to mint or create an ARC-20 token type is to directly create a single output which contains the total supply, with each Satoshi representing a single unit of the token.&#x20;
+The second way to mint or create an ARC-20 token type is to directly create a single output which contains the total supply, with each Satoshi representing a single unit of the token.
 
 ### Mint entire supply in one step
 
@@ -106,7 +106,7 @@ Optional flags:
 
 _<mark style="color:red;">**See format of metadata.json below**</mark>_
 
-The second way to mint or create an ARC-20 token type is to directly create a single output which contains the total supply, with each Satoshi representing a single unit of the token.&#x20;
+The second way to mint or create an ARC-20 token type is to directly create a single output which contains the total supply, with each Satoshi representing a single unit of the token.
 
 For example, to mint a token with a supply of 100,000,000, simply create a single output with exactly 1 full Bitcoin (since 1 BTC = 100,000,000 Satoshis). An advantage of using the direct minting mode is that the team who creates it must put up the required amount of Bitcoins to substantiate the total minted supply; which greatly reduces dishonest actors from printing tokens out of thin air.
 

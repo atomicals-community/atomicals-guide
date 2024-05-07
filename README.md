@@ -8,7 +8,10 @@ description: An Introduction to Atomicals Theory and Digital Objects on Bitcoin
 
 ## What is the Atomicals Protocol?
 
-The Atomicals Protocol is a simple, yet flexible protocol for minting, transferring and updating [_digital objects_](broken-reference) _(_traditionally called non-fungible tokens_)_ for unspent transaction output (UTXO) blockchains such as Bitcoin. An Atomical (or "atom") is a way to organize the creation, transfer and updates of digital objects – it is essentially a chain of digital ownership defined according to a few simple rules.
+The Atomicals Protocol is a simple, yet flexible protocol for minting, transferring and updating
+_digital objects (traditionally called non-fungible tokens)_
+for unspent transaction output (UTXO) blockchains such as Bitcoin. An Atomical (or "atom") is a way to organize the creation,
+transfer and updates of digital objects – it is essentially a chain of digital ownership defined according to a few simple rules.
 
 ## Why use Atomicals?
 
@@ -24,7 +27,7 @@ The Atomical specification is _the simplest possible way_ to organize digital pr
 * Virtual land and title registries
 * Dynamic objects and state for games
 * Social media profiles, posts and communities
-* Anywhere security and decentralization is critical concern. Military grade security and verification requirements.&#x20;
+* Anywhere security and decentralization is critical concern. Military grade security and verification requirements.
 
 The usage philosophy of Atomicals is to pass along the complete history of an Atomical digital object from mint inception and including every transfer updates. _Even if an Atomical is updated or exchanges hands 10,000 times  – that amounts to only about 2.5 MB of data (250 bytes x 10,000)._ A digital object is self-evident, unforgeable chain of authenticity that does not rely on any third party service or centralized indexer for verification purposes.
 
@@ -62,7 +65,7 @@ Atomicals is a shift to sovereignty and self-ownership over our digital lives. A
 The best way to understand the differences of Atomicals is to compare it against other popular non-fungible token (NFT) protocols.
 
 |                       | Atomicals                                                                                                                                                                                                                                    | Ordinals                                                                                                                                                                                                                                                            | Ethereum ERC721                                                        |
-| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+|-----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------|
 | **Value Proposition** | Digital Objects                                                                                                                                                                                                                              | Digital Artifacts                                                                                                                                                                                                                                                   | Digital Collectibles                                                   |
 | **Blockchains**       | Bitcoin and all UTXO blockchains                                                                                                                                                                                                             | Bitcoin and all UTXO blockchains                                                                                                                                                                                                                                    | Ethereum EVM compatible blockchains                                    |
 | **Mint Technique**    | Bitcoin: Commit & reveal w/ "_atom_" envelope.                                                                                                                                                                                               | Bitcoin: Commit & reveal w/ "_ord_" envelope.                                                                                                                                                                                                                       | Fund and deploy contract account                                       |
@@ -78,9 +81,9 @@ The best way to understand the differences of Atomicals is to compare it against
 
 ## Atomical Numbers, IDs, REFs
 
-An Atomical Number is a sequential numbering scheme starting from 0. The numbering scheme is used to give a global order of the Atomicals that were minted. The Atomicals numbering scheme provides a simple way to refer to individual Atomicals with a short number that complements the Atomical ID. &#x20;
+An Atomical Number is a sequential numbering scheme starting from 0. The numbering scheme is used to give a global order of the Atomicals that were minted. The Atomicals numbering scheme provides a simple way to refer to individual Atomicals with a short number that complements the Atomical ID. 
 
-Atomicals have the Atomical ID which is a unique identifier based on the hash and output of the transaction it was minted in such as _**\<txid>**_**i**_**\<index>**_ (Example: _a14e65573ff32b95b91a0ed8367feec64125e5f4ff44d9901002b262da959e6di0_). In contrast, the Atomical number is the sequential ordering of every Atomical that was minted, in the order they appear in the blockchain.&#x20;
+Atomicals have the Atomical ID which is a unique identifier based on the hash and output of the transaction it was minted in such as _**\<txid>**_**i**_**\<index>**_ (Example: _a14e65573ff32b95b91a0ed8367feec64125e5f4ff44d9901002b262da959e6di0_). In contrast, the Atomical number is the sequential ordering of every Atomical that was minted, in the order they appear in the blockchain.
 
 An Atomical Reference ("REF" for short) is an alternative encoding of the Atomical ID using Crockford-base32 to provide a richer character set to make it more useful for vanity identifiers. (See section on 'Bitwork')
 
