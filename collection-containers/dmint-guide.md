@@ -190,7 +190,7 @@ In that case, the rule **`1$`** signifies that the `bitworkc` for items ending w
 6. If you modify item data, ensure that you re-run the command from step 4 each time after making changes to regenerate the data.
 7. Copy a metadata **`dmint-metadata.json`** from **`template/containers/dmint-collection-general-dmint-metadata.json`** in the tool directory or [https://github.com/atomicals/atomicals-js/blob/master/templates/containers/dmint-collection-general-metadata.json](https://github.com/atomicals/atomicals-js/blob/master/templates/containers/dmint-collection-general-metadata.json), and adjust it according to your content.
 
-> ❗ You can refer to the [Collection Containers](https://docs.atomicals.xyz/collection-containers#collection-format-recommended) to write this section, but please do not declare \`attrs\` and \`items\` as they are incorrect content for DMINT and will lead to the inability to seal the container.
+> ❗ You can refer to the [Collection Containers](README.md#collection-format-recommended) to write this section, but please do not declare \`attrs\` and \`items\` as they are incorrect content for DMINT and will lead to the inability to seal the container.
 
 ***
 
