@@ -27,4 +27,4 @@ Success sent tx:  db8a761ed493627138c5733071558c4caa65912c5cba3e1061c02d6d793346
 
 We will use the _reveal location_ (db8a761ed493627138c5733071558c4caa65912c5cba3e1061c02d6d7933461fi0) to refer to the image _image.png_ below.
 
-Now that the file is on chain, use the [recursion and references URN](https://docs.atomicals.xyz/recursion-and-references) syntax to refer to the file.&#x20;
+Now that the file is on chain, use the [recursion and references URN](recursion-and-references.md) syntax to refer to the file.

@@ -54,7 +54,7 @@ Recall that you can convert between output script hex format to addresses and vi
 
 ### Step 2. Set the Minting Rules with "enable-subrealms" for your Realm
 
-With the rules file you have created above in Step 1, we will enable it for your particular Realm.&#x20;
+With the rules file you have created above in Step 1, we will enable it for your particular Realm.
 
 Using the CLI, execute the following command to enable subrealm minting:
 
@@ -94,7 +94,7 @@ yarn cli realm-info mycoolrealm.nicesubrealm
 yarn cli mint-subrealm +mycoolrealm.nicesubrealm --satsbyte=100
 ```
 
-Then follow the on-screen instructions. In the case of a mint that requires a payment, then you must use a tool that allows payments.&#x20;
+Then follow the on-screen instructions. In the case of a mint that requires a payment, then you must use a tool that allows payments.
 
 #### Step 3.  (If payment is required) Make payment for Subrealm during payment window.
 

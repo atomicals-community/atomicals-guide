@@ -4,13 +4,13 @@ description: Frequently Asked Questions About The Atomicals Protocol
 
 # FAQ
 
-## What is the Atomicals Protocol?&#x20;
+## What is the Atomicals Protocol?
 
-Atomicals Protocol is the most simple, flexible and secure way of creating digital objects on Bitcoin. Every Atomical is a self-evident and tamper resistant chain of digital signatures, it is a robust file format for every use imaginable. Everything on the internet can now potentially be owned digital property.&#x20;
+Atomicals Protocol is the most simple, flexible and secure way of creating digital objects on Bitcoin. Every Atomical is a self-evident and tamper resistant chain of digital signatures, it is a robust file format for every use imaginable. Everything on the internet can now potentially be owned digital property.
 
-## Does Atomicals require a separate chain, additional layers or any changes to Bitcoin?&#x20;
+## Does Atomicals require a separate chain, additional layers or any changes to Bitcoin?
 
-No! It's here now and works on native Bitcoin and existing wallets today. It leverages the key design of Bitcoin and requires no secondary layers, side-chains and no trusted services to operate. &#x20;
+No! It's here now and works on native Bitcoin and existing wallets today. It leverages the key design of Bitcoin and requires no secondary layers, side-chains and no trusted services to operate. 
 
 ## What can Atomicals Digital Objects be used for?
 
@@ -27,13 +27,11 @@ Atomicals is designed for the most demanding security requirements with zero roo
 
 The heart of Atomicals is a few key simple rules to follow for mint, transfer, and update operations, continue reading to the Protocol Overview to understand the high level flow before diving deeper.  If you like, you can just [skip all the theory and go straight to minting your first Atomical within a couple of minutes.](reference-and-tools/javascript-library-cli.md)
 
-## How does Atomicals Protocol work?&#x20;
+## How does Atomicals Protocol work?
 
 Learn more about how the protocol works by visiting the Protocol Specification page.
 
-{% content-ref url="reference-and-tools/specification.md" %}
-[specification.md](reference-and-tools/specification.md)
-{% endcontent-ref %}
+{% include "reference-and-tools/specification.md" %}
 
 ## Why are Atomicals called "digital objects" instead of "NFTs"?
 

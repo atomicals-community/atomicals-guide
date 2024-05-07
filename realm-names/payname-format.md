@@ -65,5 +65,5 @@ To see how to store the data for a Realm, consider the following format layout f
 
 **delegate:** It is possible to delegate the entire pay names available for a Realm to an NFT, and it is also possible to delegate an individual inbox.  When _delegate_ is set at the top directly underneath _paynames_ field, then it takes precedence and the rest of the data is ignored (since the entire paynames settings are delegated elsewhere)
 
-&#x20;
+
 

@@ -27,7 +27,7 @@ Consider the table of Exponents to represent token units with 1:1 backing, then 
 10^5 = 100,000
 ```
 
-For example, if we wish to trade 1 unit of a token, while still respect the dust limit. Then we simply need to substantiate each unit of the token with 1,000 regular satoshis and then we can perform a transfer of 1,000 satoshis with Exponent=3.&#x20;
+For example, if we wish to trade 1 unit of a token, while still respect the dust limit. Then we simply need to substantiate each unit of the token with 1,000 regular satoshis and then we can perform a transfer of 1,000 satoshis with Exponent=3.
 
 An example will demonstrate how this works, preserving the fungibility and fluidity of the ARC20 transfers.
 

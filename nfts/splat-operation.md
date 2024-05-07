@@ -6,7 +6,7 @@ description: >-
 
 # Splat Operation
 
-In the event that NFTs were merged to the same UTXO location, use the `SPLAT(x)` operation to quickly seperate all of them in a single transaction.&#x20;
+In the event that NFTs were merged to the same UTXO location, use the `SPLAT(x)` operation to quickly seperate all of them in a single transaction.
 
 Examples:
 

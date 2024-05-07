@@ -12,12 +12,12 @@ description: Atomicals NFT Container DMint Tutorial
 
 ## Terms
 
-| Mint      | The process of creating content on a blockchain. It typically involves generating and recording new items on the blockchain.                                 |
-| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| DMINT     | "Decentralized Mint", indicating a decentralized minting operation.                                                                                          |
-| Container | A collection or a set of items.                                                                                                                              |
-| Bitwork   | The difficulty of minting. The rules for bitwork can be found in the [https://docs.atomicals.xyz/bitwork-mining](https://docs.atomicals.xyz/bitwork-mining). |
-| Timestamp | A continuous 10 or 13-digit number used to represent time.                                                                                                   |
+| Mint      | The process of creating content on a blockchain. It typically involves generating and recording new items on the blockchain. |
+|-----------|------------------------------------------------------------------------------------------------------------------------------|
+| DMINT     | "Decentralized Mint", indicating a decentralized minting operation.                                                          |
+| Container | A collection or a set of items.                                                                                              |
+| Bitwork   | The difficulty of minting. The rules for bitwork can be found in the [Bitwork Mining](../bitwork-mining.md).                 |
+| Timestamp | A continuous 10 or 13-digit number used to represent time.                                                                   |
 
 ## Overview
 
@@ -32,7 +32,7 @@ The process can be broadly divided into four main blocks:
 
 As a project owner, your focus should be on steps 1, 2, and 3.
 
-> ​💰 Before each step, there is a ⛓️ icon indicating that the operation is on-chain, requiring gas consumption.​
+> 💰 Before each step, there is a ⛓️ icon indicating that the operation is on-chain, requiring gas consumption.
 
 #### **Prepare Collection Data**
 
@@ -57,7 +57,7 @@ As a project owner, your focus should be on steps 1, 2, and 3.
 
 1. ⛓️ Download NFT data (A) and locally mint using the official command-line tool.
 
-> ​📌 For your convenience in distinguishing between different files, we have marked them with uppercase English labels. Please pay attention to the corresponding files at each step. Using incorrect files may result in unexpected on-chain data.​
+> 📌 For your convenience in distinguishing between different files, we have marked them with uppercase English labels. Please pay attention to the corresponding files at each step. Using incorrect files may result in unexpected on-chain data.
 
 From the outlined steps above, it is evident that project owners do not need to upload each NFT individually to the blockchain. Users are responsible for verifying and bearing the gas costs during the Mint process.
 
@@ -67,11 +67,11 @@ From the outlined steps above, it is evident that project owners do not need to 
 
 The following operations are based on version 0.1.46 of the atomicals-js command-line tool ([@aa34095c](https://github.com/atomicals/atomicals-js/commit/aa34095c673de28166105e26ab2e898179e8039a)). The tool version may be updated periodically, so before proceeding, please check whether your local CLI is the latest or an available version. For installation and configuration, please refer to: [https://github.com/atomicals/atomicals-js#install](https://github.com/atomicals/atomicals-js#install). If you have any questions about a specific command, use **`-h`** when entering the command to get help content.
 
-> ​💡 To avoid errors and unexpected discrepancies during the operation, it is recommended to test the entire process on the testnet before any actions on the mainnet.​
+> 💡 To avoid errors and unexpected discrepancies during the operation, it is recommended to test the entire process on the testnet before any actions on the mainnet.
 
-> ​❗ Each step that includes content with \`#container-name\` represents the container name, and it must start with \`#\`. Otherwise, some commands may identify it as a different type of Atomicals.​
+> ❗ Each step that includes content with \`#container-name\` represents the container name, and it must start with \`#\`. Otherwise, some commands may identify it as a different type of Atomicals.
 
-> ​💰 For each command in the steps with \`--satsbyte\`, please fill in the value based on the on-chain gas situation.​
+> 💰 For each command in the steps with \`--satsbyte\`, please fill in the value based on the on-chain gas situation.
 
 ***
 
@@ -80,104 +80,104 @@ The following operations are based on version 0.1.46 of the atomicals-js command
 1. Prepare a folder containing all the original NFT files (images). It is recommended to pre-change the file names (e.g., "number.png" to "1234.png") to reduce the possibility and complexity of later data modifications. File names only support digits, English, and hyphens (`-`), and cannot start with a hyphen. The maximum length is 64 characters.
 2. Run a command to generate processed data for all NFTs. After completion, a new folder will be generated.
 
-```
-$ yarn cli prepare-dmint-items "path/to/collection-folder" "path/to/output-folder"
-```
+    ```
+    $ yarn cli prepare-dmint-items "path/to/collection-folder" "path/to/output-folder"
+    ```
 
 3. The generated folder is named "output-folder" with a timestamp, containing individual item-\*.json files for each NFT. Please note that the data generated at this point only includes the `mainHash` and `data` fields. If necessary, you can specify `bitworkc`/`bitworkr` in the `args`, and after modification, users will be required to use the declared bitwork during minting.
 
-```
-{
-  "mainHash": "0099ad5961eff12096b851d9701bedfe09ec3433dad89857bcaddc5ea2172c98",
-  "data": {
-    "args": {
-      "request_dmitem": "test-1",
-      "main": "image.jpg",
-      "i": true
-    },
-    "image.jpg": {
-      "$b": "ffd8ffe000104a4649460001010100600060000ffd9"
-    }
-  }
-}
-```
+    ```json
+    {
+      "mainHash": "0099ad5961eff12096b851d9701bedfe09ec3433dad89857bcaddc5ea2172c98",
+      "data": {
+        "args": {
+          "request_dmitem": "test-1",
+          "main": "image.jpg",
+          "i": true
+        },
+        "image.jpg": {
+          "$b": "ffd8ffe000104a4649460001010100600060000ffd9"
+        }
+      }
+    }
+    ```
 
 4. Run the following command to generate DMINT data. Replace `path/to/folder` with the path to the folder generated in step 2, and `mintHeight` with the starting block height for minting (a suggested value is `0`, meaning minting can occur immediately after deployment). After completion, a new "dmint-timestamp.json" file will be added to the folder, and all processed data for NFTs will be updated.
+    
+    ```
+    yarn cli prepare-dmint "path/to/folder" 0 "b1d0"
+    ```
+    
+    ```json
+    {
+      "dmint": {
+        "v": "1",
+        "mint_height": 0,
+        "merkle": "5c529dacfb37fc24804c550abc851602a9926016a424390387eb23e38de4cca1",
+        "immutable": true,
+        "items": 10,
+        "rules": [
+          {
+            "p": ".*",
+            "bitworkc": "7baf"
+          }
+        ]
+      }
+    }
+    ```
 
-```
-yarn cli prepare-dmint "path/to/folder" 0 "b1d0"
-```
-
-```
-{
-  "dmint": {
-    "v": "1",
-    "mint_height": 0,
-    "merkle": "5c529dacfb37fc24804c550abc851602a9926016a424390387eb23e38de4cca1",
-    "immutable": true,
-    "items": 10,
-    "rules": [
-      {
-        "p": ".*",
-        "bitworkc": "7baf"
-      }
-    ]
-  }
-}
-```
-
-From here, `mint_height` can be modified to specify which block your DMINT should start.
-For example: `840000` means the DMINT of the container can only start after the `840000` height block has been confirmed.
-
-```
-{
-  "mainHash": "0099ad5961eff12096b851d9701bedfe09ec3433dad89857bcaddc5ea2172c98",
-  "data": {
-    "args": {
-      "request_dmitem": "test-1",
-      "main": "image.jpg",
-      "i": true,
-      "proof": [
-        {
-          "p": true,
-          "d": "3212c74b3b5083433a8111f80369d8c591711c577e45dacb8ccaf7960d96790f"
-        }
-      ]
-    },
-    "image.jpg": {
-      "$b": "ffd8ffe000104a4649460001010100600060000ffd9"
-    }
-  },
-  "targetVector": "test-1:any:any:image.jpg:0099ad5961eff12096b851d9701bedfe09ec3433dad89857bcaddc5ea2172c97",
-  "targethash": "0099ad5961eff12096b851d9701bedfe09ec3433dad89857bcaddc5ea2172c98"
-}
-```
-
-> ​❗ Each time you run **`prepare-dmint`** a new **`dmint-timestamp.json`** file will be generated, instead of modifying the old one. Please be cautious not to use incorrect data for subsequent operations.​
+    From here, `mint_height` can be modified to specify which block your DMINT should start.
+    For example: `840000` means the DMINT of the container can only start after the `840000` height block has been confirmed.
+    
+    ```json
+    {
+      "mainHash": "0099ad5961eff12096b851d9701bedfe09ec3433dad89857bcaddc5ea2172c98",
+      "data": {
+        "args": {
+          "request_dmitem": "test-1",
+          "main": "image.jpg",
+          "i": true,
+          "proof": [
+            {
+              "p": true,
+              "d": "3212c74b3b5083433a8111f80369d8c591711c577e45dacb8ccaf7960d96790f"
+            }
+          ]
+        },
+        "image.jpg": {
+          "$b": "ffd8ffe000104a4649460001010100600060000ffd9"
+        }
+      },
+      "targetVector": "test-1:any:any:image.jpg:0099ad5961eff12096b851d9701bedfe09ec3433dad89857bcaddc5ea2172c97",
+      "targethash": "0099ad5961eff12096b851d9701bedfe09ec3433dad89857bcaddc5ea2172c98"
+    }
+    ```
+    
+    > ❗ Each time you run **`prepare-dmint`** a new **`dmint-timestamp.json`** file will be generated, instead of modifying the old one. Please be cautious not to use incorrect data for subsequent operations.
 
 5. You can modify the bitwork rules for dmint. In the `rules`, `p` represents the Pattern, allowing you to use regular expressions to specify different `bitworkc`. Please refer to available resources on regular expressions for rule composition. In the example below, for instance:
 
-```
-{
-  "dmint": {
-    "v": "1",
-    "mint_height": 0,
-    "merkle": "5c529dacfb37fc24804c550abc851602a9926016a424390387eb23e38de4cca1",
-    "immutable": true,
-    "items": 10,
-    "rules": [
-      {
-        "p": "1$",
-        "bitworkc": "890a"
-      },
-      {
-        "p": ".*",
-        "bitworkc": "7baf"
-      }
-    ]
-  }
-}
-```
+   ```json
+   {
+     "dmint": {
+       "v": "1",
+       "mint_height": 0,
+       "merkle": "5c529dacfb37fc24804c550abc851602a9926016a424390387eb23e38de4cca1",
+       "immutable": true,
+       "items": 10,
+       "rules": [
+         {
+           "p": "1$",
+           "bitworkc": "890a"
+         },
+         {
+           "p": ".*",
+           "bitworkc": "7baf"
+         }
+       ]
+     }
+   }
+   ```
 
 [See Rules Guide for more details](../rules-subrealms-and-dmint.md)
 
@@ -185,12 +185,12 @@ For example: `840000` means the DMINT of the container can only start after the 
 
 In that case, the rule **`1$`** signifies that the `bitworkc` for items ending with `1` (e.g., `test1`) should be `890a`, while other items (e.g., `test`) should have `7baf` as their `bitworkc`. Rules are ordered from the most specific (minimum subset) to the most general (full set).
 
-> ​❗ If you have individually set `bitworkc`/`bitworkr` for an item, you need to manually declare the corresponding pattern and rule in the \`rules\`. Otherwise, there will be conflicts between them and the base rules, making minting impossible after formal closure and deployment. The tool does not provide any prompts for this, so exercise caution when making modifications.​
+> ❗ If you have individually set `bitworkc`/`bitworkr` for an item, you need to manually declare the corresponding pattern and rule in the \`rules\`. Otherwise, there will be conflicts between them and the base rules, making minting impossible after formal closure and deployment. The tool does not provide any prompts for this, so exercise caution when making modifications.
 
 6. If you modify item data, ensure that you re-run the command from step 4 each time after making changes to regenerate the data.
 7. Copy a metadata **`dmint-metadata.json`** from **`template/containers/dmint-collection-general-dmint-metadata.json`** in the tool directory or [https://github.com/atomicals/atomicals-js/blob/master/templates/containers/dmint-collection-general-metadata.json](https://github.com/atomicals/atomicals-js/blob/master/templates/containers/dmint-collection-general-metadata.json), and adjust it according to your content.
 
-> ​❗ You can refer to the [Collection Containers](https://docs.atomicals.xyz/collection-containers#collection-format-recommended) to write this section, but please do not declare \`attrs\` and \`items\` as they are incorrect content for DMINT and will lead to the inability to seal the container.​
+> ❗ You can refer to the [Collection Containers](README.md#collection-format-recommended) to write this section, but please do not declare \`attrs\` and \`items\` as they are incorrect content for DMINT and will lead to the inability to seal the container.
 
 ***
 
@@ -204,7 +204,7 @@ $ yarn cli mint-container "#container-name" --initialowner "yourWalletAddress" -
 
 2. ⛓️ Enable the dmint status for the container using the previously generated "dmint-timestamp.json." Replace "dmint-json-path.json" with the file path of data B \[generated in step 2 - Prepare Collection Data].
 
-> ​❗ You need to wait for 4 block confirmations (turning into verified status) after completing “Configure Container - Step 1”. You can check the container status at https://wizz.cash/live-mint by entering the revealTxid.​
+> ❗ You need to wait for 4 block confirmations (turning into verified status) after completing “Configure Container - Step 1”. You can check the container status at https://wizz.cash/live-mint by entering the revealTxid.
 
 ```
 $ yarn cli enable-dmint "#container-name" "dmint-json-path.json" --satsbyte=1
@@ -256,7 +256,7 @@ $ yarn cli set-container-data "#container-name" "path/to/container-dmint-metadat
 
 5. Execute the command to seal the container.
 
-> ​❗ This operation is \*\*IRREVERSIBLE\*\*! Before closing, please complete the item validation in \[Validate NFT Item]. Ensure that all items have been validated and are correct.​
+> ❗ This operation is \*\*IRREVERSIBLE\*\*! Before closing, please complete the item validation in \[Validate NFT Item]. Ensure that all items have been validated and are correct.
 
 ```
 $ yarn cli seal "#container-name" --satsbyte=1
@@ -310,7 +310,7 @@ $ yarn cli validate-container-item "#container-name" "test-item-3" "path/to/item
 }
 ```
 
-> ​❗ It is recommended to validate each item to ensure the effectiveness of all data.​
+> ❗ It is recommended to validate each item to ensure the effectiveness of all data.
 
 ### **Mint NFT Item**
 

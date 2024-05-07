@@ -11,7 +11,7 @@ The normal operation of an ARC20 token transfer is that the sum total of all the
 Fully allocating - cleanly assign all inputs to outputs with FIFO rule.
 
 Atomicals 1932 ,7920, 0542 are Non-Fungible Tokens (NFT) are assigned in First-In First Out order while skipping unspendable outputs (OP\_RETURN). The first input NFTs are assigned starting from Output 0, and then each subsequent NFT input assigned to the next available output.\
-Multiple Atomicals at the same UTXO input are sorted by atomical\_id. Since “1932” is before “7920” it goes first.&#x20;
+Multiple Atomicals at the same UTXO input are sorted by atomical\_id. Since “1932” is before “7920” it goes first.
 
 <figure><img src="../.gitbook/assets/Transfers of Fungible Tokens (ARC20) (7).jpg" alt=""><figcaption><p>Fully allocating - cleanly assign all inputs to outputs with FIFO rule.</p></figcaption></figure>
 
@@ -30,7 +30,7 @@ If they Atomicals cannot be “cleanly assigned”, as in the example above the 
 
 ## Transfers of Fungible Tokens (ARC20)
 
-Insufficient outputs - permanently destroying unallocated units&#x20;
+Insufficient outputs - permanently destroying unallocated units
 
 Atomical 86a1 is Fungible Tokens (ARC20) and can be split and merged across outputs.\
 \

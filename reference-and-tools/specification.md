@@ -4,9 +4,8 @@ description: Detailed Documentation of Atomicals Protocol
 
 # Specification
 
-{% hint style="success" %}
-The heart of Atomicals Protocol is a **few simple rules** to follow for mint, transfer, update, delete and extract operations. After getting acquainted with the theory, jump to [minting your first Atomical Digital Object](javascript-library-cli.md) in a few minutes
-{% endhint %}
+The heart of Atomicals Protocol is a **few simple rules** to follow for mint, transfer, update, delete and extract operations.
+After getting acquainted with the theory, jump to [minting your first Atomical Digital Object](javascript-library-cli.md) in a few minutes
 
 ## ⚠️Warning: The specification is defined in code. Review the commands in the [atomicals-js CLI](https://github.com/atomicals/atomicals-js/tree/master/lib/commands) to see how they function accurately.
 
@@ -29,7 +28,7 @@ The envelope can appear anywhere in the spend script, but it is recommended to p
 
 ```
 <pubkey-hash>
-OP_CHECKSIG     // Perform a check signature against the pubkey-hash
+OP_CHECKSIG     // Perform a check signature against the pubkey-hash
 OP_FALSE
 OP_IF
  0x0461746F6D // Push "atom" 4 bytes
@@ -38,7 +37,7 @@ OP_IF
 OP_ENDIF
 ```
 
-The format of the `<Operation>` field is a single push data representing the type of operation that follows. The `<Payload>` data is interpreted in the context of the operation type. The `<Payload>` is a [CBOR](https://cbor.io/) encoded data structure and can be decoded in a variety of programming languages. CBOR provides a concise and expressive way to encode data and greatly simplifies parsing Atomicals protocol operations since there are only push datas that contain the necessary information for all the files and their metadata. &#x20;
+The format of the `<Operation>` field is a single push data representing the type of operation that follows. The `<Payload>` data is interpreted in the context of the operation type. The `<Payload>` is a [CBOR](https://cbor.io/) encoded data structure and can be decoded in a variety of programming languages. CBOR provides a concise and expressive way to encode data and greatly simplifies parsing Atomicals protocol operations since there are only push datas that contain the necessary information for all the files and their metadata. 
 
 
 
