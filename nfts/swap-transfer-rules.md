@@ -12,4 +12,4 @@ Signing with SIGHASH\_SINGLE | ANYONECANPAY allows the buyer to add additional i
 STEP 2.\
 Buyer adds funding input at 1st input and adds first output to receive the NFT Atomical 7771 value. Signing with SIGHASH\_ALL commits the buyer to all inputs and outputs.
 
-<figure><img src="../.gitbook/assets/Transfers of Fungible Tokens (ARC20) (6).jpg" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/Transfers of Fungible Tokens (ARC20) (6).jpg" alt=""><figcaption></figcaption></figure>

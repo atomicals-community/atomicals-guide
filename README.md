@@ -4,7 +4,7 @@ description: An Introduction to Atomicals Theory and Digital Objects on Bitcoin
 
 # Introduction
 
-<figure><img src=".gitbook/assets/atomblack.jpg" alt=""><figcaption><p>Atomicals Protocol brings Digital Objects to life on Bitcoin and proof-of-work based blockchains.</p></figcaption></figure>
+<figure><img src="./assets/atomblack.jpg" alt=""><figcaption><p>Atomicals Protocol brings Digital Objects to life on Bitcoin and proof-of-work based blockchains.</p></figcaption></figure>
 
 ## What is the Atomicals Protocol?
 

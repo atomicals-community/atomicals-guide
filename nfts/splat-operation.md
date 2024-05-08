@@ -18,7 +18,7 @@ If there are not enough outputs to accommodate the remaining NFTs, or the corres
 
 
 
-<figure><img src="../.gitbook/assets/Transfers of Fungible Tokens (ARC20) (14) (1).jpg" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/Transfers of Fungible Tokens (ARC20) (14) (1).jpg" alt=""><figcaption></figcaption></figure>
 
 \
 

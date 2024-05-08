@@ -8,7 +8,7 @@ description: Atomicals NFT Container DMint Tutorial
 
 
 
-<figure><img src="../.gitbook/assets/Transfers of Fungible Tokens (ARC20) (16).jpg" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/Transfers of Fungible Tokens (ARC20) (16).jpg" alt=""><figcaption></figcaption></figure>
 
 ## Terms
 
