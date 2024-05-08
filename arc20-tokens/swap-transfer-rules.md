@@ -12,4 +12,4 @@ Buyer adds funding input at 1st input and adds first output to receive the ARC20
 
 
 
-<figure><img src="../.gitbook/assets/Transfers of Fungible Tokens (ARC20) (2).jpg" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/Transfers of Fungible Tokens (ARC20) (2).jpg" alt=""><figcaption></figcaption></figure>

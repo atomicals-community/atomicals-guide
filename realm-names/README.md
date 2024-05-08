@@ -6,7 +6,7 @@ description: Overview of Realm Digital Objects (Realm Name Service)
 
 This section describes how to mint a special type of Atomical digital object called a _Realm._ You can query and search Realm names on [https://realm.name](https://realm.name)
 
-<figure><img src="../.gitbook/assets/banner2.png" alt=""><figcaption><p>Claim your Realm +name on Bitcoin @ <a href="https://realm.name">https://realm.name</a></p></figcaption></figure>
+<figure><img src="../assets/banner2.png" alt=""><figcaption><p>Claim your Realm +name on Bitcoin @ <a href="https://realm.name">https://realm.name</a></p></figcaption></figure>
 
 > **-> What is a **_**Realm**_**?**
 >
@@ -14,7 +14,7 @@ This section describes how to mint a special type of Atomical digital object cal
 
 ###
 
-<figure><img src="../.gitbook/assets/WhatsApp Image 2023-12-12 at 9.35.08 AM (1).jpeg" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/WhatsApp Image 2023-12-12 at 9.35.08 AM (1).jpeg" alt=""><figcaption></figcaption></figure>
 
 ### Mint Realm
 

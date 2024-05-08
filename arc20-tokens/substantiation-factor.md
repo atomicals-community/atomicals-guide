@@ -33,28 +33,28 @@ An example will demonstrate how this works, preserving the fungibility and fluid
 
 
 
-<figure><img src="../.gitbook/assets/split st start.jpg" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/split st start.jpg" alt=""><figcaption></figcaption></figure>
 
 In the event there are multiple inputs with different exponents, we can easily handle them too:
 
 
 
-<figure><img src="../.gitbook/assets/split mixed.jpg" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/split mixed.jpg" alt=""><figcaption></figcaption></figure>
 
 An example to "downscale" to a lower exponent
 
 
 
-<figure><img src="../.gitbook/assets/rescale.jpg" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/rescale.jpg" alt=""><figcaption></figcaption></figure>
 
 And one more example to demonstrate the downscaling to make the point extra clear
 
 
 
-<figure><img src="../.gitbook/assets/rescaledust.jpg" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/rescaledust.jpg" alt=""><figcaption></figcaption></figure>
 
 ## Transfers without Operation "ST"
 
 When the Operation "ST" is not used, then the highest Exponent is taken as the target Exponent, that's all there is to it.
 
-<figure><img src="../.gitbook/assets/merge mixed.jpg" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/merge mixed.jpg" alt=""><figcaption></figcaption></figure>

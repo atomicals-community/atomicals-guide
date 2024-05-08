@@ -10,4 +10,4 @@ The normal operation of an NFTs such as Realms and containers is using First-In 
 
 NFT inputs are assigned in a First-In First-Output approach. In the case of an input containing multiple NFTs they are considered at the same position and will be assigned to the same output together.
 
-<figure><img src="../.gitbook/assets/Transfers of Fungible Tokens (ARC20) (5).jpg" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/Transfers of Fungible Tokens (ARC20) (5).jpg" alt=""><figcaption></figcaption></figure>

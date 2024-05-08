@@ -6,7 +6,7 @@ description: >-
 
 # Mint Sub-Realms
 
-<figure><img src="../.gitbook/assets/WhatsApp Image 2023-12-12 at 9.35.07 AM.jpeg" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/WhatsApp Image 2023-12-12 at 9.35.07 AM.jpeg" alt=""><figcaption></figcaption></figure>
 
 ## Method 1: Mint with Sub-Realm Rules
 
