@@ -1,8 +1,10 @@
 ---
-description: This is only only a PRELIMINARY CONCEPT and no implementation exists to date.
+description: This is only a PRELIMINARY CONCEPT and no implementation exists to date.
 ---
 
 # Substantiation Factor
+
+> ❗ This is only a **PRELIMINARY CONCEPT** and no implementation exists to date.
 
 **Problem:** It is not possible to transfer less than 546 satoshis in a single UTXO with Bitcoin due to the dust limit, and therefore it is not possible to transfer ARC20 tokens in denominations less than 546, which can be prohibitive for many users and applications.
 
