@@ -19,7 +19,7 @@ A decentralized is initialized with a ticker, per mint award, total mints allowe
 The basic format of the decentralized initialization using the [Atomicals CLI ](../reference-and-tools/javascript-library-cli.md)is given as:
 
 ```
-npm run cli init-dft <tick> <per_mint_amt> <mint_count> 
+yarn cli init-dft <tick> <per_mint_amt> <mint_count> 
 <start_height> metadata.json
 
 Optional flags:
@@ -31,7 +31,7 @@ _<mark style="color:red;">**See format of metadata.json below**</mark>_
 
 The decentralized initialize function `init-dft` allows minting for ticker `tick` to proceed with the `mint-dft` command (described below) only from the starting block height `start_height` and allowing a maximum of `mint_count` total mint requests, each to award `per_mint_amt` token units to the requester.  The effective total max supply is `per_mint_amt * mint_count`.
 
-_Note:_ It will take 3 block confirmations before the `tick` ticker will be claimed. You can query the status with `npm run cli get <atomicalID>` or `npm run cli find-tickers`
+_Note:_ It will take 3 block confirmations before the `tick` ticker will be claimed. You can query the status with `yarn cli get <atomicalID>` or `yarn cli find-tickers`
 
 **Required Parameters:**
 
@@ -71,7 +71,7 @@ Set the satoshis per byte for the transaction and override the default.
 The basic format of the decentralized mint using the [Atomicals CLI ](../reference-and-tools/javascript-library-cli.md)is given as:
 
 ```
-npm run cli mint-dft <tick>
+yarn cli mint-dft <tick>
 
 Optional flags:
 --satsbyte=<number>
@@ -98,7 +98,7 @@ The second way to mint or create an ARC-20 token type is to directly create a si
 ### Mint entire supply in one step
 
 ```
-npm run cli mint-ft <tick> <total_supply> metadata.json
+yarn cli mint-ft <tick> <total_supply> metadata.json
 
 Optional flags:
 --satsbyte=<number>
@@ -112,7 +112,7 @@ For example, to mint a token with a supply of 100,000,000, simply create a singl
 
 Direct minting of ARC-20 is ideal for when a team or company wishes to maintain control over the initial distribution and determine how to spend the tokens at a later point in time.
 
-_Note:_ It will take 3 block confirmations before the `tick` ticker will be claimed. You can query the status with `npm run cli get <atomicalID>` or `npm run cli find-tickers`
+_Note:_ It will take 3 block confirmations before the `tick` ticker will be claimed. You can query the status with `yarn cli get <atomicalID>` or `yarn cli find-tickers`
 
 **Required Parameters:**
 

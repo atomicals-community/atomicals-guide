@@ -26,8 +26,8 @@ Download and install the [atomicals-js](https://github.com/atomicals/atomicals-j
 
 <pre><code><strong>git clone https://github.com/atomicals/atomicals-js.git
 </strong><strong>cd atomicals-js
-</strong><strong>npm install
-</strong><strong>npm run build
+</strong><strong>yarn install
+</strong><strong>yarn build
 </strong></code></pre>
 
 #### Step 2. Wallet Initialize
@@ -37,7 +37,7 @@ The purpose of the wallet is to create p2tr (pay-to-taproot) spend scripts and t
 To initialize a new `wallet.json` file that will store your address for receiving change use the `wallet-init` command.
 
 ```
-npm run cli wallet-init
+yarn cli wallet-init
 
 >>>
 
@@ -53,7 +53,7 @@ WIF: L5Sa65gNR6QsBjqK.....r6o4YzcqNRnJ1p4a6GPxqQQ
 
 The basic format to mint a Realm name using the [Atomicals CLI ](../reference-and-tools/javascript-library-cli.md)is:
 
-<pre><code><strong>npm run cli mint-realm "myrealmname"
+<pre><code><strong>yarn cli mint-realm "myrealmname"
 </strong>
 Optional flags:
 --satsbyte=&#x3C;number>
@@ -77,7 +77,7 @@ Set the satoshis per byte for the transaction and override the default.
 
 You must wait 3 confirmations for the name to be claimed and registered correctly. After it is claimed, you can query the realm name with the command:
 
-<pre><code><strong>npm run cli get +myrealmname
+<pre><code><strong>yarn cli get +myrealmname
 </strong></code></pre>
 
 You may also query and search Realm names on [https://realm.name](https://realm.name)
@@ -86,7 +86,7 @@ You may also query and search Realm names on [https://realm.name](https://realm.
 
 You can query the global feed of registered Realms and Atomicals:
 
-<pre><code><strong>npm run cli list
+<pre><code><strong>yarn cli list
 </strong></code></pre>
 
 <details>

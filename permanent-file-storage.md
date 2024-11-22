@@ -12,7 +12,7 @@ Using the command line utility, execute the following command to set the data fo
 
 ```
 // immutably store an image on-chain to reference in the container metadata
-npm run cli store-file ./path/to/image.png image.png --satsbyte=10
+yarn cli store-file ./path/to/image.png image.png --satsbyte=10
 
 Success sent tx:  db8a761ed493627138c5733071558c4caa65912c5cba3e1061c02d6d7933461f
 {

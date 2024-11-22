@@ -6,8 +6,8 @@ description: >-
 
 # Javascript Library (CLI)
 
-Get the Command Line Interface (CLI) from NPM or Github:
+Get the Command Line Interface (CLI) from Github:
 
-[Atomicals Github Repository](https://github.com/atomicals/atomicals-js)
+[Atomicals GitHub Repository](https://github.com/atomicals/atomicals-js)
 
 ####

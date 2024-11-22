@@ -161,7 +161,7 @@ Execute the following commands after formatting your collection data in the form
 
 ```
 // first store the desired main image on chain (see section below)
-npm run cli store-file ./path/to/image.png image.png --satsbyte=10
+yarn cli store-file ./path/to/image.png image.png --satsbyte=10
 
 Success sent tx:  db8a761ed493627138c5733071558c4caa65912c5cba3e1061c02d6d7933461f
 {
@@ -177,7 +177,7 @@ Success sent tx:  db8a761ed493627138c5733071558c4caa65912c5cba3e1061c02d6d793346
 // ie: atom:btc:dat:db8a761ed493627138c5733071558c4caa65912c5cba3e1061c02d6d7933461fi0/image.png
 
 // Store the collection metadata with the following command:
-npm run cli set-container-data #mycollection-name collection.json --satsbyte=10
+yarn cli set-container-data #mycollection-name collection.json --satsbyte=10
 ```
 
 ### Bare Minimum Recommended Collection Format
@@ -207,7 +207,7 @@ Execute the following commands after formatting your collection data in the form
 
 ```
 // first store the desired main image on chain (see section below)
-npm run cli store-file ./path/to/image.png image.png --satsbyte=10
+yarn cli store-file ./path/to/image.png image.png --satsbyte=10
 
 Success sent tx:  db8a761ed493627138c5733071558c4caa65912c5cba3e1061c02d6d7933461f
 {
@@ -223,7 +223,7 @@ Success sent tx:  db8a761ed493627138c5733071558c4caa65912c5cba3e1061c02d6d793346
 // ie: atom:btc:dat:db8a761ed493627138c5733071558c4caa65912c5cba3e1061c02d6d7933461fi0/image.png
 
 // Store the collection metadata with the following command:
-npm run cli set-container-data #mycollection-name collection.json --satsbyte=10
+yarn cli set-container-data #mycollection-name collection.json --satsbyte=10
 ```
 
 ## Storing Immutable Image File on Chain
@@ -234,7 +234,7 @@ Using the command line utility, execute the following command to set the data in
 
 ```
 // immutably store an image on-chain to reference in the container metadata
-npm run cli store-file ./path/to/image.png image.png --satsbyte=10
+yarn cli store-file ./path/to/image.png image.png --satsbyte=10
 
 Success sent tx:  db8a761ed493627138c5733071558c4caa65912c5cba3e1061c02d6d7933461f
 {
@@ -254,7 +254,7 @@ We will use the _reveal location_ (db8a761ed493627138c5733071558c4caa65912c5cba3
 Provide a file that matches the collections format above and execute the following command to update the sample #mycollection-name.
 
 ```
-npm run cli set-container-data #mycollection-name sample-collection.json --satsbyte=10
+yarn cli set-container-data #mycollection-name sample-collection.json --satsbyte=10
 ```
 
 ## Querying Metadata and Items of Collection Container
@@ -262,7 +262,7 @@ npm run cli set-container-data #mycollection-name sample-collection.json --satsb
 After the transaction is confirmed in a block, you may query the state of the sample #mycollection-name with:
 
 ```
-npm run cli state #mycollection-name
+yarn cli state #mycollection-name
 ```
 
 
