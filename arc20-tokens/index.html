@@ -471,8 +471,9 @@
 <h2 id="decentralized-mint">Decentralized Mint</h2>
 <p>A decentralized is initialized with a ticker, per mint award, total mints allowed, start block height, and metadata. A deployer could initialize a ticker such as <code>$myticker123</code> with a mint award of <code>1,000</code> units, with a total of <code>10,000</code> mints allowed and starting at block height <code>810,000</code> with an image.jpg and even meta data such as description, links, and terms.</p>
 <h3 id="initialize-init-dft">Initialize (init-dft)</h3>
-<p>The basic format of the decentralized initialization using the <a href="../reference-and-tools/javascript-library-cli.html">Atomicals CLI </a>is given as:</p>
-<pre><code>npm run cli init-dft &lt;tick&gt; &lt;per_mint_amt&gt; &lt;mint_count&gt; 
+<p>The basic format of the decentralized initialization using the
+<a href="../reference-and-tools/javascript-library-cli.html">Atomicals CLI</a> is given as:</p>
+<pre><code>yarn cli init-dft &lt;tick&gt; &lt;per_mint_amt&gt; &lt;mint_count&gt; 
 &lt;start_height&gt; metadata.json
 
 Optional flags:
@@ -480,7 +481,7 @@ Optional flags:
 --satsbyte=&lt;number&gt;
 </code></pre><p><em><mark style="color:red;"><strong>See format of metadata.json below</strong></mark></em></p>
 <p>The decentralized initialize function <code>init-dft</code> allows minting for ticker <code>tick</code> to proceed with the <code>mint-dft</code> command (described below) only from the starting block height <code>start_height</code> and allowing a maximum of <code>mint_count</code> total mint requests, each to award <code>per_mint_amt</code> token units to the requester.  The effective total max supply is <code>per_mint_amt * mint_count</code>.</p>
-<p><em>Note:</em> It will take 3 block confirmations before the <code>tick</code> ticker will be claimed. You can query the status with <code>npm run cli get &lt;atomicalID&gt;</code> or <code>npm run cli find-tickers</code></p>
+<p><em>Note:</em> It will take 3 block confirmations before the <code>tick</code> ticker will be claimed. You can query the status with <code>yarn cli get &lt;atomicalID&gt;</code> or <code>yarn cli find-tickers</code></p>
 <p><strong>Required Parameters:</strong></p>
 <p><em>tick:</em> The globally unique ticker name</p>
 <p><em>per_mint_amt: Number of units of the token to award per successful mint. Satoshi amount.</em></p>
@@ -501,9 +502,55 @@ Optional flags:
 </ul>
 <p><em>--satsbyte=\<number></number></em></p>
 <p>Set the satoshis per byte for the transaction and override the default.</p>
+<h4 id="initialize-a-perpetual-minting-token">Initialize a Perpetual Minting token</h4>
+<pre><code>yarn cli init-dft-perpetual &lt;ticker&gt;
+</code></pre><p><strong>Important Optional Parameters:</strong></p>
+<ul>
+<li><code>max_mints</code>: The number of mints allowed per mint phase. (Defaults to <code>2000</code>)</li>
+<li><code>maxglobalmints</code>: The number of global max mints.</li>
+<li><code>mint_amount</code>: The number of tokens per mint. (Defaults to <code>10000</code>)</li>
+<li><code>mint_height</code>: The starting mint height.</li>
+<li><code>mintbitworkvec</code>: The base vector of the bitwork prefix.</li>
+<li><code>mintbitworkcinc</code>: The amount of <code>bitworkc</code> to increase for each phase of <code>max_mints</code>. (Defaults to <code>1</code>)</li>
+<li><code>mintbitworkrinc</code>: The amount of <code>bitworkr</code> to increase for each phase of <code>max_mints</code>.</li>
+<li><code>mintbitworkcincstart</code>: The starting amount of <code>bitworkc</code> to increase for each phase of <code>max_mints</code>.</li>
+<li><code>mintbitworkrincstart</code>: The starting amount of <code>bitworkr</code> to increase for each phase of <code>max_mints</code>.</li>
+</ul>
+<blockquote>
+<p>See the complete arguments list using the command <code>yarn cli init-dft-perpetual -h</code>.</p>
+</blockquote>
+<p>Below is an example of how to initialize a token with the same configuration of $infinity.</p>
+<pre><code class="lang-shell">yarn cli init-dft-perpetual infinity2 \
+  --max_mints=3333 \
+  --mint_amount=9999 \
+  --mintbitworkvec=&quot;888888888888888888888888&quot; \
+  --mintbitworkcinc=1
+</code></pre>
+<p>In mathematical terms, the relationship between the arguments in the function can be expressed as follows:</p>
+<ol>
+<li><p><strong>Target Calculation</strong>:</p>
+<ul>
+<li>( T_{\text{steps}} = \lfloor \frac{\text{actual_mints}}{\text{max_mints}} \rfloor )</li>
+<li>( T<em>{\text{current}} = \text{starting_target} + (T</em>{\text{steps}} \cdot \text{target_increment}) )</li>
+</ul>
+<p>The current target, ( T_{\text{current}} ), is computed based on the number of minted tokens relative to the maximum allowable mints, scaled by the target increment.</p>
+</li>
+<li><p><strong>Bitwork Prefix Derivation</strong>:</p>
+<ul>
+<li>( \text{multiples} = \frac{T_{\text{current}}}{16} )</li>
+<li>( F_{\text{amount}} = \lfloor \text{multiples} \rfloor )</li>
+<li>( \text{modulo} = T_{\text{current}} \mod 16 )</li>
+</ul>
+<p>The resulting bitwork prefix string is derived from the base vector ( \text{bitwork_vec} ), padded to 32 characters, with:</p>
+<ul>
+<li>The first ( F_{\text{amount}} ) characters forming the primary prefix.</li>
+<li>If ( \text{modulo} &gt; 0 ), it appends (&quot;.\text{modulo}&quot;) to the prefix.</li>
+</ul>
+</li>
+</ol>
 <h3 id="mint-mint-dft">Mint (mint-dft)</h3>
 <p>The basic format of the decentralized mint using the <a href="../reference-and-tools/javascript-library-cli.html">Atomicals CLI </a>is given as:</p>
-<pre><code>npm run cli mint-dft &lt;tick&gt;
+<pre><code>yarn cli mint-dft &lt;tick&gt;
 
 Optional flags:
 --satsbyte=&lt;number&gt;
@@ -517,7 +564,7 @@ Optional flags:
 <h2 id="direct-mint">Direct Mint</h2>
 <p>The second way to mint or create an ARC-20 token type is to directly create a single output which contains the total supply, with each Satoshi representing a single unit of the token.</p>
 <h3 id="mint-entire-supply-in-one-step">Mint entire supply in one step</h3>
-<pre><code>npm run cli mint-ft &lt;tick&gt; &lt;total_supply&gt; metadata.json
+<pre><code>yarn cli mint-ft &lt;tick&gt; &lt;total_supply&gt; metadata.json
 
 Optional flags:
 --satsbyte=&lt;number&gt;
@@ -525,7 +572,7 @@ Optional flags:
 <p>The second way to mint or create an ARC-20 token type is to directly create a single output which contains the total supply, with each Satoshi representing a single unit of the token.</p>
 <p>For example, to mint a token with a supply of 100,000,000, simply create a single output with exactly 1 full Bitcoin (since 1 BTC = 100,000,000 Satoshis). An advantage of using the direct minting mode is that the team who creates it must put up the required amount of Bitcoins to substantiate the total minted supply; which greatly reduces dishonest actors from printing tokens out of thin air.</p>
 <p>Direct minting of ARC-20 is ideal for when a team or company wishes to maintain control over the initial distribution and determine how to spend the tokens at a later point in time.</p>
-<p><em>Note:</em> It will take 3 block confirmations before the <code>tick</code> ticker will be claimed. You can query the status with <code>npm run cli get &lt;atomicalID&gt;</code> or <code>npm run cli find-tickers</code></p>
+<p><em>Note:</em> It will take 3 block confirmations before the <code>tick</code> ticker will be claimed. You can query the status with <code>yarn cli get &lt;atomicalID&gt;</code> or <code>yarn cli find-tickers</code></p>
 <p><strong>Required Parameters:</strong></p>
 <p><em>tick:</em> The globally unique ticker name</p>
 <p><em>total_supply:</em> Total supply units to directly mint</p>
@@ -612,7 +659,7 @@ Optional flags:
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"description":"Fungible Token colored coin standard backed by Satoshis","title":"ARC20 Tokens","level":"1.3","depth":1,"next":{"title":"Normal Transfer Rules","level":"1.3.1","depth":2,"path":"arc20-tokens/normal-transfer-rules.md","ref":"arc20-tokens/normal-transfer-rules.md","articles":[]},"previous":{"title":"Splat Operation","level":"1.2.3","depth":2,"path":"nfts/splat-operation.md","ref":"nfts/splat-operation.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"arc20-tokens/README.md","mtime":"2024-11-21T14:36:50.040Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-11-21T14:37:14.896Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"description":"Fungible Token colored coin standard backed by Satoshis","title":"ARC20 Tokens","level":"1.3","depth":1,"next":{"title":"Normal Transfer Rules","level":"1.3.1","depth":2,"path":"arc20-tokens/normal-transfer-rules.md","ref":"arc20-tokens/normal-transfer-rules.md","articles":[]},"previous":{"title":"Splat Operation","level":"1.2.3","depth":2,"path":"nfts/splat-operation.md","ref":"nfts/splat-operation.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"arc20-tokens/README.md","mtime":"2024-11-22T04:35:50.112Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-11-22T04:36:13.176Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

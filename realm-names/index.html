@@ -481,14 +481,14 @@
 <p>Download and install the <a href="https://github.com/atomicals/atomicals-js" target="_blank">atomicals-js</a> CLI.</p>
 <pre><code>git clone https://github.com/atomicals/atomicals-js.git
 cd atomicals-js
-npm install
-npm run build
+yarn install
+yarn build
 </code></pre>
 
 <h4 id="step-2-wallet-initialize">Step 2. Wallet Initialize</h4>
 <p>The purpose of the wallet is to create p2tr (pay-to-taproot) spend scripts and to receive change from the transactions made for the various operations. <em>Do not put more funds than you can afford to lose, as this is still beta!</em></p>
 <p>To initialize a new <code>wallet.json</code> file that will store your address for receiving change use the <code>wallet-init</code> command.</p>
-<pre><code>npm run cli wallet-init
+<pre><code>yarn cli wallet-init
 
 &gt;&gt;&gt;
 
@@ -500,7 +500,7 @@ WIF: L5Sa65gNR6QsBjqK.....r6o4YzcqNRnJ1p4a6GPxqQQ
 ------------------------------------------------------
 </code></pre><h4 id="step-3-mint-realm">Step 3. Mint Realm</h4>
 <p>The basic format to mint a Realm name using the <a href="../reference-and-tools/javascript-library-cli.html">Atomicals CLI </a>is:</p>
-<pre><code>npm run cli mint-realm &quot;myrealmname&quot;
+<pre><code>yarn cli mint-realm &quot;myrealmname&quot;
 
 Optional flags:
 --satsbyte=&lt;number&gt;
@@ -515,13 +515,13 @@ Optional flags:
 <p>Set the satoshis per byte for the transaction and override the default.</p>
 <h4 id="step-4-query-realm-name">Step 4. Query Realm name</h4>
 <p>You must wait 3 confirmations for the name to be claimed and registered correctly. After it is claimed, you can query the realm name with the command:</p>
-<pre><code>npm run cli get +myrealmname
+<pre><code>yarn cli get +myrealmname
 </code></pre>
 
 <p>You may also query and search Realm names on <a href="https://realm.name" target="_blank">https://realm.name</a></p>
 <h4 id="step-5-query-global-feed-optional">Step 5. Query global feed (optional)</h4>
 <p>You can query the global feed of registered Realms and Atomicals:</p>
-<pre><code>npm run cli list
+<pre><code>yarn cli list
 </code></pre>
 
 <details>
@@ -580,7 +580,7 @@ Optional flags:
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"description":"Overview of Realm Digital Objects (Realm Name Service)","title":"Realm Names","level":"1.5","depth":1,"next":{"title":"Payname Format","level":"1.5.1","depth":2,"path":"realm-names/payname-format.md","ref":"realm-names/payname-format.md","articles":[]},"previous":{"title":"DMINT Guide","level":"1.4.1","depth":2,"path":"collection-containers/dmint-guide.md","ref":"collection-containers/dmint-guide.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"realm-names/README.md","mtime":"2024-11-21T14:36:50.068Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-11-21T14:37:14.896Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"description":"Overview of Realm Digital Objects (Realm Name Service)","title":"Realm Names","level":"1.5","depth":1,"next":{"title":"Payname Format","level":"1.5.1","depth":2,"path":"realm-names/payname-format.md","ref":"realm-names/payname-format.md","articles":[]},"previous":{"title":"DMINT Guide","level":"1.4.1","depth":2,"path":"collection-containers/dmint-guide.md","ref":"collection-containers/dmint-guide.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"realm-names/README.md","mtime":"2024-11-22T04:35:50.144Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-11-22T04:36:13.176Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

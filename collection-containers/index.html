@@ -593,7 +593,7 @@ See the <a href="https://github.com/atomicals/atomicals-js/tree/master/templates
 
 <p>Execute the following commands after formatting your collection data in the format above.</p>
 <pre><code>// first store the desired main image on chain (see section below)
-npm run cli store-file ./path/to/image.png image.png --satsbyte=10
+yarn cli store-file ./path/to/image.png image.png --satsbyte=10
 
 Success sent tx:  db8a761ed493627138c5733071558c4caa65912c5cba3e1061c02d6d7933461f
 {
@@ -609,7 +609,7 @@ Success sent tx:  db8a761ed493627138c5733071558c4caa65912c5cba3e1061c02d6d793346
 // ie: atom:btc:dat:db8a761ed493627138c5733071558c4caa65912c5cba3e1061c02d6d7933461fi0/image.png
 
 // Store the collection metadata with the following command:
-npm run cli set-container-data #mycollection-name collection.json --satsbyte=10
+yarn cli set-container-data #mycollection-name collection.json --satsbyte=10
 </code></pre><h3 id="bare-minimum-recommended-collection-format">Bare Minimum Recommended Collection Format</h3>
 <p>If you have a collection with no attributes and not much metadata, then the following format is the recommended minimum. Provide a <em>name, image and the list of items.</em></p>
 <pre><code>```json
@@ -633,7 +633,7 @@ npm run cli set-container-data #mycollection-name collection.json --satsbyte=10
 
 <p>Execute the following commands after formatting your collection data in the format above.</p>
 <pre><code>// first store the desired main image on chain (see section below)
-npm run cli store-file ./path/to/image.png image.png --satsbyte=10
+yarn cli store-file ./path/to/image.png image.png --satsbyte=10
 
 Success sent tx:  db8a761ed493627138c5733071558c4caa65912c5cba3e1061c02d6d7933461f
 {
@@ -649,12 +649,12 @@ Success sent tx:  db8a761ed493627138c5733071558c4caa65912c5cba3e1061c02d6d793346
 // ie: atom:btc:dat:db8a761ed493627138c5733071558c4caa65912c5cba3e1061c02d6d7933461fi0/image.png
 
 // Store the collection metadata with the following command:
-npm run cli set-container-data #mycollection-name collection.json --satsbyte=10
+yarn cli set-container-data #mycollection-name collection.json --satsbyte=10
 </code></pre><h2 id="storing-immutable-image-file-on-chain">Storing Immutable Image File on Chain</h2>
 <p><a href="../permanent-file-storage.html" title="mention">permanent-file-storage.md</a></p>
 <p>Using the command line utility, execute the following command to set the data in the sample file above.</p>
 <pre><code>// immutably store an image on-chain to reference in the container metadata
-npm run cli store-file ./path/to/image.png image.png --satsbyte=10
+yarn cli store-file ./path/to/image.png image.png --satsbyte=10
 
 Success sent tx:  db8a761ed493627138c5733071558c4caa65912c5cba3e1061c02d6d7933461f
 {
@@ -668,10 +668,10 @@ Success sent tx:  db8a761ed493627138c5733071558c4caa65912c5cba3e1061c02d6d793346
 </code></pre><p>We will use the <em>reveal location</em> (db8a761ed493627138c5733071558c4caa65912c5cba3e1061c02d6d7933461fi0) to refer to the image <em>image.png</em> below.</p>
 <h2 id="adding-nfts-to-a-collection-container">Adding NFTs to a Collection Container</h2>
 <p>Provide a file that matches the collections format above and execute the following command to update the sample #mycollection-name.</p>
-<pre><code>npm run cli set-container-data #mycollection-name sample-collection.json --satsbyte=10
+<pre><code>yarn cli set-container-data #mycollection-name sample-collection.json --satsbyte=10
 </code></pre><h2 id="querying-metadata-and-items-of-collection-container">Querying Metadata and Items of Collection Container</h2>
 <p>After the transaction is confirmed in a block, you may query the state of the sample #mycollection-name with:</p>
-<pre><code>npm run cli state #mycollection-name
+<pre><code>yarn cli state #mycollection-name
 </code></pre><details>
 
 <summary>&#x26A1; Get started and mint your first Atomical Digital Object</summary>
@@ -725,7 +725,7 @@ Success sent tx:  db8a761ed493627138c5733071558c4caa65912c5cba3e1061c02d6d793346
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"description":"Overview of Collection Containers for Tokens and Data","title":"Collection Containers","level":"1.4","depth":1,"next":{"title":"DMINT Guide","level":"1.4.1","depth":2,"path":"collection-containers/dmint-guide.md","ref":"collection-containers/dmint-guide.md","articles":[]},"previous":{"title":"Substantiation Factor","level":"1.3.3","depth":2,"path":"arc20-tokens/substantiation-factor.md","ref":"arc20-tokens/substantiation-factor.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"collection-containers/README.md","mtime":"2024-11-21T14:36:50.068Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-11-21T14:37:14.896Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"description":"Overview of Collection Containers for Tokens and Data","title":"Collection Containers","level":"1.4","depth":1,"next":{"title":"DMINT Guide","level":"1.4.1","depth":2,"path":"collection-containers/dmint-guide.md","ref":"collection-containers/dmint-guide.md","articles":[]},"previous":{"title":"Substantiation Factor","level":"1.3.3","depth":2,"path":"arc20-tokens/substantiation-factor.md","ref":"arc20-tokens/substantiation-factor.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"collection-containers/README.md","mtime":"2024-11-22T04:35:50.140Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-11-22T04:36:13.176Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
