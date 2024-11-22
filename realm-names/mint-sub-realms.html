@@ -1,0 +1,277 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Mint Sub-Realms - Atomicals Protocol Guide</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="An Introduction to Atomicals Theory and Digital Objects on Bitcoin.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Atomicals Protocol Guide</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<hr />
+<h2>description: &gt;-
+Every Realm and Sub-Realm has the ability to mint any number of Sub-Realms
+below them.</h2>
+<h1 id="mint-sub-realms"><a class="header" href="#mint-sub-realms">Mint Sub-Realms</a></h1>
+<figure><img src="../assets/WhatsApp Image 2023-12-12 at 9.35.07 AM.jpeg" alt=""><figcaption></figcaption></figure>
+<h2 id="method-1-mint-with-sub-realm-rules"><a class="header" href="#method-1-mint-with-sub-realm-rules">Method 1: Mint with Sub-Realm Rules</a></h2>
+<p>The first way to allow users to mint subrealms is to define the minting rules at the <code>subrealms</code> namespace in the Realm or Subrealm data structure.  We will demonstrate below how to configure a realm (or subrealm) to allow users to mint subrealms autonomously.  We start with the sample realm name <code>+mycoolrealm</code> and walk through the steps required to enable subrealm minting.</p>
+<h3 id="pre-requisites"><a class="header" href="#pre-requisites">Pre-Requisites</a></h3>
+<ul>
+<li>You have a Realm or Sub-Realm already claimed</li>
+<li>Decide how you will allow user's to mint subrealms (more on this below)</li>
+</ul>
+<h3 id="step-1-create-initial-subrealm-minting-rules-file"><a class="header" href="#step-1-create-initial-subrealm-minting-rules-file">Step 1. Create initial Subrealm Minting Rules File</a></h3>
+<p><a href="../rules-subrealms-and-dmint.html">See Rules Guide for more details</a> for more details on the format of the rules file. Below we will demonstrate how to configure a sample rules configuration for our example Realm <code>+mycoolrealm</code></p>
+<p>The  example demo Realm<code>+mycoolrealm</code> exists on testnet at atomical_id<code>285051d51bb9d045d24dc0816d6f29bfe72b1c91e479702ec866c724a0f4aa56i0</code></p>
+<p><strong>Sample Rules File (Save as rules.json)</strong></p>
+<pre><code>```json
+{
+  "subrealms": {
+    "rules": [
+        {
+          "p": "^[a-z0-9]{6,64}$",
+          "bitworkc": "8888.8"
+        },
+        {
+          "p": ".*",
+           "o": {
+            "0014383fb23c5b1b40025b0e1dd3e310d6e1ee6d316e": {
+              "v": 1000
+            }
+          }
+        }
+    ]
+  }
+}
+```
+</code></pre>
+<p>The rules file above allows anyone to mint a subrealm of length 6 to 64 characters in length for free as long as the user mines the Subrealm with <a href="../bitwork-mining.html">Bitwork</a>  of <code>"bitworkc": "8888.8"</code> (about 1-2 minutes of CPU time). There is a second additional rule entry that allows subrealms to be minted less than 6 characters in length as long as a payment of 10,000 satoshis is made to the address.</p>
+<p>Recall that you can convert between output script hex format to addresses and vice versa using the CLI tool. See <a href="../rules-subrealms-and-dmint.html">Rules Guide</a> for more details.</p>
+<h3 id="step-2-set-the-minting-rules-with-enable-subrealms-for-your-realm"><a class="header" href="#step-2-set-the-minting-rules-with-enable-subrealms-for-your-realm">Step 2. Set the Minting Rules with "enable-subrealms" for your Realm</a></h3>
+<p>With the rules file you have created above in Step 1, we will enable it for your particular Realm.</p>
+<p>Using the CLI, execute the following command to enable subrealm minting:</p>
+<pre><code>yarn cli enable-subrealms +mycoolrealm file.json --satsbyte=100
+</code></pre>
+<p>Then follow the on-screen instructions to deposit the funds into your funding address, and after the transaction is confirmed your rules will become activated and anyone can mint subrealms according to the rules you have created.</p>
+<h3 id="step-3-query-realm-info-to-see-activated-rules"><a class="header" href="#step-3-query-realm-info-to-see-activated-rules">Step 3. Query "realm-info" to see activated rules</a></h3>
+<p>After the transaction in Step 2. is completed successfully and confirmed in at least 1 block, then you may query the activated rules for your realm with the command:</p>
+<pre><code>yarn cli realm-info mycoolrealm
+</code></pre>
+<p>It will display the relevant information about the Realm and the activated rules.</p>
+<blockquote>
+<p><strong>⭐ Congratulations! You have successfully enabled Subrealm Minting on your Realm or Subrealms.</strong> Read below on how your users can participate and claim subrealms</p>
+</blockquote>
+<h3 id="mint-and-claim-subrealm"><a class="header" href="#mint-and-claim-subrealm">Mint and Claim Subrealm</a></h3>
+<p>To mint and claim a subrealm according to the rules created above, the users can use the following commands to query if a Subrealm name is available, and determine the minting rules that are applicable and check the status of their request.</p>
+<h4 id="step-1-query-the-subrealm-to-claim-to-check-if-is-available"><a class="header" href="#step-1-query-the-subrealm-to-claim-to-check-if-is-available">Step 1. Query the Subrealm to claim to check if is available</a></h4>
+<p>Query the subrealm <code>+mycoolrealm.nicesubrealm</code> to see if it is available and if it's taken. The command <code>realm-info</code> like the DNS <code>WHOIS</code> command to report back information about a realm name.</p>
+<pre><code>yarn cli realm-info mycoolrealm.nicesubrealm
+</code></pre>
+<h4 id="step-2-mint-the-subrealm-request"><a class="header" href="#step-2-mint-the-subrealm-request">Step 2. Mint the Subrealm Request</a></h4>
+<pre><code>yarn cli mint-subrealm +mycoolrealm.nicesubrealm --satsbyte=100
+</code></pre>
+<p>Then follow the on-screen instructions. In the case of a mint that requires a payment, then you must use a tool that allows payments.</p>
+<h4 id="step-3--if-payment-is-required-make-payment-for-subrealm-during-payment-window"><a class="header" href="#step-3--if-payment-is-required-make-payment-for-subrealm-during-payment-window">Step 3.  (If payment is required) Make payment for Subrealm during payment window.</a></h4>
+<p>The CLI has the operation to see which Subrealms are ready to be paid and also help pay with regular Satoshis:</p>
+<pre><code>yarn cli pending-subrealms 
+</code></pre>
+<p>Then follow the on-screen instructions to make regular Satoshi payments.</p>
+<p><mark style="color:red;"><strong>⚠️ WARNING: It is not recommended to use the CLI to make payments for high value items and/or paying with ARC20. The tool is experimental and it is not advised to use the tool unless you are an advanced user. It is better to use one of the upcoming wallets to handle the payment complexity on your behalf.</strong></mark></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../realm-names/payname-format.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../rules-subrealms-and-dmint.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../realm-names/payname-format.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../rules-subrealms-and-dmint.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

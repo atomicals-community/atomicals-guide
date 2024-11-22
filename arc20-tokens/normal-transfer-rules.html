@@ -1,0 +1,235 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Normal Transfer Rules - Atomicals Protocol Guide</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="An Introduction to Atomicals Theory and Digital Objects on Bitcoin.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Atomicals Protocol Guide</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<hr />
+<h2 id="description-learn-about-atomicals-fungible-tokens-arc20-transfer-rules"><a class="header" href="#description-learn-about-atomicals-fungible-tokens-arc20-transfer-rules">description: Learn about Atomicals Fungible Tokens (ARC20) Transfer Rules</a></h2>
+<h1 id="normal-transfer-rules"><a class="header" href="#normal-transfer-rules">Normal Transfer Rules</a></h1>
+<p>The normal operation of an ARC20 token transfer is that the sum total of all the input values should be allocated completely, or <em>cleanly,</em> into the available outputs. In the situation that there are not enough output values, or one of the subsequent outputs would result in an overallocation (ie: inflation of the token units), then the remaining balance is permanently destroyed or burned.</p>
+<h2 id="transfers-of-fungible-tokens-arc20"><a class="header" href="#transfers-of-fungible-tokens-arc20">Transfers of Fungible Tokens (ARC20)</a></h2>
+<p>Fully allocating - cleanly assign all inputs to outputs with FIFO rule.</p>
+<p>Atomicals 1932 ,7920, 0542 are Non-Fungible Tokens (NFT) are assigned in First-In First Out order while skipping unspendable outputs (OP_RETURN). The first input NFTs are assigned starting from Output 0, and then each subsequent NFT input assigned to the next available output.<br />
+Multiple Atomicals at the same UTXO input are sorted by atomical_id. Since “1932” is before “7920” it goes first.</p>
+<figure><img src="../assets/Transfers of Fungible Tokens (ARC20) (7).jpg" alt=""><figcaption><p>Fully allocating - cleanly assign all inputs to outputs with FIFO rule.</p></figcaption></figure>
+<h2 id="transfers-of-fungible-tokens-arc20-1"><a class="header" href="#transfers-of-fungible-tokens-arc20-1">Transfers of Fungible Tokens (ARC20)</a></h2>
+<p>Not cleanly allocating - Performs "best effort" assignment for all tokens from Output 0</p>
+<p>In the case that the outputs cannot be fully (or "cleanly") assigned, then the algorithm attempts to allocate all ARC20 tokens starting from Output 0, regardless of whether another ARC20 was already allocated. This decision was made to give leniency in the event that the developer or wallet accidentally failed to track multiple input ARC20 - in other words a "best effort" attempt is made to compensate and assign.\</p>
+<figure><img src="../assets/Transfers of Fungible Tokens (ARC20) (10).jpg" alt=""><figcaption></figcaption></figure>
+<p>Atomicals 1932 ,7920, 0542 are Non-Fungible Tokens (NFT) are assigned in First-In First Out order while skipping unspendable outputs (OP_RETURN).<br />
+<br />
+If they Atomicals cannot be “cleanly assigned”, as in the example above the 5th output has 700 units (which is too much for the Atomical 0542’s value of 620), then the algorithm defaults to “best effort” assigning all ARC20 starting from Output 0.</p>
+<h2 id="transfers-of-fungible-tokens-arc20-2"><a class="header" href="#transfers-of-fungible-tokens-arc20-2">Transfers of Fungible Tokens (ARC20)</a></h2>
+<p>Insufficient outputs - permanently destroying unallocated units</p>
+<p>Atomical 86a1 is Fungible Tokens (ARC20) and can be split and merged across outputs.<br />
+<br />
+An Atomical is insufficiently allocated when there is not a sufficient amount of Satoshis in the outputs to accommodate the input values. The result is the excess input value is burned – or permanently destroyed.  The example above shows that Atomical 86a1’s input value is 2600, but there are only 1600 Satoshis in the outputs, which effectively results in 1000 units of Atomical 86a1 being burned.\</p>
+<figure><img src="../assets/Transfers of Fungible Tokens (ARC20) (8).jpg" alt=""><figcaption></figcaption></figure>
+<h2 id="transfers-of-fungible-tokens-arc20-3"><a class="header" href="#transfers-of-fungible-tokens-arc20-3">Transfers of Fungible Tokens (ARC20)</a></h2>
+<p>Incorrect over-allocation - permanently destroying remainder</p>
+<p>Atomical 86a1 is Fungible Tokens (ARC20) and can be split and merged across outputs.<br />
+<br />
+An Atomical is incorrectly allocated when there is an excess of Satoshis in the expected output and there is not enough remaining balance of the inputs for the Atomical. The example above shows that Atomical 86a1’s input value is 2600, and there is 600 in the first output, but the second output has 2100 Satoshis, which cannot take on the Atomical 86a1 because there is only 2600 - 600 = 2000 units of the Atomical remaining to allocate. To attempt to allocate would result in inflation of the supply and therefore is considered invalid. The result is that 2000 units of Atomical 86a1 is permanently destroyed</p>
+<figure><img src="../assets/Transfers of Fungible Tokens (ARC20) (9).jpg" alt=""><figcaption></figcaption></figure>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../arc20-tokens/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../arc20-tokens/swap-transfer-rules.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../arc20-tokens/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../arc20-tokens/swap-transfer-rules.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

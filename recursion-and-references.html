@@ -1,0 +1,309 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Recursion and References - Atomicals Protocol Guide</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="An Introduction to Atomicals Theory and Digital Objects on Bitcoin.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Atomicals Protocol Guide</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<hr />
+<h2>description: &gt;-
+Create hierarchies and includes of Atomicals digital objects with recursion
+and references</h2>
+<h1 id="recursion-and-references"><a class="header" href="#recursion-and-references">Recursion and References</a></h1>
+<p>The following URNs are defined to simplify including and referencing different Atomicals resources.</p>
+<p>NOTE: When referring to references in an Atomical, it is recommended to. use the <code>ctx</code> top level field in the data to import or include references to other Atomicals and data files. The <code>ctx</code> top level is reserved specially for this reason.</p>
+<p>Examples of Recursion with References in the <code>ctx</code> field:</p>
+<pre><code>{
+  // Any Atomical data above...
+  "ctx": {
+     // Implied to always get the latest data for an atomical:
+     "resourcename": "atom:btc:id:&lt;atomical_id&gt;/mydata",
+     // Gets permanent data file image.png at the dat_id
+     "icon": "atom:btc:dat:&lt;dat_id&gt;/image.png",
+     // Gets the minted "name" property for a collection
+     "collection-name": "atom:btc:container:&lt;dat_id&gt;$name",
+     // Gets the latest version of import.js located at a realm name
+     "assetbuilder.js": "atom:btc:realm:&lt;realm_name&gt;/import.js",
+  },
+  // Another other Atomical data ...
+}
+</code></pre>
+<p><strong>Note:</strong> It is preferably to use the "dat" command to refer to on-chain assets where applicable. When using containers, realms or the dynamic references (using slash "/") it is possible the resource.</p>
+<h2 id="conventions"><a class="header" href="#conventions">Conventions</a></h2>
+<p>The convention is to use the prefix "atom:btc" to indicate the Atomicals Protocol on the Bitcoin (BTC) network. It is possible to reference digital objects by atomical_id, container name, or (sub)realms and immutable file data by the data_id.</p>
+<p>The basic form of the Atomicals Universal Resource Name (URN) is:</p>
+<p><strong>atom:&lt;chain&gt;:&lt;ref_type&gt;:&lt;identifier&gt;[$ or /[&lt;file&gt;]]</strong></p>
+<p>Where:</p>
+<p><strong>chain:</strong> The referenced blockchain, set to "BTC" for Bitcoin</p>
+<p><strong>ref_type:</strong> The type of reference. Currently supported "<strong>id", "container", "realm", and "dat"</strong></p>
+<p><strong>identifier</strong>: The identifier corresponding to the ref_type. Such as atomical_id, container name, realm name, or the reveal location of the immutable data in the case of "<em>dat"</em></p>
+<p><strong>$ or /:</strong> Whether to refer to the mint (original) data (using dollar sign <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.06em;vertical-align:-0.31em;"></span><span class="mclose">)</span><span class="mord mathnormal" style="margin-right:0.02778em;">or</span><span class="mord mathnormal">t</span><span class="mord mathnormal">h</span><span class="mord mathnormal">e</span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mord mathnormal">nami</span><span class="mord mathnormal">c</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span><span class="mord mathnormal">es</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mord mathnormal">d</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span><span class="mord mathnormal">a</span><span class="mopen">(</span><span class="mord mathnormal">u</span><span class="mord mathnormal">s</span><span class="mord mathnormal">in</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">s</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">a</span><span class="mord mathnormal">s</span><span class="mord mathnormal">h</span><span class="mord">/</span><span class="mclose">)</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal" style="margin-right:0.02778em;">or</span><span class="mord mathnormal">an</span><span class="mord mathnormal">A</span><span class="mord mathnormal">t</span><span class="mord mathnormal">o</span><span class="mord mathnormal">mi</span><span class="mord mathnormal">c</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord">.</span><span class="mord mathnormal" style="margin-right:0.22222em;">Y</span><span class="mord mathnormal">o</span><span class="mord mathnormal">u</span><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.01968em;">ll</span><span class="mord mathnormal">n</span><span class="mord mathnormal">o</span><span class="mord mathnormal">t</span><span class="mord mathnormal">i</span><span class="mord mathnormal">ce</span><span class="mord mathnormal">t</span><span class="mord mathnormal">ha</span><span class="mord mathnormal">t</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal" style="margin-right:0.02778em;">or</span><span class="mord mathnormal">t</span><span class="mord mathnormal">h</span><span class="mord mathnormal">e</span><span class="mord">‘</span><span class="mord mathnormal">d</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span><span class="mord">‘</span><span class="mord mathnormal">re</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathnormal">t</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mord mathnormal">p</span><span class="mord mathnormal">ee</span><span class="mord mathnormal">i</span><span class="mord mathnormal">t</span><span class="mord mathnormal">h</span><span class="mord mathnormal" style="margin-right:0.02778em;">er</span></span></span></span> or / is acceptable and will return the same data regardless.</p>
+<p><strong>file:</strong> The name of the file is optional, if omitted then general information about the resource is returned</p>
+<p>The philosophy is that we should be able to unambiguously reference Atomicals digital objects based on their types. At the base level every type such as container and realm can also be referenced by the atomical_id. Furthermore, we should always be able to get the original mint data, and also get the latest version of files stored, including every revision of that file either by txid, version number, or block height.</p>
+<h2 id="references-by-atomical-id"><a class="header" href="#references-by-atomical-id">References by Atomical ID</a></h2>
+<p><strong>Get general information</strong></p>
+<p>atom:btc:id:&lt;atomical_id&gt;</p>
+<p>Ex: atom:btc:id:14a0d7c98304bf5ac9a5addceb1de0ce4e840641f82d71d84cebbdac427c1fc3i0</p>
+<p><strong>Get original minted data as JSON</strong></p>
+<p>atom:btc:id:&lt;atomical_id&gt;$</p>
+<p><strong>Get original minted file</strong></p>
+<p>atom:btc:id:&lt;atomical_id&gt;$links</p>
+<p>atom:btc:id:&lt;atomical_id&gt;$info.pdf</p>
+<p><strong>Get latest dynamic data state</strong></p>
+<p>atom:btc:id:&lt;atomical_id&gt;/</p>
+<p><strong>Get latest version of a file</strong></p>
+<p>atom:btc:id:&lt;atomical_id&gt;/image.png</p>
+<p><strong>Get specific version of a file</strong></p>
+<p>atom:btc:id:&lt;atomical_id&gt;/image.png@[txid or version number or blockheight]</p>
+<p>The [txid or version number or blockheight] can be of the form:</p>
+<ul>
+<li>hexadecimal of the txid that was one of the valid updates to the file</li>
+<li>Version number starting with "v" such as "v1"</li>
+<li>Block height for the state of the file as of that block height</li>
+</ul>
+<h2 id="references-by-container-name"><a class="header" href="#references-by-container-name">References by Container Name</a></h2>
+<p><strong>Get general information</strong></p>
+<p>atom:btc:container:&lt;containerName&gt;</p>
+<p>Examples: <br />
+atom:btc:id:my-coolcontainer-name</p>
+<p><strong>Get original minted data</strong></p>
+<p>atom:btc:container:&lt;containerName&gt;$</p>
+<p><strong>Get latest dynamic data state</strong></p>
+<p>atom:btc:container:&lt;containerName&gt;/</p>
+<p><strong>Get original minted file</strong></p>
+<p>atom:btc:container:&lt;containerName&gt;$image.jpg</p>
+<p><strong>Get latest version of a file</strong></p>
+<p>atom:btc:container:&lt;containerName&gt;/items</p>
+<p><strong>Get specific version of a file</strong></p>
+<p>atom:btc:container:&lt;containerName&gt;/items@[txid or version number]</p>
+<h2 id="references-by-realms"><a class="header" href="#references-by-realms">References by Realms</a></h2>
+<p><strong>Get general information</strong></p>
+<p>atom:btc:realm:&lt;realmName&gt;</p>
+<p>Where realmName can be a Top Realm or any Sub Realm</p>
+<p>Examples: <br />
+atom:btc:realm:myrealm<br />
+atom:btc:realm:myrealm.somesubrealm<br />
+atom:btc:realm:myrealm.somesubrealm.thirdlevel-subrealm</p>
+<p><strong>Get latest version of a file</strong></p>
+<p>atom:btc:realm:&lt;realmName&gt;/profile</p>
+<p><strong>Get specific version of a file</strong></p>
+<p>atom:btc:realm:&lt;realmName&gt;/profile@[txid or version number]</p>
+<p>The [txid or version number or blockheight] can be of the form:</p>
+<ul>
+<li>hexadecimal of the txid that was one of the valid updates to the file</li>
+<li>Version number starting with "v" such as "v1"</li>
+<li>Block height for the state of the file as of that block height</li>
+</ul>
+<h2 id="references-by-arc20-fungible-tokens"><a class="header" href="#references-by-arc20-fungible-tokens">References by ARC20 (Fungible Tokens)</a></h2>
+<p><strong>Get general information</strong></p>
+<p>atom:btc:arc:&lt;ticker&gt;</p>
+<p>Where ticker can be a ticker name of an ARC20 token</p>
+<p><strong>Get mint original data</strong></p>
+<p>atom:btc:arc:&lt;ticker&gt;$</p>
+<p>atom:btc:arc:&lt;ticker&gt;/icon.png</p>
+<p><strong>Get event feed at ticker</strong></p>
+<p>atom:btc:arc:&lt;ticker&gt;/events (To be determined - TBD)</p>
+<h2 id="references-to-immutable-data"><a class="header" href="#references-to-immutable-data">References to Immutable Data</a></h2>
+<p>To store immutable (non digital object data) use the "dat" command (store-file) and reference it using the <em>dat</em> URN of the form:</p>
+<p>atom:btc:dat:&lt;data_id&gt;/image.png</p>
+<p>Notice that the <code>dat</code> immutable data storage can use either the $ or the / since there is only one version of the immutable data and both will return the same data.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="bitwork-mining.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="permanent-file-storage.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="bitwork-mining.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="permanent-file-storage.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

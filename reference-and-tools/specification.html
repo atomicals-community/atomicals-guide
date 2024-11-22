@@ -1,0 +1,253 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Specification - Atomicals Protocol Guide</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="An Introduction to Atomicals Theory and Digital Objects on Bitcoin.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Atomicals Protocol Guide</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<hr />
+<h2 id="description-detailed-documentation-of-atomicals-protocol"><a class="header" href="#description-detailed-documentation-of-atomicals-protocol">description: Detailed Documentation of Atomicals Protocol</a></h2>
+<h1 id="specification"><a class="header" href="#specification">Specification</a></h1>
+<p>The heart of Atomicals Protocol is a <strong>few simple rules</strong> to follow for mint, transfer, update, delete and extract operations.
+After getting acquainted with the theory, jump to <a href="javascript-library-cli.html">minting your first Atomical Digital Object</a> in a few minutes</p>
+<h2 id="warning-the-specification-is-defined-in-code-review-the-commands-in-the-atomicals-js-cli-to-see-how-they-function-accurately"><a class="header" href="#warning-the-specification-is-defined-in-code-review-the-commands-in-the-atomicals-js-cli-to-see-how-they-function-accurately">⚠️Warning: The specification is defined in code. Review the commands in the <a href="https://github.com/atomicals/atomicals-js/tree/master/lib/commands">atomicals-js CLI</a> to see how they function accurately.</a></h2>
+<h2 id="envelope"><a class="header" href="#envelope">Envelope</a></h2>
+<p>All methods follows a "commit and reveal" scheme leveraging Taproot (P2TR) spend path scripts. In the witness script for an input, we put the Atomicals envelope which will contain the various operations that can be legally performed on an Atomical.</p>
+<p>The convention is to use an <code>OP_FALSE OP_IF ... OP_ENDIF</code> to place arbitrary non-executable content in a witness spend script. We use the bytes of "<em>atom</em>" (<code>61746F6D</code> in hex) to indicate this envelope belongs to the Atomicals Protocol.</p>
+<pre><code>OP_FALSE
+OP_IF
+ 0x0461746F6D // Push "atom" 4 bytes
+ &lt;Operation&gt;  // Followed by a single push to denote the operation type
+ &lt;Payload&gt;    // Payload (CBOR encoded) for the operation
+OP_ENDIF
+</code></pre>
+<p>The envelope can appear anywhere in the spend script, but it is recommended to put it after a pay-to-pubkey-hash (p2pkh), which would actually be:</p>
+<pre><code>&lt;pubkey-hash&gt;
+OP_CHECKSIG     // Perform a check signature against the pubkey-hash
+OP_FALSE
+OP_IF
+ 0x0461746F6D // Push "atom" 4 bytes
+ &lt;Operation&gt;  // Followed by a single push to denote the operation type
+ &lt;Payload&gt;    // Payload (CBOR encoded) for the operation
+OP_ENDIF
+</code></pre>
+<p>The format of the <code>&lt;Operation&gt;</code> field is a single push data representing the type of operation that follows. The <code>&lt;Payload&gt;</code> data is interpreted in the context of the operation type. The <code>&lt;Payload&gt;</code> is a <a href="https://cbor.io/">CBOR</a> encoded data structure and can be decoded in a variety of programming languages. CBOR provides a concise and expressive way to encode data and greatly simplifies parsing Atomicals protocol operations since there are only push datas that contain the necessary information for all the files and their metadata.</p>
+<h2 id="payload-format-description"><a class="header" href="#payload-format-description"><strong>Payload Format Description</strong></a></h2>
+<p>The payload format is intuitive and simple: Each top-level field is a file (or field) name and below it can be any valid JSON-like structure. In the case that there is a <code>"ct"</code> (content-type) field in the payload, then it is interpreted to be a file of that type with the bytes located at <code>"d"</code></p>
+<p>The payload is <a href="https://cbor.io/">CBOR encoded</a> and can be of any size in a single push data up to 520 bytes. If the payload is larger, then include subsequent push datas of size 520. It is understood that parsers will concatenate all chunks together and then perform a CBOR decode to obtain the data structure.</p>
+<p>If any point the payload is not CBOR encoded compliant, then it is assumed there is no data associated the NFT. The absence of a Payload field is valid, but also merely indicates there is no data. Some digital objects may not have explicit payload data as part of their mint event.</p>
+<p>A final note is that any field with a sub-key <code>"ct"</code> (content-type) is assumed to be a file if and only if the <code>"d"</code> bytes are also provided. If they are not provided, then the field is treated as a non-file metadata field.</p>
+<h3 id="sample-payload-format"><a class="header" href="#sample-payload-format">Sample Payload Format</a></h3>
+<pre><code>  {
+    "someimage.png": "binary data",
+    "meta": {
+      "some": "value",
+      "another: {
+        "fieldabc": 123
+      }
+    },
+    "args": {
+      "r": "abc"
+    }
+  }
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../faq.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../reference-and-tools/electrumx-api.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../faq.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../reference-and-tools/electrumx-api.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

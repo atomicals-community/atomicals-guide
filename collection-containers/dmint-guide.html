@@ -1,0 +1,551 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>DMINT Guide - Atomicals Protocol Guide</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="An Introduction to Atomicals Theory and Digital Objects on Bitcoin.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Atomicals Protocol Guide</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<hr />
+<h2 id="description-atomicals-nft-container-dmint-tutorial"><a class="header" href="#description-atomicals-nft-container-dmint-tutorial">description: Atomicals NFT Container DMint Tutorial</a></h2>
+<h1 id="dmint-guide"><a class="header" href="#dmint-guide">DMINT Guide</a></h1>
+<blockquote>
+<p>The following DMINT Guide is courtesy and written by the <a href="https://wizz.cash">wizz.cash</a> team. <a href="https://astrox.notion.site/Atomicals-NFT-Container-DMint-Tutorial-1bd9216f051942458b3a83268a68fb0c">Original link.</a></p>
+</blockquote>
+<figure><img src="../assets/Transfers of Fungible Tokens (ARC20) (16).jpg" alt=""><figcaption></figcaption></figure>
+<h2 id="terms"><a class="header" href="#terms">Terms</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Mint</th><th>The process of creating content on a blockchain. It typically involves generating and recording new items on the blockchain.</th></tr></thead><tbody>
+<tr><td>DMINT</td><td>"Decentralized Mint", indicating a decentralized minting operation.</td></tr>
+<tr><td>Container</td><td>A collection or a set of items.</td></tr>
+<tr><td>Bitwork</td><td>The difficulty of minting. The rules for bitwork can be found in the <a href="../bitwork-mining.html">Bitwork Mining</a>.</td></tr>
+<tr><td>Timestamp</td><td>A continuous 10 or 13-digit number used to represent time.</td></tr>
+</tbody></table>
+</div>
+<h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
+<p>This tutorial is designed to help project owners quickly understand how to onboard their DMINT NFT collection onto the Atomicals protocol. In the Atomicals protocol, NFT collections are d to as 'containers', which is roughly equivalent to 'NFT collection.'</p>
+<p>The process can be broadly divided into four main blocks:</p>
+<ol>
+<li>Prepare all data for the collection.</li>
+<li>Configure the container.</li>
+<li>Validate the NFT item.</li>
+<li>Mint the NFT item.</li>
+</ol>
+<p>As a project owner, your focus should be on steps 1, 2, and 3.</p>
+<blockquote>
+<p>💰 Before each step, there is a ⛓️ icon indicating that the operation is on-chain, requiring gas consumption.</p>
+</blockquote>
+<h4 id="prepare-collection-data"><a class="header" href="#prepare-collection-data"><strong>Prepare Collection Data</strong></a></h4>
+<ol>
+<li>Gather data for all NFTs (A1, A2......AN).</li>
+<li>Prepare the DMINT data for the collection (B).</li>
+<li>Collect other metadata for the collection (C).</li>
+<li>Use the command-line tool to locally create a new wallet for isolating all container operations and avoiding confusion.</li>
+</ol>
+<h4 id="configure-container"><a class="header" href="#configure-container"><strong>Configure Container</strong></a></h4>
+<ol>
+<li>⛓️ Mint the container.</li>
+<li>⛓️ Use the collection data (B) to configure DMINT.</li>
+<li>⛓️ Configure other metadata (C).</li>
+<li>⛓️ Seal the container after confirming all information. <strong>(Final step! Final step!)</strong></li>
+</ol>
+<h4 id="validate-nft-item"><a class="header" href="#validate-nft-item"><strong>Validate NFT Item</strong></a></h4>
+<ol>
+<li>With existing item data and the container already on-chain with configured DMINT, independently use NFT data (A) to validate whether the item matches the container.</li>
+<li>The container is sealed; you can retrieve the mint status of individual items and the list of items already minted.</li>
+</ol>
+<h4 id="mint-nft-item"><a class="header" href="#mint-nft-item"><strong>Mint NFT Item</strong></a></h4>
+<ol>
+<li>⛓️ Download NFT data (A) and locally mint using the official command-line tool.</li>
+</ol>
+<blockquote>
+<p>📌 For your convenience in distinguishing between different files, we have marked them with uppercase English labels. Please pay attention to the corresponding files at each step. Using incorrect files may result in unexpected on-chain data.</p>
+</blockquote>
+<p>From the outlined steps above, it is evident that project owners do not need to upload each NFT individually to the blockchain. Users are responsible for verifying and bearing the gas costs during the Mint process.</p>
+<hr />
+<h2 id="operation-process"><a class="header" href="#operation-process"><strong>Operation Process</strong></a></h2>
+<p>The following operations are based on version 0.1.46 of the atomicals-js command-line tool (<a href="https://github.com/atomicals/atomicals-js/commit/aa34095c673de28166105e26ab2e898179e8039a">@aa34095c</a>). The tool version may be updated periodically, so before proceeding, please check whether your local CLI is the latest or an available version. For installation and configuration, please refer to: <a href="https://github.com/atomicals/atomicals-js#install">https://github.com/atomicals/atomicals-js#install</a>. If you have any questions about a specific command, use <strong><code>-h</code></strong> when entering the command to get help content.</p>
+<blockquote>
+<p>💡 To avoid errors and unexpected discrepancies during the operation, it is recommended to test the entire process on the testnet before any actions on the mainnet.</p>
+</blockquote>
+<blockquote>
+<p>❗ Each step that includes content with `#container-name` represents the container name, and it must start with `#`. Otherwise, some commands may identify it as a different type of Atomicals.</p>
+</blockquote>
+<blockquote>
+<p>💰 For each command in the steps with `--satsbyte`, please fill in the value based on the on-chain gas situation.</p>
+</blockquote>
+<hr />
+<h3 id="prepare-collection-data-1"><a class="header" href="#prepare-collection-data-1"><strong>Prepare Collection Data</strong></a></h3>
+<ol>
+<li>
+<p>Prepare a folder containing all the original NFT files (images). It is recommended to pre-change the file names (e.g., "number.png" to "1234.png") to reduce the possibility and complexity of later data modifications. File names only support digits, English, and hyphens (<code>-</code>), and cannot start with a hyphen. The maximum length is 64 characters.</p>
+</li>
+<li>
+<p>Run a command to generate processed data for all NFTs. After completion, a new folder will be generated.</p>
+<pre><code>$ yarn cli prepare-dmint-items "path/to/collection-folder" "path/to/output-folder"
+</code></pre>
+</li>
+<li>
+<p>The generated folder is named "output-folder" with a timestamp, containing individual item-*.json files for each NFT. Please note that the data generated at this point only includes the <code>mainHash</code> and <code>data</code> fields. If necessary, you can specify <code>bitworkc</code>/<code>bitworkr</code> in the <code>args</code>, and after modification, users will be required to use the declared bitwork during minting.</p>
+<pre><code class="language-json">{
+  "mainHash": "0099ad5961eff12096b851d9701bedfe09ec3433dad89857bcaddc5ea2172c98",
+  "data": {
+    "args": {
+      "request_dmitem": "test-1",
+      "main": "image.jpg",
+      "i": true
+    },
+    "image.jpg": {
+      "$b": "ffd8ffe000104a4649460001010100600060000ffd9"
+    }
+  }
+}
+</code></pre>
+</li>
+<li>
+<p>Run the following command to generate DMINT data. Replace <code>path/to/folder</code> with the path to the folder generated in step 2, and <code>mintHeight</code> with the starting block height for minting (a suggested value is <code>0</code>, meaning minting can occur immediately after deployment). After completion, a new "dmint-timestamp.json" file will be added to the folder, and all processed data for NFTs will be updated.</p>
+<pre><code>yarn cli prepare-dmint "path/to/folder" 0 "b1d0"
+</code></pre>
+<pre><code class="language-json">{
+  "dmint": {
+    "v": "1",
+    "mint_height": 0,
+    "merkle": "5c529dacfb37fc24804c550abc851602a9926016a424390387eb23e38de4cca1",
+    "immutable": true,
+    "items": 10,
+    "rules": [
+      {
+        "p": ".*",
+        "bitworkc": "7baf"
+      }
+    ]
+  }
+}
+</code></pre>
+<p>From here, <code>mint_height</code> can be modified to specify which block your DMINT should start.
+For example: <code>840000</code> means the DMINT of the container can only start after the <code>840000</code> height block has been confirmed.</p>
+<pre><code class="language-json">{
+  "mainHash": "0099ad5961eff12096b851d9701bedfe09ec3433dad89857bcaddc5ea2172c98",
+  "data": {
+    "args": {
+      "request_dmitem": "test-1",
+      "main": "image.jpg",
+      "i": true,
+      "proof": [
+        {
+          "p": true,
+          "d": "3212c74b3b5083433a8111f80369d8c591711c577e45dacb8ccaf7960d96790f"
+        }
+      ]
+    },
+    "image.jpg": {
+      "$b": "ffd8ffe000104a4649460001010100600060000ffd9"
+    }
+  },
+  "targetVector": "test-1:any:any:image.jpg:0099ad5961eff12096b851d9701bedfe09ec3433dad89857bcaddc5ea2172c97",
+  "targethash": "0099ad5961eff12096b851d9701bedfe09ec3433dad89857bcaddc5ea2172c98"
+}
+</code></pre>
+<blockquote>
+<p>❗ Each time you run <strong><code>prepare-dmint</code></strong> a new <strong><code>dmint-timestamp.json</code></strong> file will be generated, instead of modifying the old one. Please be cautious not to use incorrect data for subsequent operations.</p>
+</blockquote>
+</li>
+<li>
+<p>You can modify the bitwork rules for dmint. In the <code>rules</code>, <code>p</code> represents the Pattern, allowing you to use regular expressions to specify different <code>bitworkc</code>. Please refer to available resources on regular expressions for rule composition. In the example below, for instance:</p>
+<pre><code class="language-json">{
+  "dmint": {
+    "v": "1",
+    "mint_height": 0,
+    "merkle": "5c529dacfb37fc24804c550abc851602a9926016a424390387eb23e38de4cca1",
+    "immutable": true,
+    "items": 10,
+    "rules": [
+      {
+        "p": "1$",
+        "bitworkc": "890a"
+      },
+      {
+        "p": ".*",
+        "bitworkc": "7baf"
+      }
+    ]
+  }
+}
+</code></pre>
+</li>
+</ol>
+<p><a href="../rules-subrealms-and-dmint.html">See Rules Guide for more details</a></p>
+<p><mark style="color:red;"><strong>Warning:</strong></mark>** The regex standard being used is the one in Python 3.9. This means that all regex patterns are matched in "full string mode" - meaning that the match is always from the very beginning of a string to the very end even in the absence of <code>^</code> or <code>$</code>**</p>
+<p>In that case, the rule <strong><code>1$</code></strong> signifies that the <code>bitworkc</code> for items ending with <code>1</code> (e.g., <code>test1</code>) should be <code>890a</code>, while other items (e.g., <code>test</code>) should have <code>7baf</code> as their <code>bitworkc</code>. Rules are ordered from the most specific (minimum subset) to the most general (full set).</p>
+<blockquote>
+<p>❗ If you have individually set <code>bitworkc</code>/<code>bitworkr</code> for an item, you need to manually declare the corresponding pattern and rule in the `rules`. Otherwise, there will be conflicts between them and the base rules, making minting impossible after formal closure and deployment. The tool does not provide any prompts for this, so exercise caution when making modifications.</p>
+</blockquote>
+<ol start="6">
+<li>If you modify item data, ensure that you re-run the command from step 4 each time after making changes to regenerate the data.</li>
+<li>Copy a metadata <strong><code>dmint-metadata.json</code></strong> from <strong><code>template/containers/dmint-collection-general-dmint-metadata.json</code></strong> in the tool directory or <a href="https://github.com/atomicals/atomicals-js/blob/master/templates/containers/dmint-collection-general-metadata.json">https://github.com/atomicals/atomicals-js/blob/master/templates/containers/dmint-collection-general-metadata.json</a>, and adjust it according to your content.</li>
+</ol>
+<blockquote>
+<p>❗ You can refer to the <a href="README.html#collection-format-recommended">Collection Containers</a> to write this section, but please do not declare `attrs` and `items` as they are incorrect content for DMINT and will lead to the inability to seal the container.</p>
+</blockquote>
+<hr />
+<h3 id="configure-container-1"><a class="header" href="#configure-container-1">Configure Container</a></h3>
+<ol>
+<li>⛓️ Mint the specified container. If you want to specify a different receiving address, replace "yourWalletAddress" with the corresponding wallet address.</li>
+</ol>
+<pre><code>$ yarn cli mint-container "#container-name" --initialowner "yourWalletAddress" --satsoutput=1000 --bitworkc="b6cf" --satsbyte=1
+</code></pre>
+<ol start="2">
+<li>⛓️ Enable the dmint status for the container using the previously generated "dmint-timestamp.json." Replace "dmint-json-path.json" with the file path of data B [generated in step 2 - Prepare Collection Data].</li>
+</ol>
+<blockquote>
+<p>❗ You need to wait for 4 block confirmations (turning into verified status) after completing “Configure Container - Step 1”. You can check the container status at https://wizz.cash/live-mint by entering the revealTxid.</p>
+</blockquote>
+<pre><code>$ yarn cli enable-dmint "#container-name" "dmint-json-path.json" --satsbyte=1
+</code></pre>
+<ol start="3">
+<li>⛓️ Upload the resources for the container cover by renaming the file to "logo.png" (preferably in PNG, JPG, or SVG format), then run the following command.</li>
+</ol>
+<pre><code>$ yarn run cli store-file "path/of/your_logo.png" "logo.png" --satsbyte=1
+
+......
+filesData {
+  'logo.png': &lt;Buffer 89 50 4e 47 0d 0a 1a 0a 00 00 00 0d 49 48 44 52 00 00 00 18 00 00 00 18 08 06 00 00 00 e0 77 3d f8 00 00 00 9d 49 44 41 54 78 da 63 60 18 05 54 04 ff ... 164 more bytes&gt;
+}
+Payload CBOR Size (bytes):  235
+Payload Encoded:  {
+  'logo.png': &lt;Buffer 89 50 4e 47 0d 0a 1a 0a 00 00 00 0d 49 48 44 52 00 00 00 18 00 00 00 18 08 06 00 00 00 e0 77 3d f8 00 00 00 9d 49 44 41 54 78 da 63 60 18 05 54 04 ff ... 164 more bytes&gt;
+}
+
+...
+Success sent tx:  f26bbf1833d6af0ca533cfdd7401f8074375490120164e6d0a680aca4bacf7af
+{
+  "success": true,
+  "data": {
+    "commitTxid": "c931d7a337eef91f5f6f2b3430c78aaac0e7f11752e15576a1a4881b344457c5",
+    "revealTxid": "f26bbf1833d6af0ca533cfddbbb1f8074375490120164e6d0a680aca4bacf7af",
+    "dataId": "f26bbf1833d6af0ca533cfdd7401f8074375490120164e6d0a680aca4bacf7afi0"
+  }
+}
+✨  Done in 81.41s.
+</code></pre>
+<p>After completion, concatenate the filename and the output <code>dataId</code> as: <strong><code>atom:btc:dat:{dataId}/logo.png</code></strong>. Fill in the image field in the metadata file C [generated in step 7 of Prepare Collection Data] with this value.</p>
+<pre><code>{
+  "name": "container-name",
+  "desc": "A test container."
+  "image": "atom:btc:dat:1a29d1ed20c36a95f6b5c20977a5f1035cc0cd5f55327692149a5710d1d75e9bi0/logo.png",
+  ...
+}
+</code></pre>
+<ol start="4">
+<li>⛓️ After modifying metadata C, set it for the container.</li>
+</ol>
+<pre><code>$ yarn cli set-container-data "#container-name" "path/to/container-dmint-metadata.json" --satsbyte=1
+</code></pre>
+<ol start="5">
+<li>Execute the command to seal the container.</li>
+</ol>
+<blockquote>
+<p>❗ This operation is **IRREVERSIBLE**! Before closing, please complete the item validation in [Validate NFT Item]. Ensure that all items have been validated and are correct.</p>
+</blockquote>
+<pre><code>$ yarn cli seal "#container-name" --satsbyte=1
+</code></pre>
+<hr />
+<h3 id="validate-nft-item-1"><a class="header" href="#validate-nft-item-1"><strong>Validate NFT Item</strong></a></h3>
+<p>Due to the uniqueness of Merkle verification, there's no need to upload each NFT in advance. It's sufficient to verify whether they match the container. In different states or lifecycles of the container, you can use various methods to validate the effectiveness of NFT items.</p>
+<ul>
+<li>To validate whether a specific item is effective, you need the container's name, the item's name, and the JSON file generated in step 2 of Prepare Collection Data (replace <code>path/to/item-3.json</code> with the file path of the item).</li>
+</ul>
+<pre><code>$ yarn cli validate-container-item "#container-name" "test-item-3" "path/to/item-3.json"
+</code></pre>
+<ul>
+<li>The result will return the following content. If <strong><code>proof_valid</code></strong> is <code>true</code>, it means the validation is successful. If <strong><code>applicable_rule</code></strong> returns the complete rule, it indicates that the rule configuration is correct:</li>
+</ul>
+<pre><code>{
+  "success": true,
+  "response": {
+    "result": {
+      "status": null,
+      "candidate_atomical_id": null,
+      "atomical_id": null,
+      "candidates": [],
+      "type": "item",
+      "applicable_rule": {
+        "p": ".*",
+        "bitworkc": "a91b"
+      },
+      "proof_valid": true,
+      "target_vector": "test-item-3:any:any:image.jpg:3b0bcfe26b7521e83e595f5838d04ea25a45931a849ab5f0db134eb9a4a7cec2",
+      "target_hash": "8d800be8cb6b418d986a99b9d2fd23994fa712f3c76ef9a3c8306298d2af2ba4",
+      "dmint": {
+        "v": "1",
+        "rules": [
+          {
+            "p": ".*",
+            "bitworkc": "a91b"
+          }
+        ],
+        "merkle": "b68ace0edff5f81a92acc57e493d6d3cfa7cfc038bfe0397dfb81d082bd3b9d0",
+        "immutable": true,
+        "mint_height": 0
+      }
+    }
+  }
+}
+</code></pre>
+<blockquote>
+<p>❗ It is recommended to validate each item to ensure the effectiveness of all data.</p>
+</blockquote>
+<h3 id="mint-nft-item-1"><a class="header" href="#mint-nft-item-1"><strong>Mint NFT Item</strong></a></h3>
+<p>After the container is released, users can mint the corresponding NFT using the command-line tool, provided they have access to the json file for the item.</p>
+<pre><code>$ yarn cli mint-item "#container-name" "item-name" "path/to/item-name.json" --satsbyte=1
+</code></pre>
+<hr />
+<h2 id="advanced-topic-mint-payment-rules"><a class="header" href="#advanced-topic-mint-payment-rules">Advanced Topic: Mint Payment Rules</a></h2>
+<p><mark style="color:red;">Note:</mark> The creator of a DMINT collection can choose to specify that not only is Bitwork required to mint an item, but also certain payments must be made to predetermined addresses in order to finalize the claim process. This is basically purchasing an NFT.</p>
+<p>An example rule set with payments defined. Any item ending in "hi" must be claimed with a payment to the output script "<em>5120a1519da5fead1a2e6cc803aedbd79a756f5e0eaafccae641c16e0612fb03071c</em>" with at least 10000 satoshis and every other item claimed must have a payment of 2000 satoshis to "<em>5120a9519da5fead1a2e6cc803acebd79a756f5e0eaafccae641c16e0612fb03072c</em>"</p>
+<pre><code>```json
+{
+  "dmint": {
+    "v": "1",
+    "items": 1000,
+    "rules": [
+      {
+        "o": {
+          "5120a1519da5fead1a2e6cc803aedbd79a756f5e0eaafccae641c16e0612fb03071c": {
+            "v": 10000
+          }
+        },
+        "p": "hi$",
+        "bitworkc": "888"
+      },
+      {
+        "o": {
+          "5120a9519da5fead1a2e6cc803acebd79a756f5e0eaafccae641c16e0612fb03072c": {
+            "v": 2000
+          }
+        },
+        "p": ".*",
+        "bitworkc": "7777"
+      }
+    ],
+    "merkle": "12e772dc28611968e3f203827ed9c71e0a1e25071032d565b6fb9afee94dd344",
+    "immutable": true,
+    "mint_height": 0
+  }
+}
+```
+</code></pre>
+<p>In the event that an item minted requires payment, the status of the NFT will indicate that payment is expected for the leading candidate.</p>
+<p>Use the <strong>`transfer-builder`</strong> command to create a custom payment. This is an advanced command and could lead to the loss of funds if used incorrectly.</p>
+<p>From the <a href="https://github.com/atomicals/atomicals-js">atomical-js CLI:</a></p>
+<pre><code>yarn cli transfer-builder --atomicalreceipt &lt;atomical_id_of_item_claim_attempt&gt; --owner funding --atomicalreceipttype d --satsbyte=80
+</code></pre>
+<p>Then follow the instructions in the terminal to select which UTXOS to combine and send. Make sure you do not send UTXOS with other Atomicals in them. And construct the outputs in a way as to pay the rules defined in the DMINT Container. <mark style="color:red;"><strong>When in doubt, do NOT use this command, it is risky without advanced knowledge.</strong></mark> Wait for 3rd party wallets and services to provide direct payment support.</p>
+<h2 id="optional-operations"><a class="header" href="#optional-operations"><strong>Optional Operations</strong></a></h2>
+<p>The container is already sealed, and users can now begin minting. In the case where some items have already been minted:</p>
+<h3 id="query-the-status-of-a-single-item"><a class="header" href="#query-the-status-of-a-single-item">Query the status of a single item</a></h3>
+<p><code>get-container-item</code></p>
+<pre><code>$ yarn cli get-container-item "#container-name" "test-item-4"
+</code></pre>
+<h3 id="query-minted-items"><a class="header" href="#query-minted-items"><strong>Query Minted Items</strong></a></h3>
+<p>Use <strong><code>get-container-items</code></strong> to query minted items (<strong><code>limit</code></strong> specifies the number of entries, suggested value is <strong><code>10</code></strong>; <strong><code>offset</code></strong> indicates the starting point for the query, suggested value is <strong><code>0</code></strong>).</p>
+<pre><code>$ yarn cli get-container-items "#container-name" limit offset
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../collection-containers/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../realm-names/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../collection-containers/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../realm-names/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

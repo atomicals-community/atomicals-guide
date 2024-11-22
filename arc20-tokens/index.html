@@ -1,0 +1,365 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>ARC20 Tokens - Atomicals Protocol Guide</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="An Introduction to Atomicals Theory and Digital Objects on Bitcoin.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Atomicals Protocol Guide</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<hr />
+<h2 id="description-fungible-token-colored-coin-standard-backed-by-satoshis"><a class="header" href="#description-fungible-token-colored-coin-standard-backed-by-satoshis">description: Fungible Token colored coin standard backed by Satoshis</a></h2>
+<h1 id="arc20-tokens"><a class="header" href="#arc20-tokens">ARC20 Tokens</a></h1>
+<p>The Atomicals Protocol solves the long standing problem of how to represent arbitrary fungible token assets on the Bitcoin blockchain. The ARC-20 fungible token standard finally brings colored coins to Bitcoin and uses each Satoshi to represent ownership units of deployed tokens. This means that every unit of the token is backed by 1 Satoshi forever.  <em>It acts as a kind of "digital gold content" that underpins the value of the token.</em>  It also means every token can never go below 1 Satoshi in value, by definition.</p>
+<p>ARC-20 uses the native Satoshi unit to represent each token, and they can be split and combined just like regular Bitcoins. ARC-20 tokens can be minted by anyone, and transferred to any Bitcoin address type, and works with wallets that support UTXO selection such as Sparrow Wallet <a href="https://www.sparrowwallet.com/">(external link)</a>. There are two modes of deployment: direct and decentralized. Learn more below about the different ways the ARC-20 can be minted and their benefits.</p>
+<p>The ARC-20 also comes with a built in ticker symbol service to provide a global unique name system for ticker symbols. The first registration of the ticker name is permanent and can never be used again.</p>
+<h2 id="decentralized-mint"><a class="header" href="#decentralized-mint">Decentralized Mint</a></h2>
+<p>A decentralized is initialized with a ticker, per mint award, total mints allowed, start block height, and metadata. A deployer could initialize a ticker such as <code>$myticker123</code> with a mint award of <code>1,000</code> units, with a total of <code>10,000</code> mints allowed and starting at block height <code>810,000</code> with an image.jpg and even meta data such as description, links, and terms.</p>
+<h3 id="initialize-init-dft"><a class="header" href="#initialize-init-dft">Initialize (init-dft)</a></h3>
+<p>The basic format of the decentralized initialization using the
+<a href="../reference-and-tools/javascript-library-cli.html">Atomicals CLI</a> is given as:</p>
+<pre><code>yarn cli init-dft &lt;tick&gt; &lt;per_mint_amt&gt; &lt;mint_count&gt; 
+&lt;start_height&gt; metadata.json
+
+Optional flags:
+--mintbitworkc=&lt;prefix&gt;
+--satsbyte=&lt;number&gt;
+</code></pre>
+<p><em><mark style="color:red;"><strong>See format of metadata.json below</strong></mark></em></p>
+<p>The decentralized initialize function <code>init-dft</code> allows minting for ticker <code>tick</code> to proceed with the <code>mint-dft</code> command (described below) only from the starting block height <code>start_height</code> and allowing a maximum of <code>mint_count</code> total mint requests, each to award <code>per_mint_amt</code> token units to the requester.  The effective total max supply is <code>per_mint_amt * mint_count</code>.</p>
+<p><em>Note:</em> It will take 3 block confirmations before the <code>tick</code> ticker will be claimed. You can query the status with <code>yarn cli get &lt;atomicalID&gt;</code> or <code>yarn cli find-tickers</code></p>
+<p><strong>Required Parameters:</strong></p>
+<p><em>tick:</em> The globally unique ticker name</p>
+<p><em>per_mint_amt: Number of units of the token to award per successful mint. Satoshi amount.</em></p>
+<p><em>mint_count:</em> Total number of permitted mints before exhausting the quota and becoming "fully minted"</p>
+<p><em>start_height:</em> Starting block height that mints may be begin. Can set block height to 0 or any future block height.</p>
+<p><em>image:</em> An image icon to represent the token. The name of the file will appear in the token. Use caution and rename the file first completely and include it as "image.jpg" or "image.png"</p>
+<p><strong>Optional Flags:</strong></p>
+<p><em>--mintbitworkc=&lt;prefix&gt;</em></p>
+<p>Define an optional <a href="../bitwork-mining.html">Bitwork</a> mining prefix target for the mints. If set, then the minters must expend CPU energy to find a match for the prefix target to be allowed to mint successfully.  This forces minters to perform proof of working mining in a similar manner to Bitcoin mining itself.</p>
+<p>It is recommended to choose a prefix between 4 and 6 hex digits. You can use any valid hex digits between <code>a-f0-9.</code> It is intended to purely be a vanity transaction id and any value is sufficient to require minters to expend energy to mint the token.</p>
+<p>Example time estimates for time required for minters:</p>
+<p><em>Note:</em> it could be any digit in the range <code>a-f0-9</code>, we use all <code>7's</code> for illustration purpose only.</p>
+<ul>
+<li>3 hex digit prefix of "777" will take about 4 seconds to mine</li>
+<li>4 hex digit prefix of "7777" will take ~1 minute to mine</li>
+<li>5 hex digit prefix of "77777" will take ~16 minutes to mine</li>
+<li>6 hex digit prefix of "777777" will take ~256 minutes to mine</li>
+</ul>
+<p><em>--satsbyte=&lt;number&gt;</em></p>
+<p>Set the satoshis per byte for the transaction and override the default.</p>
+<h4 id="initialize-a-perpetual-minting-token"><a class="header" href="#initialize-a-perpetual-minting-token">Initialize a Perpetual Minting token</a></h4>
+<pre><code>yarn cli init-dft-perpetual &lt;ticker&gt;
+</code></pre>
+<p><strong>Important Optional Parameters:</strong></p>
+<ul>
+<li><code>max_mints</code>: The number of mints allowed per mint phase. (Defaults to <code>2000</code>)</li>
+<li><code>maxglobalmints</code>: The number of global max mints.</li>
+<li><code>mint_amount</code>: The number of tokens per mint. (Defaults to <code>10000</code>)</li>
+<li><code>mint_height</code>: The starting mint height.</li>
+<li><code>mintbitworkvec</code>: The base vector of the bitwork prefix.</li>
+<li><code>mintbitworkcinc</code>: The amount of <code>bitworkc</code> to increase for each phase of <code>max_mints</code>. (Defaults to <code>1</code>)</li>
+<li><code>mintbitworkrinc</code>: The amount of <code>bitworkr</code> to increase for each phase of <code>max_mints</code>.</li>
+<li><code>mintbitworkcincstart</code>: The starting amount of <code>bitworkc</code> to increase for each phase of <code>max_mints</code>.</li>
+<li><code>mintbitworkrincstart</code>: The starting amount of <code>bitworkr</code> to increase for each phase of <code>max_mints</code>.</li>
+</ul>
+<blockquote>
+<p>See the complete arguments list using the command <code>yarn cli init-dft-perpetual -h</code>.</p>
+</blockquote>
+<p>Below is an example of how to initialize a token with the same configuration of $infinity.</p>
+<pre><code class="language-shell">yarn cli init-dft-perpetual infinity2 \
+  --max_mints=3333 \
+  --mint_amount=9999 \
+  --mintbitworkvec="888888888888888888888888" \
+  --mintbitworkcinc=1
+</code></pre>
+<p>In mathematical terms, the relationship between the arguments in the function can be expressed as follows:</p>
+<ol>
+<li>
+<p><strong>Target Calculation</strong>:</p>
+<ul>
+<li>( T_{\text{steps}} = \lfloor \frac{\text{actual_mints}}{\text{max_mints}} \rfloor )</li>
+<li>( T_{\text{current}} = \text{starting_target} + (T_{\text{steps}} \cdot \text{target_increment}) )</li>
+</ul>
+<p>The current target, ( T_{\text{current}} ), is computed based on the number of minted tokens relative to the maximum allowable mints, scaled by the target increment.</p>
+</li>
+<li>
+<p><strong>Bitwork Prefix Derivation</strong>:</p>
+<ul>
+<li>( \text{multiples} = \frac{T_{\text{current}}}{16} )</li>
+<li>( F_{\text{amount}} = \lfloor \text{multiples} \rfloor )</li>
+<li>( \text{modulo} = T_{\text{current}} \mod 16 )</li>
+</ul>
+<p>The resulting bitwork prefix string is derived from the base vector ( \text{bitwork_vec} ), padded to 32 characters, with:</p>
+<ul>
+<li>The first ( F_{\text{amount}} ) characters forming the primary prefix.</li>
+<li>If ( \text{modulo} &gt; 0 ), it appends (".\text{modulo}") to the prefix.</li>
+</ul>
+</li>
+</ol>
+<h3 id="mint-mint-dft"><a class="header" href="#mint-mint-dft">Mint (mint-dft)</a></h3>
+<p>The basic format of the decentralized mint using the <a href="../reference-and-tools/javascript-library-cli.html">Atomicals CLI </a>is given as:</p>
+<pre><code>yarn cli mint-dft &lt;tick&gt;
+
+Optional flags:
+--satsbyte=&lt;number&gt;
+</code></pre>
+<p>The decentralized mint function <code>mint-dft</code> allows minting for ticker <code>tick</code> to proceed starting from block height <code>start_height</code>.</p>
+<p>Follow the on-screen instructions to mint.</p>
+<p><strong>Required Parameters:</strong></p>
+<p><em>tick:</em> The globally unique ticker name</p>
+<p><strong>Optional Flags:</strong></p>
+<p><em>--satsbyte=&lt;number&gt;</em></p>
+<p>Set the satoshis per byte for the transaction and override the default.</p>
+<h2 id="direct-mint"><a class="header" href="#direct-mint">Direct Mint</a></h2>
+<p>The second way to mint or create an ARC-20 token type is to directly create a single output which contains the total supply, with each Satoshi representing a single unit of the token.</p>
+<h3 id="mint-entire-supply-in-one-step"><a class="header" href="#mint-entire-supply-in-one-step">Mint entire supply in one step</a></h3>
+<pre><code>yarn cli mint-ft &lt;tick&gt; &lt;total_supply&gt; metadata.json
+
+Optional flags:
+--satsbyte=&lt;number&gt;
+</code></pre>
+<p><em><mark style="color:red;"><strong>See format of metadata.json below</strong></mark></em></p>
+<p>The second way to mint or create an ARC-20 token type is to directly create a single output which contains the total supply, with each Satoshi representing a single unit of the token.</p>
+<p>For example, to mint a token with a supply of 100,000,000, simply create a single output with exactly 1 full Bitcoin (since 1 BTC = 100,000,000 Satoshis). An advantage of using the direct minting mode is that the team who creates it must put up the required amount of Bitcoins to substantiate the total minted supply; which greatly reduces dishonest actors from printing tokens out of thin air.</p>
+<p>Direct minting of ARC-20 is ideal for when a team or company wishes to maintain control over the initial distribution and determine how to spend the tokens at a later point in time.</p>
+<p><em>Note:</em> It will take 3 block confirmations before the <code>tick</code> ticker will be claimed. You can query the status with <code>yarn cli get &lt;atomicalID&gt;</code> or <code>yarn cli find-tickers</code></p>
+<p><strong>Required Parameters:</strong></p>
+<p><em>tick:</em> The globally unique ticker name</p>
+<p><em>total_supply:</em> Total supply units to directly mint</p>
+<p><em>image:</em> An image icon to represent the token. The name of the file will appear in the token. Use caution and rename the file first completely and include it as "image.jpg" or "image.png"</p>
+<p><strong>Optional Flags:</strong></p>
+<p><em>--satsbyte=&lt;number&gt;</em></p>
+<p>Set the satoshis per byte for the transaction and override the default.</p>
+<h2 id="metadatajson-format"><a class="header" href="#metadatajson-format">Metadata.json Format</a></h2>
+<p><strong>Define metadata details into the token.</strong> The suggested format to use follows the convention <code>sample-ft-meta.json.</code></p>
+<p>Use <a href="../permanent-file-storage.html">Permanent File Storage</a> to store an image on-chain and reference it in the "image" field below.</p>
+<pre><code>```json
+{
+    "name": "",
+    "desc": "",
+    "image": "atom:btc:dat:&lt;location of store-file data&gt;/image.png",
+    "decimals": 0,
+    "links": {
+        "x": {
+            "v": "https://x.com/..."
+        },
+        "website": {
+            "v": "https://..."
+        },
+        "realm": {
+            "v": "atom:btc:realm:myrealmname.subrealm"
+        },
+        "discord": {
+            "v": "https://discord.gg/..."
+        }
+    },
+    "legal": {
+        "terms": ""
+    }
+}
+```
+</code></pre>
+<p>None of the fields in the metadata are required, and can take any shape and form as long as it is valid JSON object. However it is recommended at a minimum <em>name, description, and legal</em> are provided to inform users of usage details. You must consult legal advice and verify your applicable jurisdictions permit your intended usage.</p>
+<details>
+<summary>⚡ Get started and mint your first Atomical Digital Object</summary>
+<p><a href="https://github.com/atomicals/atomicals-js">Download and install the Atomicals Javascript CLI tool</a> and follow the quick start instructions to mint your NFT, Collection, or Realm name in less than 2 minutes.</p>
+</details>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../nfts/splat-operation.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../arc20-tokens/normal-transfer-rules.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../nfts/splat-operation.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../arc20-tokens/normal-transfer-rules.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

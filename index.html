@@ -1,0 +1,268 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Introduction - Atomicals Protocol Guide</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="An Introduction to Atomicals Theory and Digital Objects on Bitcoin.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Atomicals Protocol Guide</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
+<figure><img src="./assets/atomblack.jpg" alt=""><figcaption><p>Atomicals Protocol brings Digital Objects to life on Bitcoin and proof-of-work based blockchains.</p></figcaption></figure>
+<h2 id="what-is-the-atomicals-protocol"><a class="header" href="#what-is-the-atomicals-protocol">What is the Atomicals Protocol?</a></h2>
+<p>The Atomicals Protocol is a simple, yet flexible protocol for minting, transferring and updating
+<em>digital objects (traditionally called non-fungible tokens)</em>
+for unspent transaction output (UTXO) blockchains such as Bitcoin. An Atomical (or "atom") is a way to organize the creation,
+transfer and updates of digital objects – it is essentially a chain of digital ownership defined according to a few simple rules.</p>
+<h2 id="why-use-atomicals"><a class="header" href="#why-use-atomicals">Why use Atomicals?</a></h2>
+<p>The Atomical specification is <em>the simplest possible way</em> to organize digital property on a blockchain such as Bitcoin. The implementation is very simple and provides the maximum flexibility for static and dynamic digital assets, artifacts and objects. The rules are so simple that it's impossible to accidentally spend Atomicals as miner fees and it's trivial to verify that ownership was transferred to the correct recipient – without relying on any third parties whatsoever or even being required to run an indexer. Atomicals are self-evident digital object histories. That being said, most developers and services will prefer the convenience of running their own indexer and all the benefits that come along with it.</p>
+<h2 id="use-cases"><a class="header" href="#use-cases">Use Cases</a></h2>
+<ul>
+<li>Digital collectibles, media and art</li>
+<li>Digital identity, authentication and token- gated content.</li>
+<li>Web hosting and file storage</li>
+<li>Peer to peer exchange and atomic swaps</li>
+<li>Digital namespace allocation</li>
+<li>Virtual land and title registries</li>
+<li>Dynamic objects and state for games</li>
+<li>Social media profiles, posts and communities</li>
+<li>Anywhere security and decentralization is critical concern. Military grade security and verification requirements.</li>
+</ul>
+<p>The usage philosophy of Atomicals is to pass along the complete history of an Atomical digital object from mint inception and including every transfer updates. <em>Even if an Atomical is updated or exchanges hands 10,000 times  – that amounts to only about 2.5 MB of data (250 bytes x 10,000).</em> A digital object is self-evident, unforgeable chain of authenticity that does not rely on any third party service or centralized indexer for verification purposes.</p>
+<p>The motto is:</p>
+<p><strong>"No transaction history, not your digital object"</strong></p>
+<p>Any client, wallet, marketplace, game and service can rapidly verify the Atomical by processing the history according to the very simple rules and detect a fake instantly without relying on trusted services.</p>
+<p>The heart of Atomicals is a few key simple rules to follow for mint, transfer, and update operations, continue reading to the Protocol Overview to understand the high level flow before diving deeper.  If you like, you can just <a href="reference-and-tools/javascript-library-cli.html">skip all the theory and go straight to minting your first Atomical within a couple of minutes.</a></p>
+<h2 id="what-are-atomicals-digital-objects"><a class="header" href="#what-are-atomicals-digital-objects">What are Atomicals Digital Objects?</a></h2>
+<p>An Atomical digital object (or simply "<em>Atomical</em>") is a new kind of Non-Fungible Token (NFT) that can be minted, transferred, and updated on Bitcoin. <em>The major difference is there is no requirement to use a centralized service or middleman acting as a trusted indexer.</em> It just works today and without needing changes whatsoever to Bitcoin nor requiring side-chains or any secondary layers. <strong>It is time to take back control of our digital lives - forever.</strong></p>
+<p>Atomicals are <em>self-evident</em> and easy to verify which makes them perfect for digital collectibles, social media, gaming, authentication and anywhere ownership and authenticity is critical to establish. The protocol rules are extremely simple, yet at the same time provides military grade security and verification levels. Zero room for error.</p>
+<p>The Atomicals Protocol is free, open-source and will forever be available to use by anyone anywhere. Our digital future depends on a robust digital object format to elegantly handle every possible use case while minimizing any potential for errors in software implementations.</p>
+<h2 id="the-atomicals-vision"><a class="header" href="#the-atomicals-vision">The Atomicals Vision</a></h2>
+<p><br />
+The grand vision is to establish and secure the Bitcoin blockchain as the source of truth and digital sovereignty.  Atomicals provides a simple and powerful protocol to take back control of our digital lives forever. We have everything within reach for us to create the future we want.</p>
+<p>The Atomicals Protocol is open source, free for anyone to use however they want. All the libraries, frameworks and services are released under MIT and GPLv3 to ensure no one has power over the tools and protocol.<br />
+<br />
+This is our work of passion to give to the world an option for finally bringing programmable digital objects to Bitcoin. It works today with no changes to Bitcoin, no side-chains, no separate token, no secondary layers and no middlemen, no leaders nor centralized parties.<br />
+<br />
+It is designed to work in harmony with the other protocols that have emerged such as <a href="https://nostr.com">Nostr</a>, <a href="https://ordinals.com">Ordinals</a> and more. Each Protocol has it's different strengths and Atomicals Digital Objects adds to the landscape of options available for users, creators and developers.<br />
+<br />
+Atomicals is a shift to sovereignty and self-ownership over our digital lives. A simple and extremely powerful protocol to re-decentralize the web and social communities.</p>
+<h2 id="key-differences-from-other-protocols"><a class="header" href="#key-differences-from-other-protocols">Key Differences From Other Protocols</a></h2>
+<p>The best way to understand the differences of Atomicals is to compare it against other popular non-fungible token (NFT) protocols.</p>
+<div class="table-wrapper"><table><thead><tr><th></th><th>Atomicals</th><th>Ordinals</th><th>Ethereum ERC721</th></tr></thead><tbody>
+<tr><td><strong>Value Proposition</strong></td><td>Digital Objects</td><td>Digital Artifacts</td><td>Digital Collectibles</td></tr>
+<tr><td><strong>Blockchains</strong></td><td>Bitcoin and all UTXO blockchains</td><td>Bitcoin and all UTXO blockchains</td><td>Ethereum EVM compatible blockchains</td></tr>
+<tr><td><strong>Mint Technique</strong></td><td>Bitcoin: Commit &amp; reveal w/ "<em>atom</em>" envelope.</td><td>Bitcoin: Commit &amp; reveal w/ "<em>ord</em>" envelope.</td><td>Fund and deploy contract account</td></tr>
+<tr><td><strong>Data Storage</strong></td><td><mark style="color:green;">Store</mark> <mark style="color:green;"></mark><em><mark style="color:green;">one or multiple</mark></em> <mark style="color:green;"></mark><mark style="color:green;">files upon minting</mark></td><td>Store only one file upon minting</td><td><em>Not defined</em></td></tr>
+<tr><td><strong>Dynamic State</strong></td><td><mark style="color:green;">Define</mark> <mark style="color:green;"></mark><em><mark style="color:green;">and update app state</mark></em> <mark style="color:green;"></mark><mark style="color:green;">for basic and any complex file types</mark></td><td><em>Not defined</em> - can be defined on app specific basis</td><td><em>Not defined -</em> can be programmed up front</td></tr>
+<tr><td><strong>Validation</strong></td><td><mark style="color:blue;">Validation currently through the indexing service "electrumx" - in theory it's possible to validate 100% client-side.</mark></td><td><mark style="color:blue;">Validation currently through the indexing service "ord" - in theory it's possible to validate 100% client-side.</mark></td><td>Trusts Ethereum  EVM nodes or in practice trust Metamask or Infura</td></tr>
+<tr><td><strong>Indexing</strong></td><td><mark style="color:blue;">Validation relies on elecrumx atomicals</mark> <mark style="color:blue;">indexer (Python) at the moment for tracking ordinal numbering system.</mark></td><td><mark style="color:blue;">Validation relies on</mark> <mark style="color:blue;"></mark><em><mark style="color:blue;">ord</mark></em> <mark style="color:blue;"></mark><mark style="color:blue;">indexer (Rust) at the moment for tracking ordinal numbering system.</mark></td><td>Uses native Ethereum EVM nodes or in practice trust Metamask or Infura</td></tr>
+<tr><td><strong>Address Format</strong></td><td><mark style="color:green;">P2TR (Taproot) addresses required for mint and updates.</mark></td><td>P2TR (Taproot) addresses are required for all uses such as mint and transfers</td><td>Uses native Ethereum Account address.</td></tr>
+<tr><td><strong>Collections</strong></td><td><mark style="color:green;">First-class "Container" NFT for updating collections, sealable permanently.</mark></td><td>Not defined but is in progress with parent-child relationships</td><td>Defined as separate ERC</td></tr>
+<tr><td><strong>Atomics Swaps</strong></td><td><mark style="color:green;">Partially Signed Bitcoin Transactions (PBSTs)</mark></td><td><mark style="color:green;">Partially Signed Bitcoin Transactions (PBSTs)</mark></td><td>Defined as separate ERC</td></tr>
+<tr><td><strong>Fungible Tokens</strong></td><td><mark style="color:green;">First-class "ARC20" using Satoshis as unit of account. Decentralized and direct minting modes available. Built-in ticker name service</mark></td><td>Not provided in base protocol. "BRC20" creates a JSON protocol in an Inscription to define the decentralized mint rules and ticker name.</td><td>Defined as ERC20 type tokens</td></tr>
+<tr><td><strong>Name Service</strong></td><td><mark style="color:green;">Realms are first-class NFTs that represent domain names and digital identities. A new naming standard with no domain suffix, starts with plus "+" sign like +username</mark></td><td>Not provided in base protocol. ".names" and ".sats" protocols exist as JSON protocol in an Inscription to define the claim and update rules.</td><td>Existing services such as ENS and Unstoppable Domains</td></tr>
+</tbody></table>
+</div>
+<h2 id="atomical-numbers-ids-refs"><a class="header" href="#atomical-numbers-ids-refs">Atomical Numbers, IDs, REFs</a></h2>
+<p>An Atomical Number is a sequential numbering scheme starting from 0. The numbering scheme is used to give a global order of the Atomicals that were minted. The Atomicals numbering scheme provides a simple way to refer to individual Atomicals with a short number that complements the Atomical ID.</p>
+<p>Atomicals have the Atomical ID which is a unique identifier based on the hash and output of the transaction it was minted in such as <em><strong>&lt;txid&gt;</strong></em><strong>i</strong><em><strong>&lt;index&gt;</strong></em> (Example: <em>a14e65573ff32b95b91a0ed8367feec64125e5f4ff44d9901002b262da959e6di0</em>). In contrast, the Atomical number is the sequential ordering of every Atomical that was minted, in the order they appear in the blockchain.</p>
+<p>An Atomical Reference ("REF" for short) is an alternative encoding of the Atomical ID using Crockford-base32 to provide a richer character set to make it more useful for vanity identifiers. (See section on 'Bitwork')</p>
+<h2 id="get-started-and-create-your-first-atomical-digital-object"><a class="header" href="#get-started-and-create-your-first-atomical-digital-object">Get Started and Create Your First Atomical Digital Object</a></h2>
+<p><a href="https://github.com/atomicals/atomicals-js">Download and install the Atomicals Javascript CLI tool</a> and mint your first Atomical in less than 2 minutes.</p>
+<details>
+<summary>⚡ Get started and mint your first Atomical Digital Object</summary>
+<p><a href="https://github.com/atomicals/atomicals-js">Download and install the Atomicals Javascript CLI tool</a> and follow the quick start instructions to mint your NFT, Collection, or Realm name in less than 2 minutes.</p>
+</details>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+                            <a rel="next prefetch" href="nfts/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+                    <a rel="next prefetch" href="nfts/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

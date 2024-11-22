@@ -1,0 +1,346 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Rules (Subrealms &amp; DMINT) - Atomicals Protocol Guide</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="An Introduction to Atomicals Theory and Digital Objects on Bitcoin.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Atomicals Protocol Guide</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<hr />
+<h2 id="description-overview-of-the-rules-system-for-claiming-subrealms-and-dmint"><a class="header" href="#description-overview-of-the-rules-system-for-claiming-subrealms-and-dmint">description: Overview of the Rules system for claiming Subrealms and DMINT</a></h2>
+<h1 id="rules-subrealms--dmint"><a class="header" href="#rules-subrealms--dmint">Rules (Subrealms &amp; DMINT)</a></h1>
+<p>Subrealms and NFT items (with DMINT - Decentralized Mints) can be minted (or "claimed") according to the <code>rules</code> set up by the owner of the parent realm or in in the case of DMINT, the creator of the container.</p>
+<p>It is possible to pay for a subrealm or DMINT'ed item using only proof of work (Bitwork) and/or also paying any set of output addresses a certain amount of Satoshis or value in an <a href="arc20-tokens/">ARC20</a> token.</p>
+<h2 id="format-of-rules-data-structure"><a class="header" href="#format-of-rules-data-structure">Format of Rules Data-structure</a></h2>
+<p>The <code>rules</code> section in the <code>dmint</code> (for containers) and <code>subrealms</code> section for Realms is identical and has the same syntax and semantics.</p>
+<p>We demonstrate the use of the rules, by building upon simple examples and gradually increasing complexity.</p>
+<p><mark style="color:red;">Warning:</mark> The regex standard being used is the one in Python 3.9. This means that all regex patterns are matched in "full string mode" - meaning that the match is always from the very beginning of a string to the very end even in the absence of <code>^</code> or <code>$</code></p>
+<h3 id="example-1-require-only-bitworkc-mining-to-claim-mint"><a class="header" href="#example-1-require-only-bitworkc-mining-to-claim-mint">Example 1: Require only Bitworkc mining to claim mint</a></h3>
+<p>Require the use of Bitwork to mine on the commit transaction (<code>bitworkc</code>). The pattern <code>"p": ".*"</code> means to match any subrealm name or any dmint item id, then the only form of "payment" required is that the item must be minted with <code>"bitworkc": "1234"</code> on the commit transaction to claim.</p>
+<pre><code>```json
+{
+  "rules": [
+      {
+        "p": ".*",
+        "bitworkc": "1234"
+      }
+  ]
+}
+```
+</code></pre>
+<h3 id="example-2-require-both-bitworkc-and-bitworkr-mining-to-claim-mint"><a class="header" href="#example-2-require-both-bitworkc-and-bitworkr-mining-to-claim-mint">Example 2: Require both Bitworkc and Bitworkr mining to claim mint</a></h3>
+<p>Require the use of Bitwork to mine on the commit transaction (<code>bitworkc</code>). The pattern <code>"p": ".*"</code> means to match any subrealm name or any dmint item id, then the form of "payment" required is that the item must be minted with <code>"bitworkc": "1234"</code> on the commit transaction to claim. Additionally the reveal transaction must have <code>"bitworkr": "8888.10" which means it must match "8888.*"</code> for the transaction hash as long as the 5th hex character is greater than or equal to "a" (10 in hex).</p>
+<pre><code>```json
+{
+  "rules": [
+      {
+        "p": ".*",
+        "bitworkc": "1234",
+        "bitworkr": "8888.10"
+      }
+  ]
+}
+```
+</code></pre>
+<h3 id="example-3-require-different-bitworkc-based-on-the-name-of-the-item"><a class="header" href="#example-3-require-different-bitworkc-based-on-the-name-of-the-item">Example 3: Require different Bitworkc based on the name of the item</a></h3>
+<p>In the third example, we specify that if the item name starts with the number <code>"0"</code> or the name ends in <code>.gif</code> then the Bitwork required is about 16x harder (ie: 16x more CPU/GPU mining will be required)</p>
+<pre><code>```json
+{
+  "rules": [
+      {
+        "p": "^0|\.gif$",
+        "bitworkc": "77777"
+      },
+      {
+        "p": ".*",
+        "bitworkc": "7777"
+      }
+  ]
+}
+```
+</code></pre>
+<h3 id="example-4-require-a-payment-to-a-certain-address-to-claim-the-item"><a class="header" href="#example-4-require-a-payment-to-a-certain-address-to-claim-the-item">Example 4: Require a payment to a certain address to claim the item</a></h3>
+<p>To enable "pay to claim" use the <code>"o"</code> (output script) field to indicate what output must be paid in order to successfully claim.</p>
+<pre><code>```json
+{
+  "rules": [
+      {
+        "p": ".*",
+         "o": {
+          "5120a97636cf3492a546d976e053f61b50788ef57a10b28885275b60bb369e6290e4": {
+            "v": 1000
+          }
+        },
+      }
+  ]
+}
+```
+</code></pre>
+<p>The above means that the output script of 5120a97636cf3492a546d976e053f61b50788ef57a10b28885275b60bb369e6290e4 must be paid at least <code>"v": 1000</code> satoshis for the claim to succeed. The script decodes to address <code>bc1p49mrdne5j2j5dktkupflvx6s0z8027ssk2yg2f6mvzand8nzjrjqschm45</code></p>
+<p><strong>Note: Use the CLI utility commands "yarn cli script-address &lt;script&gt;" to get the address decoded. To perform the reverse and get the script for an address use "yarn cli address-script &lt;address&gt;"</strong></p>
+<p>The reason for the use of the hex encoded output script is because a project may want the user to post a message in the form of an OP_RETURN on the blockchain instead of payment. Additionally it is more flexible for future address types.</p>
+<h3 id="example-5-require-a-payment-to-multiple-address-to-claim-an-item"><a class="header" href="#example-5-require-a-payment-to-multiple-address-to-claim-an-item">Example 5: Require a payment to multiple address to claim an item</a></h3>
+<p>To enable "pay to claim" use the <code>"o"</code> (output script) field to indicate what outputs must be paid in order to successfully claim.  In the example below in order to claim the items that start with <code>"000\d"</code> (ie: items <code>0000 to 0009</code>") they must pay 5000 satoshis to output script <code>5120bd5ba4e806e8cf69eff55af83c9b910f82d1978bfac53ce48554ce291dd22bec</code> (address: <code>bc1ph4d6f6qxar8knml4tturexu3p7pdr9utltzneey92n8zj8wj90kqshxyqa</code>) and also at the same time pay output script <code>5120a97636cf3492a546d976e053f61b50788ef57a10b28885275b60bb369e6290e4</code> (address: <code>bc1p49mrdne5j2j5dktkupflvx6s0z8027ssk2yg2f6mvzand8nzjrjqschm45</code>) 1000 satoshis.</p>
+<pre><code>```json
+{
+  "rules": [
+      {
+        "p": "^000\d$",
+         "o": {
+          "5120bd5ba4e806e8cf69eff55af83c9b910f82d1978bfac53ce48554ce291dd22bec": {
+            "v": 5000
+          }
+        },
+        "p": ".*",
+         "o": {
+          "5120a97636cf3492a546d976e053f61b50788ef57a10b28885275b60bb369e6290e4": {
+            "v": 1000
+          }
+        }
+      }
+  ]
+}
+```
+
+</code></pre>
+<h3 id="example-5-require-a-payment-with-specific-arc20-token-to-claim-an-item"><a class="header" href="#example-5-require-a-payment-with-specific-arc20-token-to-claim-an-item">Example 5: Require a payment with specific ARC20 token to claim an item</a></h3>
+<p>To enable "pay to claim" use the <code>"o"</code> (output script) field to indicate what outputs must be paid in order to successfully claim.  In the example below in order to claim the items that start with <code>"000\d"</code> (ie: items <code>0000 to 0009</code>") they must  pay output script <code>5120a97636cf3492a546d976e053f61b50788ef57a10b28885275b60bb369e6290e4</code> (address: <code>bc1p49mrdne5j2j5dktkupflvx6s0z8027ssk2yg2f6mvzand8nzjrjqschm45</code>) with 1000 units of the <a href="arc20-tokens/">ARC20</a> token identified by id <code>2112003789d572f764ff91b273266997e3a1153e017dc8a4fca020eaff324301i0</code></p>
+<pre><code>```json
+{
+  "rules": [
+      {
+        "p": ".*",
+         "o": {
+          "5120a97636cf3492a546d976e053f61b50788ef57a10b28885275b60bb369e6290e4": {
+            "id": "2112003789d572f764ff91b273266997e3a1153e017dc8a4fca020eaff324301i0",
+            "v": 1000
+          }
+        }
+      }
+  ]
+}
+```
+</code></pre>
+<h3 id="example-6-require-bitworkc-mining-and-a-payment-with-specific-arc20-token-to-claim-an-item"><a class="header" href="#example-6-require-bitworkc-mining-and-a-payment-with-specific-arc20-token-to-claim-an-item">Example 6: Require Bitworkc mining and a payment with specific ARC20 token to claim an item</a></h3>
+<p>The example below combines Examples above to also require Bitworkc (commit txid) mining and also a payment of a specific token</p>
+<pre><code>```json
+{
+  "rules": [
+      {
+        "p": ".*",
+         "o": {
+          "5120a97636cf3492a546d976e053f61b50788ef57a10b28885275b60bb369e6290e4": {
+            "id": "2112003789d572f764ff91b273266997e3a1153e017dc8a4fca020eaff324301i0",
+            "v": 1000
+          }
+        },
+        "bitworkc": "7878"
+      }
+  ]
+}
+```
+
+</code></pre>
+<h2 id="when-to-make-a-payment-after-the-initial-claim-candidate"><a class="header" href="#when-to-make-a-payment-after-the-initial-claim-candidate">When to make a Payment after the initial claim candidate</a></h2>
+<p>When a payment rule includes a requirement to pay at least one address, then the user who minted the claim must wait 4 block confirmations to ensure they are the leading candidate to win the subrealm or item. Then they have an additional 11 block confirmations to make the payment according to the payment rules and must attach an <code>OP_RETURN</code> receipt which specifies which atomical id they are claiming and paying for.</p>
+<p>The reason for this 2 step process is that if it was not 2 steps, then a malicious NFT collection could front run valid payments and then cheat users out of their items by paying faster than the user.  Therefore we use the candidate system to ensure only 1 user has the leading candidate and the eligibility to make the payment. If the user does not complete the payment and confirmed on the blockchain within 15 blocks since their original commit transaction, then another user can take the candidate lead and issue their payment and be awarded the item.</p>
+<p><strong>We strongly recommend wallet and service implementors use a fee rate that is at least 50% to 100% higher than the prevaling Bitcoin network conditions to ensure the payment arrives on time and not delayed after ther 15 block confirmations</strong></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="realm-names/mint-sub-realms.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="bitwork-mining.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="realm-names/mint-sub-realms.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="bitwork-mining.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

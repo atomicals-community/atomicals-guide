@@ -1,0 +1,1708 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Atomicals Protocol Guide</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="An Introduction to Atomicals Theory and Digital Objects on Bitcoin.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Atomicals Protocol Guide</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
+<figure><img src="./assets/atomblack.jpg" alt=""><figcaption><p>Atomicals Protocol brings Digital Objects to life on Bitcoin and proof-of-work based blockchains.</p></figcaption></figure>
+<h2 id="what-is-the-atomicals-protocol"><a class="header" href="#what-is-the-atomicals-protocol">What is the Atomicals Protocol?</a></h2>
+<p>The Atomicals Protocol is a simple, yet flexible protocol for minting, transferring and updating
+<em>digital objects (traditionally called non-fungible tokens)</em>
+for unspent transaction output (UTXO) blockchains such as Bitcoin. An Atomical (or "atom") is a way to organize the creation,
+transfer and updates of digital objects – it is essentially a chain of digital ownership defined according to a few simple rules.</p>
+<h2 id="why-use-atomicals"><a class="header" href="#why-use-atomicals">Why use Atomicals?</a></h2>
+<p>The Atomical specification is <em>the simplest possible way</em> to organize digital property on a blockchain such as Bitcoin. The implementation is very simple and provides the maximum flexibility for static and dynamic digital assets, artifacts and objects. The rules are so simple that it's impossible to accidentally spend Atomicals as miner fees and it's trivial to verify that ownership was transferred to the correct recipient – without relying on any third parties whatsoever or even being required to run an indexer. Atomicals are self-evident digital object histories. That being said, most developers and services will prefer the convenience of running their own indexer and all the benefits that come along with it.</p>
+<h2 id="use-cases"><a class="header" href="#use-cases">Use Cases</a></h2>
+<ul>
+<li>Digital collectibles, media and art</li>
+<li>Digital identity, authentication and token- gated content.</li>
+<li>Web hosting and file storage</li>
+<li>Peer to peer exchange and atomic swaps</li>
+<li>Digital namespace allocation</li>
+<li>Virtual land and title registries</li>
+<li>Dynamic objects and state for games</li>
+<li>Social media profiles, posts and communities</li>
+<li>Anywhere security and decentralization is critical concern. Military grade security and verification requirements.</li>
+</ul>
+<p>The usage philosophy of Atomicals is to pass along the complete history of an Atomical digital object from mint inception and including every transfer updates. <em>Even if an Atomical is updated or exchanges hands 10,000 times  – that amounts to only about 2.5 MB of data (250 bytes x 10,000).</em> A digital object is self-evident, unforgeable chain of authenticity that does not rely on any third party service or centralized indexer for verification purposes.</p>
+<p>The motto is:</p>
+<p><strong>"No transaction history, not your digital object"</strong></p>
+<p>Any client, wallet, marketplace, game and service can rapidly verify the Atomical by processing the history according to the very simple rules and detect a fake instantly without relying on trusted services.</p>
+<p>The heart of Atomicals is a few key simple rules to follow for mint, transfer, and update operations, continue reading to the Protocol Overview to understand the high level flow before diving deeper.  If you like, you can just <a href="reference-and-tools/javascript-library-cli.html">skip all the theory and go straight to minting your first Atomical within a couple of minutes.</a></p>
+<h2 id="what-are-atomicals-digital-objects"><a class="header" href="#what-are-atomicals-digital-objects">What are Atomicals Digital Objects?</a></h2>
+<p>An Atomical digital object (or simply "<em>Atomical</em>") is a new kind of Non-Fungible Token (NFT) that can be minted, transferred, and updated on Bitcoin. <em>The major difference is there is no requirement to use a centralized service or middleman acting as a trusted indexer.</em> It just works today and without needing changes whatsoever to Bitcoin nor requiring side-chains or any secondary layers. <strong>It is time to take back control of our digital lives - forever.</strong></p>
+<p>Atomicals are <em>self-evident</em> and easy to verify which makes them perfect for digital collectibles, social media, gaming, authentication and anywhere ownership and authenticity is critical to establish. The protocol rules are extremely simple, yet at the same time provides military grade security and verification levels. Zero room for error.</p>
+<p>The Atomicals Protocol is free, open-source and will forever be available to use by anyone anywhere. Our digital future depends on a robust digital object format to elegantly handle every possible use case while minimizing any potential for errors in software implementations.</p>
+<h2 id="the-atomicals-vision"><a class="header" href="#the-atomicals-vision">The Atomicals Vision</a></h2>
+<p><br />
+The grand vision is to establish and secure the Bitcoin blockchain as the source of truth and digital sovereignty.  Atomicals provides a simple and powerful protocol to take back control of our digital lives forever. We have everything within reach for us to create the future we want.</p>
+<p>The Atomicals Protocol is open source, free for anyone to use however they want. All the libraries, frameworks and services are released under MIT and GPLv3 to ensure no one has power over the tools and protocol.<br />
+<br />
+This is our work of passion to give to the world an option for finally bringing programmable digital objects to Bitcoin. It works today with no changes to Bitcoin, no side-chains, no separate token, no secondary layers and no middlemen, no leaders nor centralized parties.<br />
+<br />
+It is designed to work in harmony with the other protocols that have emerged such as <a href="https://nostr.com">Nostr</a>, <a href="https://ordinals.com">Ordinals</a> and more. Each Protocol has it's different strengths and Atomicals Digital Objects adds to the landscape of options available for users, creators and developers.<br />
+<br />
+Atomicals is a shift to sovereignty and self-ownership over our digital lives. A simple and extremely powerful protocol to re-decentralize the web and social communities.</p>
+<h2 id="key-differences-from-other-protocols"><a class="header" href="#key-differences-from-other-protocols">Key Differences From Other Protocols</a></h2>
+<p>The best way to understand the differences of Atomicals is to compare it against other popular non-fungible token (NFT) protocols.</p>
+<div class="table-wrapper"><table><thead><tr><th></th><th>Atomicals</th><th>Ordinals</th><th>Ethereum ERC721</th></tr></thead><tbody>
+<tr><td><strong>Value Proposition</strong></td><td>Digital Objects</td><td>Digital Artifacts</td><td>Digital Collectibles</td></tr>
+<tr><td><strong>Blockchains</strong></td><td>Bitcoin and all UTXO blockchains</td><td>Bitcoin and all UTXO blockchains</td><td>Ethereum EVM compatible blockchains</td></tr>
+<tr><td><strong>Mint Technique</strong></td><td>Bitcoin: Commit &amp; reveal w/ "<em>atom</em>" envelope.</td><td>Bitcoin: Commit &amp; reveal w/ "<em>ord</em>" envelope.</td><td>Fund and deploy contract account</td></tr>
+<tr><td><strong>Data Storage</strong></td><td><mark style="color:green;">Store</mark> <mark style="color:green;"></mark><em><mark style="color:green;">one or multiple</mark></em> <mark style="color:green;"></mark><mark style="color:green;">files upon minting</mark></td><td>Store only one file upon minting</td><td><em>Not defined</em></td></tr>
+<tr><td><strong>Dynamic State</strong></td><td><mark style="color:green;">Define</mark> <mark style="color:green;"></mark><em><mark style="color:green;">and update app state</mark></em> <mark style="color:green;"></mark><mark style="color:green;">for basic and any complex file types</mark></td><td><em>Not defined</em> - can be defined on app specific basis</td><td><em>Not defined -</em> can be programmed up front</td></tr>
+<tr><td><strong>Validation</strong></td><td><mark style="color:blue;">Validation currently through the indexing service "electrumx" - in theory it's possible to validate 100% client-side.</mark></td><td><mark style="color:blue;">Validation currently through the indexing service "ord" - in theory it's possible to validate 100% client-side.</mark></td><td>Trusts Ethereum  EVM nodes or in practice trust Metamask or Infura</td></tr>
+<tr><td><strong>Indexing</strong></td><td><mark style="color:blue;">Validation relies on elecrumx atomicals</mark> <mark style="color:blue;">indexer (Python) at the moment for tracking ordinal numbering system.</mark></td><td><mark style="color:blue;">Validation relies on</mark> <mark style="color:blue;"></mark><em><mark style="color:blue;">ord</mark></em> <mark style="color:blue;"></mark><mark style="color:blue;">indexer (Rust) at the moment for tracking ordinal numbering system.</mark></td><td>Uses native Ethereum EVM nodes or in practice trust Metamask or Infura</td></tr>
+<tr><td><strong>Address Format</strong></td><td><mark style="color:green;">P2TR (Taproot) addresses required for mint and updates.</mark></td><td>P2TR (Taproot) addresses are required for all uses such as mint and transfers</td><td>Uses native Ethereum Account address.</td></tr>
+<tr><td><strong>Collections</strong></td><td><mark style="color:green;">First-class "Container" NFT for updating collections, sealable permanently.</mark></td><td>Not defined but is in progress with parent-child relationships</td><td>Defined as separate ERC</td></tr>
+<tr><td><strong>Atomics Swaps</strong></td><td><mark style="color:green;">Partially Signed Bitcoin Transactions (PBSTs)</mark></td><td><mark style="color:green;">Partially Signed Bitcoin Transactions (PBSTs)</mark></td><td>Defined as separate ERC</td></tr>
+<tr><td><strong>Fungible Tokens</strong></td><td><mark style="color:green;">First-class "ARC20" using Satoshis as unit of account. Decentralized and direct minting modes available. Built-in ticker name service</mark></td><td>Not provided in base protocol. "BRC20" creates a JSON protocol in an Inscription to define the decentralized mint rules and ticker name.</td><td>Defined as ERC20 type tokens</td></tr>
+<tr><td><strong>Name Service</strong></td><td><mark style="color:green;">Realms are first-class NFTs that represent domain names and digital identities. A new naming standard with no domain suffix, starts with plus "+" sign like +username</mark></td><td>Not provided in base protocol. ".names" and ".sats" protocols exist as JSON protocol in an Inscription to define the claim and update rules.</td><td>Existing services such as ENS and Unstoppable Domains</td></tr>
+</tbody></table>
+</div>
+<h2 id="atomical-numbers-ids-refs"><a class="header" href="#atomical-numbers-ids-refs">Atomical Numbers, IDs, REFs</a></h2>
+<p>An Atomical Number is a sequential numbering scheme starting from 0. The numbering scheme is used to give a global order of the Atomicals that were minted. The Atomicals numbering scheme provides a simple way to refer to individual Atomicals with a short number that complements the Atomical ID.</p>
+<p>Atomicals have the Atomical ID which is a unique identifier based on the hash and output of the transaction it was minted in such as <em><strong>&lt;txid&gt;</strong></em><strong>i</strong><em><strong>&lt;index&gt;</strong></em> (Example: <em>a14e65573ff32b95b91a0ed8367feec64125e5f4ff44d9901002b262da959e6di0</em>). In contrast, the Atomical number is the sequential ordering of every Atomical that was minted, in the order they appear in the blockchain.</p>
+<p>An Atomical Reference ("REF" for short) is an alternative encoding of the Atomical ID using Crockford-base32 to provide a richer character set to make it more useful for vanity identifiers. (See section on 'Bitwork')</p>
+<h2 id="get-started-and-create-your-first-atomical-digital-object"><a class="header" href="#get-started-and-create-your-first-atomical-digital-object">Get Started and Create Your First Atomical Digital Object</a></h2>
+<p><a href="https://github.com/atomicals/atomicals-js">Download and install the Atomicals Javascript CLI tool</a> and mint your first Atomical in less than 2 minutes.</p>
+<details>
+<summary>⚡ Get started and mint your first Atomical Digital Object</summary>
+<p><a href="https://github.com/atomicals/atomicals-js">Download and install the Atomicals Javascript CLI tool</a> and follow the quick start instructions to mint your NFT, Collection, or Realm name in less than 2 minutes.</p>
+</details>
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<hr />
+<h2 id="description-atomicals-digital-objects-or-atoms-for-short"><a class="header" href="#description-atomicals-digital-objects-or-atoms-for-short">description: Atomicals Digital Objects or "atoms" for short.</a></h2>
+<h1 id="nfts"><a class="header" href="#nfts">NFTs</a></h1>
+<h2 id="what-are-atomicals-digital-objects-1"><a class="header" href="#what-are-atomicals-digital-objects-1">What are Atomicals Digital Objects?</a></h2>
+<p>An Atomical digital object (or simply "<em>Atomical</em>") is a new kind of Non-Fungible Token (NFT) that can be minted, transferred, and updated on Bitcoin. <em>The major difference is there is no requirement to use a centralized service or middleman acting as a trusted indexer.</em> It just works today and without needing changes whatsoever to Bitcoin nor requiring side-chains or any secondary layers. <strong>It is time to take back control of our digital lives - forever.</strong></p>
+<p>Atomicals are <em>self-evident</em> and easy to verify which makes them perfect for digital collectibles, social media, gaming, authentication and anywhere ownership and authenticity is critical to establish. The protocol rules are extremely simple, yet at the same time provides military grade security and verification levels. Zero room for error.</p>
+<p>The Atomicals Protocol is free, open-source and will forever be available to use by anyone anywhere. Our digital future depends on a robust digital object format to elegantly handle every possible use case while minimizing any potential for errors in software implementations.</p>
+<h2 id="how-atomicals-digital-objects-are-created"><a class="header" href="#how-atomicals-digital-objects-are-created">How Atomicals Digital Objects Are Created</a></h2>
+<p>An Atomical is minted using a 2-step commit and reveal scheme using Taproot (P2TR) spend scripts using the Atomicals Envelope and the minting operation denoted by the letter "m". A transaction output commits to the data or file being commuted and then the data is included in a spend script to reveal the content which could one or more files with any content type such as images, text or any media.</p>
+<p><a href="https://github.com/atomicals/atomicals-js">Mint your first Atomical using the command line interface</a> with nothing more than your existing Bitcoin wallet.</p>
+<p>Once created the Atomical is stored on the blockchain forever immutably and may be transferred using any address type to any new owner according to the familiar rules of Bitcoin.</p>
+<h2 id="how-atomicals-digital-objects-are-updated"><a class="header" href="#how-atomicals-digital-objects-are-updated">How Atomicals Digital Objects Are Updated</a></h2>
+<p>In addition to immutable content and files, Atomicals digital objects supports the ability to attach any number of files and state at any time after using the update operation denoted by the letter "u". Similar to the minting operation, the update follows a 2-step commit and reveal scheme to commit to an update and then a P2TR taproot spend script reveals the update contents.</p>
+<p>Any file or content type is supported in a single update. The owner of the digital object can overwrite, or update, the content of any file. This gives Atomicals a unique capability to act as an evolving data object perfect for social media, games, and more.</p>
+<p>Due to the nature of immutable storage, every file has the revision history stored permanently to be able to playback the state changes with fidelity.</p>
+<h2 id="how-atomicals-digital-objects-are-transferred"><a class="header" href="#how-atomicals-digital-objects-are-transferred">How Atomicals Digital Objects Are Transferred</a></h2>
+<p>An Atomical, once minted, is transferred like regular Bitcoins using any address format type include Taproot (P2TR), SegWit, Multisig, and legacy address (P2PKH).</p>
+<p>No special wallet support is required, although it is highly recommended to use an Atomicals-aware wallet to help facility identifying and transferring Atomicals safely. Even though it is impossible to accidentally destroy an Atomical, it is possible to send it to an unintended recipient if the user is not careful using a wallet that does not facilitate Atomicals identification. Fortunately the implementation is the simplest possible protocol that makes it easy for wallets and services to do if correctly and avoiding errors.</p>
+<p>There is no separate explicit "Transfer Operation" because we rely on using the native Bitcoin transfer mechanism to flow (or imprint) the identity of an Atomical from the inputs to the outputs.</p>
+<p>Read about <a href="nfts/normal-transfer-rules.html">NFT Transfer Rules</a> and<a href="nfts/swap-transfer-rules.html"> NFT Swap Rules</a>.</p>
+<h2 id="dynamic-digital-object-state"><a class="header" href="#dynamic-digital-object-state">Dynamic Digital Object State</a></h2>
+<p>An overview of how to update the data state of an AtomicalEvery NFT Atomical digital object has not only the immutable static files embedded upon minting, but it also has the ability to attach any data or file throughout it's lifetime. Since Bitcoin is an immutable audit trail, every change to every field is permanently recorded and can be played back to verify the latest state was arrived at correctly.What this means is that we finally have a way to create complex interactions, games and other services that depend upon attaching data to NFTs. The Atomicals payload format is intuitive and simple: add one or more files or variables to every spend of the digital object UTXO and like magic the latest state is propagated to all nodes and served up in the indexer instantly.With one simple command users and programmers can set key-value pairs of any type of data and even larger files like PDFs and images. For example, a user can host their BTC wallet address at the path "/btc/address" and host their avatar picture at "/profile/photo" in their Atomical and update it easily.The Atomicals philsophy is "Not your digital object history, not your digital asset", which means that we "Trust, but verify" and it's easy to validate the object state is correct by playing forward the history. Don't worry, we are providing a full suite of tools and libraries to basically do all of this automatically for you on launch day.\</p>
+<blockquote>
+<p>⚡ Get started and mint your first Atomical Digital Object</p>
+<p><a href="https://github.com/atomicals/atomicals-js">Download and install the Atomicals Javascript CLI tool</a> and follow the quick start instructions</p>
+</blockquote>
+<details>
+<summary>⚡ Get started and mint your first Atomical Digital Object</summary>
+<p><a href="https://github.com/atomicals/atomicals-js">Download and install the Atomicals Javascript CLI tool</a> and follow the quick start instructions to mint your NFT, Collection, or Realm name in less than 2 minutes.</p>
+</details>
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<hr />
+<h2 id="description-learn-about-atomicals-non-fungible-tokens-nft-transfer-rules"><a class="header" href="#description-learn-about-atomicals-non-fungible-tokens-nft-transfer-rules">description: Learn about Atomicals Non-Fungible Tokens (NFT) Transfer Rules</a></h2>
+<h1 id="normal-transfer-rules"><a class="header" href="#normal-transfer-rules">Normal Transfer Rules</a></h1>
+<p>The normal operation of an NFTs such as Realms and containers is using First-In First-Out (FIFO) allocations from inputs to outputs. The way to imagine as the the earliest inputs which contain NFTs will go to the first available output, then the next inputs which contain NFTS go to the next output, and so on until all the input NFTs have been allocated. In the case that an expected output is an unspendable OP_RETURN or there are not enough outputs to accomodate the input sequence, then the NFTs are always assigned to the 0'th output.</p>
+<h2 id="transfers-of-non-fungible-tokens-nft"><a class="header" href="#transfers-of-non-fungible-tokens-nft">Transfers of Non-Fungible Tokens (NFT)</a></h2>
+<p>NFT inputs are assigned in a First-In First-Output approach. In the case of an input containing multiple NFTs they are considered at the same position and will be assigned to the same output together.</p>
+<figure><img src="nfts/../assets/Transfers of Fungible Tokens (ARC20) (5).jpg" alt=""><figcaption></figcaption></figure>
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<hr />
+<h2 id="description-learn-about-atomicals-non-fungible-tokens-nft-pbst-swap-rules"><a class="header" href="#description-learn-about-atomicals-non-fungible-tokens-nft-pbst-swap-rules">description: Learn about Atomicals Non-Fungible Tokens (NFT) PBST Swap Rules</a></h2>
+<h1 id="swap-transfer-rules"><a class="header" href="#swap-transfer-rules">Swap Transfer Rules</a></h1>
+<p>STEP 1.<br />
+Seller signs 2nd input containing the NFT Atomical 7771 and 2nd output to receive 4000 Satoshis.<br />
+Signing with SIGHASH_SINGLE | ANYONECANPAY allows the buyer to add additional inputs for funding and their receive address for where to receive the NFT</p>
+<p><br />
+STEP 2.<br />
+Buyer adds funding input at 1st input and adds first output to receive the NFT Atomical 7771 value. Signing with SIGHASH_ALL commits the buyer to all inputs and outputs.</p>
+<figure><img src="nfts/../assets/Transfers of Fungible Tokens (ARC20) (6).jpg" alt=""><figcaption></figcaption></figure>
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<hr />
+<h2>description: &gt;-
+Separate (or "splat") merged NFTs at the same UTXO location to their own
+outputs</h2>
+<h1 id="splat-operation"><a class="header" href="#splat-operation">Splat Operation</a></h1>
+<p>In the event that NFTs were merged to the same UTXO location, use the <code>SPLAT(x)</code> operation to quickly seperate all of them in a single transaction.</p>
+<p>Examples:</p>
+<p>Atomicals 1199 ,4567, 0542 are Non-Fungible Tokens (NFT) merged in a single UTXO.<br />
+<br />
+To separate them, use the SPLAT (x) operation to spread them out over the outputs in alphabetical order according to their atomical_id.</p>
+<p>If there are not enough outputs to accommodate the remaining NFTs, or the corresponding output is an unspendable OP_RETURN, then that particular NFT is automatically assigned to the first Output 0 always.</p>
+<figure><img src="nfts/../assets/Transfers of Fungible Tokens (ARC20) (14) (1).jpg" alt=""><figcaption></figcaption></figure>
+<p>\</p>
+<p>\</p>
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<hr />
+<h2 id="description-fungible-token-colored-coin-standard-backed-by-satoshis"><a class="header" href="#description-fungible-token-colored-coin-standard-backed-by-satoshis">description: Fungible Token colored coin standard backed by Satoshis</a></h2>
+<h1 id="arc20-tokens"><a class="header" href="#arc20-tokens">ARC20 Tokens</a></h1>
+<p>The Atomicals Protocol solves the long standing problem of how to represent arbitrary fungible token assets on the Bitcoin blockchain. The ARC-20 fungible token standard finally brings colored coins to Bitcoin and uses each Satoshi to represent ownership units of deployed tokens. This means that every unit of the token is backed by 1 Satoshi forever.  <em>It acts as a kind of "digital gold content" that underpins the value of the token.</em>  It also means every token can never go below 1 Satoshi in value, by definition.</p>
+<p>ARC-20 uses the native Satoshi unit to represent each token, and they can be split and combined just like regular Bitcoins. ARC-20 tokens can be minted by anyone, and transferred to any Bitcoin address type, and works with wallets that support UTXO selection such as Sparrow Wallet <a href="https://www.sparrowwallet.com/">(external link)</a>. There are two modes of deployment: direct and decentralized. Learn more below about the different ways the ARC-20 can be minted and their benefits.</p>
+<p>The ARC-20 also comes with a built in ticker symbol service to provide a global unique name system for ticker symbols. The first registration of the ticker name is permanent and can never be used again.</p>
+<h2 id="decentralized-mint"><a class="header" href="#decentralized-mint">Decentralized Mint</a></h2>
+<p>A decentralized is initialized with a ticker, per mint award, total mints allowed, start block height, and metadata. A deployer could initialize a ticker such as <code>$myticker123</code> with a mint award of <code>1,000</code> units, with a total of <code>10,000</code> mints allowed and starting at block height <code>810,000</code> with an image.jpg and even meta data such as description, links, and terms.</p>
+<h3 id="initialize-init-dft"><a class="header" href="#initialize-init-dft">Initialize (init-dft)</a></h3>
+<p>The basic format of the decentralized initialization using the
+<a href="arc20-tokens/../reference-and-tools/javascript-library-cli.html">Atomicals CLI</a> is given as:</p>
+<pre><code>yarn cli init-dft &lt;tick&gt; &lt;per_mint_amt&gt; &lt;mint_count&gt; 
+&lt;start_height&gt; metadata.json
+
+Optional flags:
+--mintbitworkc=&lt;prefix&gt;
+--satsbyte=&lt;number&gt;
+</code></pre>
+<p><em><mark style="color:red;"><strong>See format of metadata.json below</strong></mark></em></p>
+<p>The decentralized initialize function <code>init-dft</code> allows minting for ticker <code>tick</code> to proceed with the <code>mint-dft</code> command (described below) only from the starting block height <code>start_height</code> and allowing a maximum of <code>mint_count</code> total mint requests, each to award <code>per_mint_amt</code> token units to the requester.  The effective total max supply is <code>per_mint_amt * mint_count</code>.</p>
+<p><em>Note:</em> It will take 3 block confirmations before the <code>tick</code> ticker will be claimed. You can query the status with <code>yarn cli get &lt;atomicalID&gt;</code> or <code>yarn cli find-tickers</code></p>
+<p><strong>Required Parameters:</strong></p>
+<p><em>tick:</em> The globally unique ticker name</p>
+<p><em>per_mint_amt: Number of units of the token to award per successful mint. Satoshi amount.</em></p>
+<p><em>mint_count:</em> Total number of permitted mints before exhausting the quota and becoming "fully minted"</p>
+<p><em>start_height:</em> Starting block height that mints may be begin. Can set block height to 0 or any future block height.</p>
+<p><em>image:</em> An image icon to represent the token. The name of the file will appear in the token. Use caution and rename the file first completely and include it as "image.jpg" or "image.png"</p>
+<p><strong>Optional Flags:</strong></p>
+<p><em>--mintbitworkc=&lt;prefix&gt;</em></p>
+<p>Define an optional <a href="arc20-tokens/../bitwork-mining.html">Bitwork</a> mining prefix target for the mints. If set, then the minters must expend CPU energy to find a match for the prefix target to be allowed to mint successfully.  This forces minters to perform proof of working mining in a similar manner to Bitcoin mining itself.</p>
+<p>It is recommended to choose a prefix between 4 and 6 hex digits. You can use any valid hex digits between <code>a-f0-9.</code> It is intended to purely be a vanity transaction id and any value is sufficient to require minters to expend energy to mint the token.</p>
+<p>Example time estimates for time required for minters:</p>
+<p><em>Note:</em> it could be any digit in the range <code>a-f0-9</code>, we use all <code>7's</code> for illustration purpose only.</p>
+<ul>
+<li>3 hex digit prefix of "777" will take about 4 seconds to mine</li>
+<li>4 hex digit prefix of "7777" will take ~1 minute to mine</li>
+<li>5 hex digit prefix of "77777" will take ~16 minutes to mine</li>
+<li>6 hex digit prefix of "777777" will take ~256 minutes to mine</li>
+</ul>
+<p><em>--satsbyte=&lt;number&gt;</em></p>
+<p>Set the satoshis per byte for the transaction and override the default.</p>
+<h4 id="initialize-a-perpetual-minting-token"><a class="header" href="#initialize-a-perpetual-minting-token">Initialize a Perpetual Minting token</a></h4>
+<pre><code>yarn cli init-dft-perpetual &lt;ticker&gt;
+</code></pre>
+<p><strong>Important Optional Parameters:</strong></p>
+<ul>
+<li><code>max_mints</code>: The number of mints allowed per mint phase. (Defaults to <code>2000</code>)</li>
+<li><code>maxglobalmints</code>: The number of global max mints.</li>
+<li><code>mint_amount</code>: The number of tokens per mint. (Defaults to <code>10000</code>)</li>
+<li><code>mint_height</code>: The starting mint height.</li>
+<li><code>mintbitworkvec</code>: The base vector of the bitwork prefix.</li>
+<li><code>mintbitworkcinc</code>: The amount of <code>bitworkc</code> to increase for each phase of <code>max_mints</code>. (Defaults to <code>1</code>)</li>
+<li><code>mintbitworkrinc</code>: The amount of <code>bitworkr</code> to increase for each phase of <code>max_mints</code>.</li>
+<li><code>mintbitworkcincstart</code>: The starting amount of <code>bitworkc</code> to increase for each phase of <code>max_mints</code>.</li>
+<li><code>mintbitworkrincstart</code>: The starting amount of <code>bitworkr</code> to increase for each phase of <code>max_mints</code>.</li>
+</ul>
+<blockquote>
+<p>See the complete arguments list using the command <code>yarn cli init-dft-perpetual -h</code>.</p>
+</blockquote>
+<p>Below is an example of how to initialize a token with the same configuration of $infinity.</p>
+<pre><code class="language-shell">yarn cli init-dft-perpetual infinity2 \
+  --max_mints=3333 \
+  --mint_amount=9999 \
+  --mintbitworkvec="888888888888888888888888" \
+  --mintbitworkcinc=1
+</code></pre>
+<p>In mathematical terms, the relationship between the arguments in the function can be expressed as follows:</p>
+<ol>
+<li>
+<p><strong>Target Calculation</strong>:</p>
+<ul>
+<li>( T_{\text{steps}} = \lfloor \frac{\text{actual_mints}}{\text{max_mints}} \rfloor )</li>
+<li>( T_{\text{current}} = \text{starting_target} + (T_{\text{steps}} \cdot \text{target_increment}) )</li>
+</ul>
+<p>The current target, ( T_{\text{current}} ), is computed based on the number of minted tokens relative to the maximum allowable mints, scaled by the target increment.</p>
+</li>
+<li>
+<p><strong>Bitwork Prefix Derivation</strong>:</p>
+<ul>
+<li>( \text{multiples} = \frac{T_{\text{current}}}{16} )</li>
+<li>( F_{\text{amount}} = \lfloor \text{multiples} \rfloor )</li>
+<li>( \text{modulo} = T_{\text{current}} \mod 16 )</li>
+</ul>
+<p>The resulting bitwork prefix string is derived from the base vector ( \text{bitwork_vec} ), padded to 32 characters, with:</p>
+<ul>
+<li>The first ( F_{\text{amount}} ) characters forming the primary prefix.</li>
+<li>If ( \text{modulo} &gt; 0 ), it appends (".\text{modulo}") to the prefix.</li>
+</ul>
+</li>
+</ol>
+<h3 id="mint-mint-dft"><a class="header" href="#mint-mint-dft">Mint (mint-dft)</a></h3>
+<p>The basic format of the decentralized mint using the <a href="arc20-tokens/../reference-and-tools/javascript-library-cli.html">Atomicals CLI </a>is given as:</p>
+<pre><code>yarn cli mint-dft &lt;tick&gt;
+
+Optional flags:
+--satsbyte=&lt;number&gt;
+</code></pre>
+<p>The decentralized mint function <code>mint-dft</code> allows minting for ticker <code>tick</code> to proceed starting from block height <code>start_height</code>.</p>
+<p>Follow the on-screen instructions to mint.</p>
+<p><strong>Required Parameters:</strong></p>
+<p><em>tick:</em> The globally unique ticker name</p>
+<p><strong>Optional Flags:</strong></p>
+<p><em>--satsbyte=&lt;number&gt;</em></p>
+<p>Set the satoshis per byte for the transaction and override the default.</p>
+<h2 id="direct-mint"><a class="header" href="#direct-mint">Direct Mint</a></h2>
+<p>The second way to mint or create an ARC-20 token type is to directly create a single output which contains the total supply, with each Satoshi representing a single unit of the token.</p>
+<h3 id="mint-entire-supply-in-one-step"><a class="header" href="#mint-entire-supply-in-one-step">Mint entire supply in one step</a></h3>
+<pre><code>yarn cli mint-ft &lt;tick&gt; &lt;total_supply&gt; metadata.json
+
+Optional flags:
+--satsbyte=&lt;number&gt;
+</code></pre>
+<p><em><mark style="color:red;"><strong>See format of metadata.json below</strong></mark></em></p>
+<p>The second way to mint or create an ARC-20 token type is to directly create a single output which contains the total supply, with each Satoshi representing a single unit of the token.</p>
+<p>For example, to mint a token with a supply of 100,000,000, simply create a single output with exactly 1 full Bitcoin (since 1 BTC = 100,000,000 Satoshis). An advantage of using the direct minting mode is that the team who creates it must put up the required amount of Bitcoins to substantiate the total minted supply; which greatly reduces dishonest actors from printing tokens out of thin air.</p>
+<p>Direct minting of ARC-20 is ideal for when a team or company wishes to maintain control over the initial distribution and determine how to spend the tokens at a later point in time.</p>
+<p><em>Note:</em> It will take 3 block confirmations before the <code>tick</code> ticker will be claimed. You can query the status with <code>yarn cli get &lt;atomicalID&gt;</code> or <code>yarn cli find-tickers</code></p>
+<p><strong>Required Parameters:</strong></p>
+<p><em>tick:</em> The globally unique ticker name</p>
+<p><em>total_supply:</em> Total supply units to directly mint</p>
+<p><em>image:</em> An image icon to represent the token. The name of the file will appear in the token. Use caution and rename the file first completely and include it as "image.jpg" or "image.png"</p>
+<p><strong>Optional Flags:</strong></p>
+<p><em>--satsbyte=&lt;number&gt;</em></p>
+<p>Set the satoshis per byte for the transaction and override the default.</p>
+<h2 id="metadatajson-format"><a class="header" href="#metadatajson-format">Metadata.json Format</a></h2>
+<p><strong>Define metadata details into the token.</strong> The suggested format to use follows the convention <code>sample-ft-meta.json.</code></p>
+<p>Use <a href="arc20-tokens/../permanent-file-storage.html">Permanent File Storage</a> to store an image on-chain and reference it in the "image" field below.</p>
+<pre><code>```json
+{
+    "name": "",
+    "desc": "",
+    "image": "atom:btc:dat:&lt;location of store-file data&gt;/image.png",
+    "decimals": 0,
+    "links": {
+        "x": {
+            "v": "https://x.com/..."
+        },
+        "website": {
+            "v": "https://..."
+        },
+        "realm": {
+            "v": "atom:btc:realm:myrealmname.subrealm"
+        },
+        "discord": {
+            "v": "https://discord.gg/..."
+        }
+    },
+    "legal": {
+        "terms": ""
+    }
+}
+```
+</code></pre>
+<p>None of the fields in the metadata are required, and can take any shape and form as long as it is valid JSON object. However it is recommended at a minimum <em>name, description, and legal</em> are provided to inform users of usage details. You must consult legal advice and verify your applicable jurisdictions permit your intended usage.</p>
+<details>
+<summary>⚡ Get started and mint your first Atomical Digital Object</summary>
+<p><a href="https://github.com/atomicals/atomicals-js">Download and install the Atomicals Javascript CLI tool</a> and follow the quick start instructions to mint your NFT, Collection, or Realm name in less than 2 minutes.</p>
+</details>
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<hr />
+<h2 id="description-learn-about-atomicals-fungible-tokens-arc20-transfer-rules"><a class="header" href="#description-learn-about-atomicals-fungible-tokens-arc20-transfer-rules">description: Learn about Atomicals Fungible Tokens (ARC20) Transfer Rules</a></h2>
+<h1 id="normal-transfer-rules-1"><a class="header" href="#normal-transfer-rules-1">Normal Transfer Rules</a></h1>
+<p>The normal operation of an ARC20 token transfer is that the sum total of all the input values should be allocated completely, or <em>cleanly,</em> into the available outputs. In the situation that there are not enough output values, or one of the subsequent outputs would result in an overallocation (ie: inflation of the token units), then the remaining balance is permanently destroyed or burned.</p>
+<h2 id="transfers-of-fungible-tokens-arc20"><a class="header" href="#transfers-of-fungible-tokens-arc20">Transfers of Fungible Tokens (ARC20)</a></h2>
+<p>Fully allocating - cleanly assign all inputs to outputs with FIFO rule.</p>
+<p>Atomicals 1932 ,7920, 0542 are Non-Fungible Tokens (NFT) are assigned in First-In First Out order while skipping unspendable outputs (OP_RETURN). The first input NFTs are assigned starting from Output 0, and then each subsequent NFT input assigned to the next available output.<br />
+Multiple Atomicals at the same UTXO input are sorted by atomical_id. Since “1932” is before “7920” it goes first.</p>
+<figure><img src="arc20-tokens/../assets/Transfers of Fungible Tokens (ARC20) (7).jpg" alt=""><figcaption><p>Fully allocating - cleanly assign all inputs to outputs with FIFO rule.</p></figcaption></figure>
+<h2 id="transfers-of-fungible-tokens-arc20-1"><a class="header" href="#transfers-of-fungible-tokens-arc20-1">Transfers of Fungible Tokens (ARC20)</a></h2>
+<p>Not cleanly allocating - Performs "best effort" assignment for all tokens from Output 0</p>
+<p>In the case that the outputs cannot be fully (or "cleanly") assigned, then the algorithm attempts to allocate all ARC20 tokens starting from Output 0, regardless of whether another ARC20 was already allocated. This decision was made to give leniency in the event that the developer or wallet accidentally failed to track multiple input ARC20 - in other words a "best effort" attempt is made to compensate and assign.\</p>
+<figure><img src="arc20-tokens/../assets/Transfers of Fungible Tokens (ARC20) (10).jpg" alt=""><figcaption></figcaption></figure>
+<p>Atomicals 1932 ,7920, 0542 are Non-Fungible Tokens (NFT) are assigned in First-In First Out order while skipping unspendable outputs (OP_RETURN).<br />
+<br />
+If they Atomicals cannot be “cleanly assigned”, as in the example above the 5th output has 700 units (which is too much for the Atomical 0542’s value of 620), then the algorithm defaults to “best effort” assigning all ARC20 starting from Output 0.</p>
+<h2 id="transfers-of-fungible-tokens-arc20-2"><a class="header" href="#transfers-of-fungible-tokens-arc20-2">Transfers of Fungible Tokens (ARC20)</a></h2>
+<p>Insufficient outputs - permanently destroying unallocated units</p>
+<p>Atomical 86a1 is Fungible Tokens (ARC20) and can be split and merged across outputs.<br />
+<br />
+An Atomical is insufficiently allocated when there is not a sufficient amount of Satoshis in the outputs to accommodate the input values. The result is the excess input value is burned – or permanently destroyed.  The example above shows that Atomical 86a1’s input value is 2600, but there are only 1600 Satoshis in the outputs, which effectively results in 1000 units of Atomical 86a1 being burned.\</p>
+<figure><img src="arc20-tokens/../assets/Transfers of Fungible Tokens (ARC20) (8).jpg" alt=""><figcaption></figcaption></figure>
+<h2 id="transfers-of-fungible-tokens-arc20-3"><a class="header" href="#transfers-of-fungible-tokens-arc20-3">Transfers of Fungible Tokens (ARC20)</a></h2>
+<p>Incorrect over-allocation - permanently destroying remainder</p>
+<p>Atomical 86a1 is Fungible Tokens (ARC20) and can be split and merged across outputs.<br />
+<br />
+An Atomical is incorrectly allocated when there is an excess of Satoshis in the expected output and there is not enough remaining balance of the inputs for the Atomical. The example above shows that Atomical 86a1’s input value is 2600, and there is 600 in the first output, but the second output has 2100 Satoshis, which cannot take on the Atomical 86a1 because there is only 2600 - 600 = 2000 units of the Atomical remaining to allocate. To attempt to allocate would result in inflation of the supply and therefore is considered invalid. The result is that 2000 units of Atomical 86a1 is permanently destroyed</p>
+<figure><img src="arc20-tokens/../assets/Transfers of Fungible Tokens (ARC20) (9).jpg" alt=""><figcaption></figcaption></figure>
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<hr />
+<h2 id="description-learn-about-atomicals-fungible-tokens-arc20-pbst-swap-rules"><a class="header" href="#description-learn-about-atomicals-fungible-tokens-arc20-pbst-swap-rules">description: Learn about Atomicals Fungible Tokens (ARC20) PBST Swap Rules</a></h2>
+<h1 id="swap-transfer-rules-1"><a class="header" href="#swap-transfer-rules-1">Swap Transfer Rules</a></h1>
+<p><strong>STEP 1.</strong><br />
+Seller signs 2nd input containing the ARC20 Atomical 9810 and 2nd output to receive 5000 Satoshis. Signing with <code>SIGHASH_SINGLE | ANYONECANPAY</code> allows the buyer to add additional inputs for funding and their receive address for where to receive the ARC20 tokens.</p>
+<p><strong>STEP 2.</strong><br />
+Buyer adds funding input at 1st input and adds first output to receive the ARC20 Atomical 9810 value. Signing with <code>SIGHASH_ALL</code> commits the buyer to all inputs and outputs.</p>
+<figure><img src="arc20-tokens/../assets/Transfers of Fungible Tokens (ARC20) (2).jpg" alt=""><figcaption></figcaption></figure>
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<hr />
+<h2 id="description-this-is-only-a-preliminary-concept-and-no-implementation-exists-to-date"><a class="header" href="#description-this-is-only-a-preliminary-concept-and-no-implementation-exists-to-date">description: This is only a PRELIMINARY CONCEPT and no implementation exists to date.</a></h2>
+<h1 id="substantiation-factor"><a class="header" href="#substantiation-factor">Substantiation Factor</a></h1>
+<blockquote>
+<p>❗ This is only a <strong>PRELIMINARY CONCEPT</strong> and no implementation exists to date.</p>
+</blockquote>
+<p><strong>Problem:</strong> It is not possible to transfer less than 546 satoshis in a single UTXO with Bitcoin due to the dust limit, and therefore it is not possible to transfer ARC20 tokens in denominations less than 546, which can be prohibitive for many users and applications.</p>
+<p>⚡ <strong>Solution:</strong> Introduce a <em>SUBSTANTIATION FACTOR (SF)</em> that redefines how many Satoshis are needed to back a single unit of an ARC20 token. The default substantiation factor is 1:1 and arbitrary precision must be feasible to facilitate making transfers involving less than 546 units of a token.</p>
+<h2 id="operation-st---substantiate-token"><a class="header" href="#operation-st---substantiate-token">Operation: "ST" - Substantiate Token</a></h2>
+<p>A new operation is created that allows the re-substantiation of token units from 1:1 to 1:10, 1:100, etc... Effectively allowing the owner of the token to "split" or "fractionalize" their token units to arbitrary precision - with one catch: they must provide the regular Satoshis as the collateral or backing of the token units direclty in proportion to their desired factor.</p>
+<p>The default operation of ARC20 is to have 0 decimals, or a 1:1 substantation. We can define this as an Exponent of 0 in the calculation <code>10^0 = 1</code></p>
+<p>We can then see we can "rescale" or "re-substantiation" by different factors, by changing the exponent to give decimal places.</p>
+<p>Consider the table of Exponents to represent token units with 1:1 backing, then 1:10, then 1:100 satoshis, etc and so on.</p>
+<pre><code>10^0 = 1
+10^1 = 10
+10^2 = 100
+10^3 = 1,000
+10^4 = 10,000
+10^5 = 100,000
+</code></pre>
+<p>For example, if we wish to trade 1 unit of a token, while still respect the dust limit. Then we simply need to substantiate each unit of the token with 1,000 regular satoshis and then we can perform a transfer of 1,000 satoshis with Exponent=3.</p>
+<p>An example will demonstrate how this works, preserving the fungibility and fluidity of the ARC20 transfers.</p>
+<figure><img src="arc20-tokens/../assets/split st start.jpg" alt=""><figcaption></figcaption></figure>
+<p>In the event there are multiple inputs with different exponents, we can easily handle them too:</p>
+<figure><img src="arc20-tokens/../assets/split mixed.jpg" alt=""><figcaption></figcaption></figure>
+<p>An example to "downscale" to a lower exponent</p>
+<figure><img src="arc20-tokens/../assets/rescale.jpg" alt=""><figcaption></figcaption></figure>
+<p>And one more example to demonstrate the downscaling to make the point extra clear</p>
+<figure><img src="arc20-tokens/../assets/rescaledust.jpg" alt=""><figcaption></figcaption></figure>
+<h2 id="transfers-without-operation-st"><a class="header" href="#transfers-without-operation-st">Transfers without Operation "ST"</a></h2>
+<p>When the Operation "ST" is not used, then the highest Exponent is taken as the target Exponent, that's all there is to it.</p>
+<figure><img src="arc20-tokens/../assets/merge mixed.jpg" alt=""><figcaption></figcaption></figure>
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<hr />
+<h2 id="description-overview-of-collection-containers-for-tokens-and-data"><a class="header" href="#description-overview-of-collection-containers-for-tokens-and-data">description: Overview of Collection Containers for Tokens and Data</a></h2>
+<h1 id="collection-containers"><a class="header" href="#collection-containers">Collection Containers</a></h1>
+<p>This section describes how to mint a special type of Atomical digital object called a <em>Container.</em> This data type is designed for NFT collections and more. Basically any time we want to group items together, we will use a container.</p>
+<blockquote>
+<p><strong>-&gt; Quick Overview: What is a <strong><em><strong>Container</strong></em></strong>?</strong></p>
+<p>Containers are human-readable identifiers to represent collections of NFTs and metadata. A Container name begins with the hashtag  <code>#</code> sign. Container names are self-owned and self-managed directly on the Bitcoin blockchain using the Atomicals Digital Object format — add and update items in the container collection, and optionally <em>seal</em> the container permanently to prevent future changes</p>
+</blockquote>
+<p><strong>📌 To Mint Container Items with DMINT (Decentralized Mint) consult the</strong> <a href="collection-containers/dmint-guide.html"><strong>DMINT Guide</strong></a></p>
+<h2 id="collection-format-recommended"><a class="header" href="#collection-format-recommended">Collection Format (Recommended)</a></h2>
+<p>For efficiency reasons, the attributes are defined seperately from the items attributes assocations. A numeric value is used to link or connect the attributes of each item to the attribute definitions.<br />
+See the <a href="https://github.com/atomicals/atomicals-js/tree/master/templates/containers/sample-collection.json">sample collection format</a> in github.</p>
+<h3 id="name-string---optional"><a class="header" href="#name-string---optional">name (string - optional)</a></h3>
+<p>The <em>name</em> field defines the display name of the collection. The collection container itself is identified with the # hashtag slug (ie: <em>#mycollection-name</em>), and <em>name</em> is what websites can use to display a more descriptive name.</p>
+<h3 id="desc-string---optional"><a class="header" href="#desc-string---optional">desc (string - optional)</a></h3>
+<p>The <em>desc</em> field defines the detailed description of the collection.</p>
+<h3 id="legal-object---recommended"><a class="header" href="#legal-object---recommended">legal (object - recommended)</a></h3>
+<p>The <em>legal</em> section defines legal terms and licensing to make it clear how users and holders of the NFTs may use the data.</p>
+<p><strong>terms (recommended):</strong> Any specific terms of the collection usage or items usage.</p>
+<p><strong>license (recommended):</strong> Any type of license code.</p>
+<pre><code>"legal": {
+    "terms": "...",
+    "license": "CC",
+}
+</code></pre>
+<h3 id="links-optional"><a class="header" href="#links-optional">links (optional)</a></h3>
+<p>The <em>links</em> section defines additional external resources of interest such as website and social media links.</p>
+<pre><code>{
+    "links": {
+        "x": {
+            "v": "https://x.com/username"
+        },
+        "website": {
+            "v": "https://coolwebsite.com"
+        },
+        "discord": {
+            "v": "https://discord.gg/..."
+        }
+    }
+}
+</code></pre>
+<h3 id="attrs-object---optional"><a class="header" href="#attrs-object---optional">attrs (object - optional)</a></h3>
+<p>The <em>attrs</em> section defines the types of attributes, their details such as name, description and possible ranges of values.</p>
+<h3 id="items-object---required"><a class="header" href="#items-object---required">items (object - required)</a></h3>
+<p>The items section connects all of the NFTs to the container using a map of key to items. It is recommended to use a string of the key of items, even when using a numbering scheme.</p>
+<p><strong>id (required):</strong> stands for "id" of an item and corresponds to the atomical ID of an NFT</p>
+<p><strong>a (required):</strong> stands for "attributes" of an item. It is required to be in the form of an array with each element in the array representing the associated value in the attributes definition section <em>attr</em></p>
+<p><strong>n (optional):</strong> stands for "name" of an item</p>
+<pre><code><strong>```json
+</strong>{
+  "name": "Collection Name",
+  "desc": "Collection description",
+  "image": "atom:btc:dat:&#x3C;location of store-file data>/image.png",
+  "legal": {
+    "terms": "...",
+    "license": "CC"
+  },
+  "links": {
+        "x": {
+            "v": "https://x.com/..."
+        },
+        "website": {
+            "v": "https://..."
+        },
+        "discord": {
+            "v": "https://discord.gg/..."
+        }
+  },
+  "attrs": [
+    {
+      "name": "bodyarmor",
+      "desc": "Type of body armor",
+      "type": "string",
+      "values": [
+        "metal",
+        "leather",
+        "field"
+      ]
+    },
+    {
+      "name": "headcovering",
+      "desc": "The type of head covering",
+      "type": "string",
+      "values": [
+        "bandana",
+        "helmet",
+        "scarf",
+        "baseball cap"
+      ]
+    },
+    {
+      "name": "stamina",
+      "desc": "The stamina of the hero",
+      "type": "integer",
+      "min": 0,
+      "max": 10
+    }
+  ],
+  "items": {
+    "0": {
+      "id": "84718b469c40b1bcc7cb324b8e24e4e442f88cd913687ea2bc7b3e79d4fc4fdei0",
+      "n": "Some Name",
+      "a": [
+        0,
+        3,
+        8
+      ]
+    },
+    "1": {
+      "id": "1070d7c98304bf5ac9a5addceb13e0ce4e840641f82d71d84cebbdac427c1f4fi0",
+      "n": "Another Name",
+      "a": [
+        1,
+        2,
+        10
+      ]
+    },
+    "Signature Series 1": {
+      "id": "14a0d7c98304bf5ac9a5addceb1de0ce4e840641f82d71d84cebbdac427c1fc3i0",
+      "n": "Special",
+      "a": [
+        2,
+        3,
+        7
+      ]
+    }
+  }
+}
+```
+</code></pre>
+<p>Execute the following commands after formatting your collection data in the format above.</p>
+<pre><code>// first store the desired main image on chain (see section below)
+yarn cli store-file ./path/to/image.png image.png --satsbyte=10
+
+Success sent tx:  db8a761ed493627138c5733071558c4caa65912c5cba3e1061c02d6d7933461f
+{
+  "success": true,
+  "data": {
+    "commitTxid": "b57bad8c0b7f58a552574fafc16b6efbbb3bf966b9ccfb24f03580f9462b5997",
+    "revealTxid": "db8a761ed493627138c5733071558c4caa65912c5cba3e1061c02d6d7933461f",
+    "dataId": "db8a761ed493627138c5733071558c4caa65912c5cba3e1061c02d6d7933461fi0"
+  }
+}
+
+// We will use the dataId above to reference the data on chain
+// ie: atom:btc:dat:db8a761ed493627138c5733071558c4caa65912c5cba3e1061c02d6d7933461fi0/image.png
+
+// Store the collection metadata with the following command:
+yarn cli set-container-data #mycollection-name collection.json --satsbyte=10
+</code></pre>
+<h3 id="bare-minimum-recommended-collection-format"><a class="header" href="#bare-minimum-recommended-collection-format">Bare Minimum Recommended Collection Format</a></h3>
+<p>If you have a collection with no attributes and not much metadata, then the following format is the recommended minimum. Provide a <em>name, image and the list of items.</em></p>
+<pre><code><strong>```json
+</strong>{
+  "name": "Collection Name",
+  "image": "atom:btc:dat:&#x3C;location of store-file data>/image.png",
+  "items": {
+    "0": {
+      "id": "84718b469c40b1bcc7cb324b8e24e4e442f88cd913687ea2bc7b3e79d4fc4fdei0"
+    },
+    "1": {
+      "id": "1070d7c98304bf5ac9a5addceb13e0ce4e840641f82d71d84cebbdac427c1f4fi0"
+    },
+    "9999": {
+      "id": "14a0d7c98304bf5ac9a5addceb1de0ce4e840641f82d71d84cebbdac427c1fc3i0"
+    }
+  }
+}
+```
+</code></pre>
+<p>Execute the following commands after formatting your collection data in the format above.</p>
+<pre><code>// first store the desired main image on chain (see section below)
+yarn cli store-file ./path/to/image.png image.png --satsbyte=10
+
+Success sent tx:  db8a761ed493627138c5733071558c4caa65912c5cba3e1061c02d6d7933461f
+{
+  "success": true,
+  "data": {
+    "commitTxid": "b57bad8c0b7f58a552574fafc16b6efbbb3bf966b9ccfb24f03580f9462b5997",
+    "revealTxid": "db8a761ed493627138c5733071558c4caa65912c5cba3e1061c02d6d7933461f",
+    "dataId": "db8a761ed493627138c5733071558c4caa65912c5cba3e1061c02d6d7933461fi0"
+  }
+}
+
+// We will use the dataId above to reference the data on chain
+// ie: atom:btc:dat:db8a761ed493627138c5733071558c4caa65912c5cba3e1061c02d6d7933461fi0/image.png
+
+// Store the collection metadata with the following command:
+yarn cli set-container-data #mycollection-name collection.json --satsbyte=10
+</code></pre>
+<h2 id="storing-immutable-image-file-on-chain"><a class="header" href="#storing-immutable-image-file-on-chain">Storing Immutable Image File on Chain</a></h2>
+<p><a href="collection-containers/../permanent-file-storage.html" title="mention">permanent-file-storage.md</a></p>
+<p>Using the command line utility, execute the following command to set the data in the sample file above.</p>
+<pre><code>// immutably store an image on-chain to reference in the container metadata
+yarn cli store-file ./path/to/image.png image.png --satsbyte=10
+
+Success sent tx:  db8a761ed493627138c5733071558c4caa65912c5cba3e1061c02d6d7933461f
+{
+  "success": true,
+  "data": {
+    "commitTxid": "b57bad8c0b7f58a552574fafc16b6efbbb3bf966b9ccfb24f03580f9462b5997",
+    "revealTxid": "db8a761ed493627138c5733071558c4caa65912c5cba3e1061c02d6d7933461f",
+    "dataId": "db8a761ed493627138c5733071558c4caa65912c5cba3e1061c02d6d7933461fi0"
+  }
+}
+</code></pre>
+<p>We will use the <em>reveal location</em> (db8a761ed493627138c5733071558c4caa65912c5cba3e1061c02d6d7933461fi0) to refer to the image <em>image.png</em> below.</p>
+<h2 id="adding-nfts-to-a-collection-container"><a class="header" href="#adding-nfts-to-a-collection-container">Adding NFTs to a Collection Container</a></h2>
+<p>Provide a file that matches the collections format above and execute the following command to update the sample #mycollection-name.</p>
+<pre><code>yarn cli set-container-data #mycollection-name sample-collection.json --satsbyte=10
+</code></pre>
+<h2 id="querying-metadata-and-items-of-collection-container"><a class="header" href="#querying-metadata-and-items-of-collection-container">Querying Metadata and Items of Collection Container</a></h2>
+<p>After the transaction is confirmed in a block, you may query the state of the sample #mycollection-name with:</p>
+<pre><code>yarn cli state #mycollection-name
+</code></pre>
+<details>
+<summary>⚡ Get started and mint your first Atomical Digital Object</summary>
+<p><a href="https://github.com/atomicals/atomicals-js">Download and install the Atomicals Javascript CLI tool</a> and follow the quick start instructions to mint your NFT, Collection, or Realm name in less than 2 minutes.</p>
+</details>
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<hr />
+<h2 id="description-atomicals-nft-container-dmint-tutorial"><a class="header" href="#description-atomicals-nft-container-dmint-tutorial">description: Atomicals NFT Container DMint Tutorial</a></h2>
+<h1 id="dmint-guide"><a class="header" href="#dmint-guide">DMINT Guide</a></h1>
+<blockquote>
+<p>The following DMINT Guide is courtesy and written by the <a href="https://wizz.cash">wizz.cash</a> team. <a href="https://astrox.notion.site/Atomicals-NFT-Container-DMint-Tutorial-1bd9216f051942458b3a83268a68fb0c">Original link.</a></p>
+</blockquote>
+<figure><img src="collection-containers/../assets/Transfers of Fungible Tokens (ARC20) (16).jpg" alt=""><figcaption></figcaption></figure>
+<h2 id="terms"><a class="header" href="#terms">Terms</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Mint</th><th>The process of creating content on a blockchain. It typically involves generating and recording new items on the blockchain.</th></tr></thead><tbody>
+<tr><td>DMINT</td><td>"Decentralized Mint", indicating a decentralized minting operation.</td></tr>
+<tr><td>Container</td><td>A collection or a set of items.</td></tr>
+<tr><td>Bitwork</td><td>The difficulty of minting. The rules for bitwork can be found in the <a href="collection-containers/../bitwork-mining.html">Bitwork Mining</a>.</td></tr>
+<tr><td>Timestamp</td><td>A continuous 10 or 13-digit number used to represent time.</td></tr>
+</tbody></table>
+</div>
+<h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
+<p>This tutorial is designed to help project owners quickly understand how to onboard their DMINT NFT collection onto the Atomicals protocol. In the Atomicals protocol, NFT collections are d to as 'containers', which is roughly equivalent to 'NFT collection.'</p>
+<p>The process can be broadly divided into four main blocks:</p>
+<ol>
+<li>Prepare all data for the collection.</li>
+<li>Configure the container.</li>
+<li>Validate the NFT item.</li>
+<li>Mint the NFT item.</li>
+</ol>
+<p>As a project owner, your focus should be on steps 1, 2, and 3.</p>
+<blockquote>
+<p>💰 Before each step, there is a ⛓️ icon indicating that the operation is on-chain, requiring gas consumption.</p>
+</blockquote>
+<h4 id="prepare-collection-data"><a class="header" href="#prepare-collection-data"><strong>Prepare Collection Data</strong></a></h4>
+<ol>
+<li>Gather data for all NFTs (A1, A2......AN).</li>
+<li>Prepare the DMINT data for the collection (B).</li>
+<li>Collect other metadata for the collection (C).</li>
+<li>Use the command-line tool to locally create a new wallet for isolating all container operations and avoiding confusion.</li>
+</ol>
+<h4 id="configure-container"><a class="header" href="#configure-container"><strong>Configure Container</strong></a></h4>
+<ol>
+<li>⛓️ Mint the container.</li>
+<li>⛓️ Use the collection data (B) to configure DMINT.</li>
+<li>⛓️ Configure other metadata (C).</li>
+<li>⛓️ Seal the container after confirming all information. <strong>(Final step! Final step!)</strong></li>
+</ol>
+<h4 id="validate-nft-item"><a class="header" href="#validate-nft-item"><strong>Validate NFT Item</strong></a></h4>
+<ol>
+<li>With existing item data and the container already on-chain with configured DMINT, independently use NFT data (A) to validate whether the item matches the container.</li>
+<li>The container is sealed; you can retrieve the mint status of individual items and the list of items already minted.</li>
+</ol>
+<h4 id="mint-nft-item"><a class="header" href="#mint-nft-item"><strong>Mint NFT Item</strong></a></h4>
+<ol>
+<li>⛓️ Download NFT data (A) and locally mint using the official command-line tool.</li>
+</ol>
+<blockquote>
+<p>📌 For your convenience in distinguishing between different files, we have marked them with uppercase English labels. Please pay attention to the corresponding files at each step. Using incorrect files may result in unexpected on-chain data.</p>
+</blockquote>
+<p>From the outlined steps above, it is evident that project owners do not need to upload each NFT individually to the blockchain. Users are responsible for verifying and bearing the gas costs during the Mint process.</p>
+<hr />
+<h2 id="operation-process"><a class="header" href="#operation-process"><strong>Operation Process</strong></a></h2>
+<p>The following operations are based on version 0.1.46 of the atomicals-js command-line tool (<a href="https://github.com/atomicals/atomicals-js/commit/aa34095c673de28166105e26ab2e898179e8039a">@aa34095c</a>). The tool version may be updated periodically, so before proceeding, please check whether your local CLI is the latest or an available version. For installation and configuration, please refer to: <a href="https://github.com/atomicals/atomicals-js#install">https://github.com/atomicals/atomicals-js#install</a>. If you have any questions about a specific command, use <strong><code>-h</code></strong> when entering the command to get help content.</p>
+<blockquote>
+<p>💡 To avoid errors and unexpected discrepancies during the operation, it is recommended to test the entire process on the testnet before any actions on the mainnet.</p>
+</blockquote>
+<blockquote>
+<p>❗ Each step that includes content with `#container-name` represents the container name, and it must start with `#`. Otherwise, some commands may identify it as a different type of Atomicals.</p>
+</blockquote>
+<blockquote>
+<p>💰 For each command in the steps with `--satsbyte`, please fill in the value based on the on-chain gas situation.</p>
+</blockquote>
+<hr />
+<h3 id="prepare-collection-data-1"><a class="header" href="#prepare-collection-data-1"><strong>Prepare Collection Data</strong></a></h3>
+<ol>
+<li>
+<p>Prepare a folder containing all the original NFT files (images). It is recommended to pre-change the file names (e.g., "number.png" to "1234.png") to reduce the possibility and complexity of later data modifications. File names only support digits, English, and hyphens (<code>-</code>), and cannot start with a hyphen. The maximum length is 64 characters.</p>
+</li>
+<li>
+<p>Run a command to generate processed data for all NFTs. After completion, a new folder will be generated.</p>
+<pre><code>$ yarn cli prepare-dmint-items "path/to/collection-folder" "path/to/output-folder"
+</code></pre>
+</li>
+<li>
+<p>The generated folder is named "output-folder" with a timestamp, containing individual item-*.json files for each NFT. Please note that the data generated at this point only includes the <code>mainHash</code> and <code>data</code> fields. If necessary, you can specify <code>bitworkc</code>/<code>bitworkr</code> in the <code>args</code>, and after modification, users will be required to use the declared bitwork during minting.</p>
+<pre><code class="language-json">{
+  "mainHash": "0099ad5961eff12096b851d9701bedfe09ec3433dad89857bcaddc5ea2172c98",
+  "data": {
+    "args": {
+      "request_dmitem": "test-1",
+      "main": "image.jpg",
+      "i": true
+    },
+    "image.jpg": {
+      "$b": "ffd8ffe000104a4649460001010100600060000ffd9"
+    }
+  }
+}
+</code></pre>
+</li>
+<li>
+<p>Run the following command to generate DMINT data. Replace <code>path/to/folder</code> with the path to the folder generated in step 2, and <code>mintHeight</code> with the starting block height for minting (a suggested value is <code>0</code>, meaning minting can occur immediately after deployment). After completion, a new "dmint-timestamp.json" file will be added to the folder, and all processed data for NFTs will be updated.</p>
+<pre><code>yarn cli prepare-dmint "path/to/folder" 0 "b1d0"
+</code></pre>
+<pre><code class="language-json">{
+  "dmint": {
+    "v": "1",
+    "mint_height": 0,
+    "merkle": "5c529dacfb37fc24804c550abc851602a9926016a424390387eb23e38de4cca1",
+    "immutable": true,
+    "items": 10,
+    "rules": [
+      {
+        "p": ".*",
+        "bitworkc": "7baf"
+      }
+    ]
+  }
+}
+</code></pre>
+<p>From here, <code>mint_height</code> can be modified to specify which block your DMINT should start.
+For example: <code>840000</code> means the DMINT of the container can only start after the <code>840000</code> height block has been confirmed.</p>
+<pre><code class="language-json">{
+  "mainHash": "0099ad5961eff12096b851d9701bedfe09ec3433dad89857bcaddc5ea2172c98",
+  "data": {
+    "args": {
+      "request_dmitem": "test-1",
+      "main": "image.jpg",
+      "i": true,
+      "proof": [
+        {
+          "p": true,
+          "d": "3212c74b3b5083433a8111f80369d8c591711c577e45dacb8ccaf7960d96790f"
+        }
+      ]
+    },
+    "image.jpg": {
+      "$b": "ffd8ffe000104a4649460001010100600060000ffd9"
+    }
+  },
+  "targetVector": "test-1:any:any:image.jpg:0099ad5961eff12096b851d9701bedfe09ec3433dad89857bcaddc5ea2172c97",
+  "targethash": "0099ad5961eff12096b851d9701bedfe09ec3433dad89857bcaddc5ea2172c98"
+}
+</code></pre>
+<blockquote>
+<p>❗ Each time you run <strong><code>prepare-dmint</code></strong> a new <strong><code>dmint-timestamp.json</code></strong> file will be generated, instead of modifying the old one. Please be cautious not to use incorrect data for subsequent operations.</p>
+</blockquote>
+</li>
+<li>
+<p>You can modify the bitwork rules for dmint. In the <code>rules</code>, <code>p</code> represents the Pattern, allowing you to use regular expressions to specify different <code>bitworkc</code>. Please refer to available resources on regular expressions for rule composition. In the example below, for instance:</p>
+<pre><code class="language-json">{
+  "dmint": {
+    "v": "1",
+    "mint_height": 0,
+    "merkle": "5c529dacfb37fc24804c550abc851602a9926016a424390387eb23e38de4cca1",
+    "immutable": true,
+    "items": 10,
+    "rules": [
+      {
+        "p": "1$",
+        "bitworkc": "890a"
+      },
+      {
+        "p": ".*",
+        "bitworkc": "7baf"
+      }
+    ]
+  }
+}
+</code></pre>
+</li>
+</ol>
+<p><a href="collection-containers/../rules-subrealms-and-dmint.html">See Rules Guide for more details</a></p>
+<p><mark style="color:red;"><strong>Warning:</strong></mark>** The regex standard being used is the one in Python 3.9. This means that all regex patterns are matched in "full string mode" - meaning that the match is always from the very beginning of a string to the very end even in the absence of <code>^</code> or <code>$</code>**</p>
+<p>In that case, the rule <strong><code>1$</code></strong> signifies that the <code>bitworkc</code> for items ending with <code>1</code> (e.g., <code>test1</code>) should be <code>890a</code>, while other items (e.g., <code>test</code>) should have <code>7baf</code> as their <code>bitworkc</code>. Rules are ordered from the most specific (minimum subset) to the most general (full set).</p>
+<blockquote>
+<p>❗ If you have individually set <code>bitworkc</code>/<code>bitworkr</code> for an item, you need to manually declare the corresponding pattern and rule in the `rules`. Otherwise, there will be conflicts between them and the base rules, making minting impossible after formal closure and deployment. The tool does not provide any prompts for this, so exercise caution when making modifications.</p>
+</blockquote>
+<ol start="6">
+<li>If you modify item data, ensure that you re-run the command from step 4 each time after making changes to regenerate the data.</li>
+<li>Copy a metadata <strong><code>dmint-metadata.json</code></strong> from <strong><code>template/containers/dmint-collection-general-dmint-metadata.json</code></strong> in the tool directory or <a href="https://github.com/atomicals/atomicals-js/blob/master/templates/containers/dmint-collection-general-metadata.json">https://github.com/atomicals/atomicals-js/blob/master/templates/containers/dmint-collection-general-metadata.json</a>, and adjust it according to your content.</li>
+</ol>
+<blockquote>
+<p>❗ You can refer to the <a href="collection-containers/README.html#collection-format-recommended">Collection Containers</a> to write this section, but please do not declare `attrs` and `items` as they are incorrect content for DMINT and will lead to the inability to seal the container.</p>
+</blockquote>
+<hr />
+<h3 id="configure-container-1"><a class="header" href="#configure-container-1">Configure Container</a></h3>
+<ol>
+<li>⛓️ Mint the specified container. If you want to specify a different receiving address, replace "yourWalletAddress" with the corresponding wallet address.</li>
+</ol>
+<pre><code>$ yarn cli mint-container "#container-name" --initialowner "yourWalletAddress" --satsoutput=1000 --bitworkc="b6cf" --satsbyte=1
+</code></pre>
+<ol start="2">
+<li>⛓️ Enable the dmint status for the container using the previously generated "dmint-timestamp.json." Replace "dmint-json-path.json" with the file path of data B [generated in step 2 - Prepare Collection Data].</li>
+</ol>
+<blockquote>
+<p>❗ You need to wait for 4 block confirmations (turning into verified status) after completing “Configure Container - Step 1”. You can check the container status at https://wizz.cash/live-mint by entering the revealTxid.</p>
+</blockquote>
+<pre><code>$ yarn cli enable-dmint "#container-name" "dmint-json-path.json" --satsbyte=1
+</code></pre>
+<ol start="3">
+<li>⛓️ Upload the resources for the container cover by renaming the file to "logo.png" (preferably in PNG, JPG, or SVG format), then run the following command.</li>
+</ol>
+<pre><code>$ yarn run cli store-file "path/of/your_logo.png" "logo.png" --satsbyte=1
+
+......
+filesData {
+  'logo.png': &lt;Buffer 89 50 4e 47 0d 0a 1a 0a 00 00 00 0d 49 48 44 52 00 00 00 18 00 00 00 18 08 06 00 00 00 e0 77 3d f8 00 00 00 9d 49 44 41 54 78 da 63 60 18 05 54 04 ff ... 164 more bytes&gt;
+}
+Payload CBOR Size (bytes):  235
+Payload Encoded:  {
+  'logo.png': &lt;Buffer 89 50 4e 47 0d 0a 1a 0a 00 00 00 0d 49 48 44 52 00 00 00 18 00 00 00 18 08 06 00 00 00 e0 77 3d f8 00 00 00 9d 49 44 41 54 78 da 63 60 18 05 54 04 ff ... 164 more bytes&gt;
+}
+
+...
+Success sent tx:  f26bbf1833d6af0ca533cfdd7401f8074375490120164e6d0a680aca4bacf7af
+{
+  "success": true,
+  "data": {
+    "commitTxid": "c931d7a337eef91f5f6f2b3430c78aaac0e7f11752e15576a1a4881b344457c5",
+    "revealTxid": "f26bbf1833d6af0ca533cfddbbb1f8074375490120164e6d0a680aca4bacf7af",
+    "dataId": "f26bbf1833d6af0ca533cfdd7401f8074375490120164e6d0a680aca4bacf7afi0"
+  }
+}
+✨  Done in 81.41s.
+</code></pre>
+<p>After completion, concatenate the filename and the output <code>dataId</code> as: <strong><code>atom:btc:dat:{dataId}/logo.png</code></strong>. Fill in the image field in the metadata file C [generated in step 7 of Prepare Collection Data] with this value.</p>
+<pre><code>{
+  "name": "container-name",
+  "desc": "A test container."
+  "image": "atom:btc:dat:1a29d1ed20c36a95f6b5c20977a5f1035cc0cd5f55327692149a5710d1d75e9bi0/logo.png",
+  ...
+}
+</code></pre>
+<ol start="4">
+<li>⛓️ After modifying metadata C, set it for the container.</li>
+</ol>
+<pre><code>$ yarn cli set-container-data "#container-name" "path/to/container-dmint-metadata.json" --satsbyte=1
+</code></pre>
+<ol start="5">
+<li>Execute the command to seal the container.</li>
+</ol>
+<blockquote>
+<p>❗ This operation is **IRREVERSIBLE**! Before closing, please complete the item validation in [Validate NFT Item]. Ensure that all items have been validated and are correct.</p>
+</blockquote>
+<pre><code>$ yarn cli seal "#container-name" --satsbyte=1
+</code></pre>
+<hr />
+<h3 id="validate-nft-item-1"><a class="header" href="#validate-nft-item-1"><strong>Validate NFT Item</strong></a></h3>
+<p>Due to the uniqueness of Merkle verification, there's no need to upload each NFT in advance. It's sufficient to verify whether they match the container. In different states or lifecycles of the container, you can use various methods to validate the effectiveness of NFT items.</p>
+<ul>
+<li>To validate whether a specific item is effective, you need the container's name, the item's name, and the JSON file generated in step 2 of Prepare Collection Data (replace <code>path/to/item-3.json</code> with the file path of the item).</li>
+</ul>
+<pre><code>$ yarn cli validate-container-item "#container-name" "test-item-3" "path/to/item-3.json"
+</code></pre>
+<ul>
+<li>The result will return the following content. If <strong><code>proof_valid</code></strong> is <code>true</code>, it means the validation is successful. If <strong><code>applicable_rule</code></strong> returns the complete rule, it indicates that the rule configuration is correct:</li>
+</ul>
+<pre><code>{
+  "success": true,
+  "response": {
+    "result": {
+      "status": null,
+      "candidate_atomical_id": null,
+      "atomical_id": null,
+      "candidates": [],
+      "type": "item",
+      "applicable_rule": {
+        "p": ".*",
+        "bitworkc": "a91b"
+      },
+      "proof_valid": true,
+      "target_vector": "test-item-3:any:any:image.jpg:3b0bcfe26b7521e83e595f5838d04ea25a45931a849ab5f0db134eb9a4a7cec2",
+      "target_hash": "8d800be8cb6b418d986a99b9d2fd23994fa712f3c76ef9a3c8306298d2af2ba4",
+      "dmint": {
+        "v": "1",
+        "rules": [
+          {
+            "p": ".*",
+            "bitworkc": "a91b"
+          }
+        ],
+        "merkle": "b68ace0edff5f81a92acc57e493d6d3cfa7cfc038bfe0397dfb81d082bd3b9d0",
+        "immutable": true,
+        "mint_height": 0
+      }
+    }
+  }
+}
+</code></pre>
+<blockquote>
+<p>❗ It is recommended to validate each item to ensure the effectiveness of all data.</p>
+</blockquote>
+<h3 id="mint-nft-item-1"><a class="header" href="#mint-nft-item-1"><strong>Mint NFT Item</strong></a></h3>
+<p>After the container is released, users can mint the corresponding NFT using the command-line tool, provided they have access to the json file for the item.</p>
+<pre><code>$ yarn cli mint-item "#container-name" "item-name" "path/to/item-name.json" --satsbyte=1
+</code></pre>
+<hr />
+<h2 id="advanced-topic-mint-payment-rules"><a class="header" href="#advanced-topic-mint-payment-rules">Advanced Topic: Mint Payment Rules</a></h2>
+<p><mark style="color:red;">Note:</mark> The creator of a DMINT collection can choose to specify that not only is Bitwork required to mint an item, but also certain payments must be made to predetermined addresses in order to finalize the claim process. This is basically purchasing an NFT.</p>
+<p>An example rule set with payments defined. Any item ending in "hi" must be claimed with a payment to the output script "<em>5120a1519da5fead1a2e6cc803aedbd79a756f5e0eaafccae641c16e0612fb03071c</em>" with at least 10000 satoshis and every other item claimed must have a payment of 2000 satoshis to "<em>5120a9519da5fead1a2e6cc803acebd79a756f5e0eaafccae641c16e0612fb03072c</em>"</p>
+<pre><code>```json
+{
+  "dmint": {
+    "v": "1",
+    "items": 1000,
+    "rules": [
+      {
+        "o": {
+          "5120a1519da5fead1a2e6cc803aedbd79a756f5e0eaafccae641c16e0612fb03071c": {
+            "v": 10000
+          }
+        },
+        "p": "hi$",
+        "bitworkc": "888"
+      },
+      {
+        "o": {
+          "5120a9519da5fead1a2e6cc803acebd79a756f5e0eaafccae641c16e0612fb03072c": {
+            "v": 2000
+          }
+        },
+        "p": ".*",
+        "bitworkc": "7777"
+      }
+    ],
+    "merkle": "12e772dc28611968e3f203827ed9c71e0a1e25071032d565b6fb9afee94dd344",
+    "immutable": true,
+    "mint_height": 0
+  }
+}
+```
+</code></pre>
+<p>In the event that an item minted requires payment, the status of the NFT will indicate that payment is expected for the leading candidate.</p>
+<p>Use the <strong>`transfer-builder`</strong> command to create a custom payment. This is an advanced command and could lead to the loss of funds if used incorrectly.</p>
+<p>From the <a href="https://github.com/atomicals/atomicals-js">atomical-js CLI:</a></p>
+<pre><code>yarn cli transfer-builder --atomicalreceipt &lt;atomical_id_of_item_claim_attempt&gt; --owner funding --atomicalreceipttype d --satsbyte=80
+</code></pre>
+<p>Then follow the instructions in the terminal to select which UTXOS to combine and send. Make sure you do not send UTXOS with other Atomicals in them. And construct the outputs in a way as to pay the rules defined in the DMINT Container. <mark style="color:red;"><strong>When in doubt, do NOT use this command, it is risky without advanced knowledge.</strong></mark> Wait for 3rd party wallets and services to provide direct payment support.</p>
+<h2 id="optional-operations"><a class="header" href="#optional-operations"><strong>Optional Operations</strong></a></h2>
+<p>The container is already sealed, and users can now begin minting. In the case where some items have already been minted:</p>
+<h3 id="query-the-status-of-a-single-item"><a class="header" href="#query-the-status-of-a-single-item">Query the status of a single item</a></h3>
+<p><code>get-container-item</code></p>
+<pre><code>$ yarn cli get-container-item "#container-name" "test-item-4"
+</code></pre>
+<h3 id="query-minted-items"><a class="header" href="#query-minted-items"><strong>Query Minted Items</strong></a></h3>
+<p>Use <strong><code>get-container-items</code></strong> to query minted items (<strong><code>limit</code></strong> specifies the number of entries, suggested value is <strong><code>10</code></strong>; <strong><code>offset</code></strong> indicates the starting point for the query, suggested value is <strong><code>0</code></strong>).</p>
+<pre><code>$ yarn cli get-container-items "#container-name" limit offset
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<hr />
+<h2 id="description-overview-of-realm-digital-objects-realm-name-service"><a class="header" href="#description-overview-of-realm-digital-objects-realm-name-service">description: Overview of Realm Digital Objects (Realm Name Service)</a></h2>
+<h1 id="realm-names"><a class="header" href="#realm-names">Realm Names</a></h1>
+<p>This section describes how to mint a special type of Atomical digital object called a <em>Realm.</em> You can query and search Realm names on <a href="https://realm.name">https://realm.name</a></p>
+<figure><img src="realm-names/../assets/banner2.png" alt=""><figcaption><p>Claim your Realm +name on Bitcoin @ <a href="https://realm.name">https://realm.name</a></p></figcaption></figure>
+<blockquote>
+<p><strong>-&gt; What is a <strong><em><strong>Realm</strong></em></strong>?</strong></p>
+<p>Realm Names are human-readable identifiers which can be used to associate network addresses and resource information. A Realm name begins with the plus <code>+</code> sign and has at least one alphabetical character, such as <code>+alice</code> and <code>+agent007</code> which are both valid names <em>(top-level-realms or TLRs)</em> in the Realm Name System (RNS). Realm names are self-owned and self-managed directly on the Bitcoin blockchain using the Atomicals Digital Object format — which basically means that there is no middle man or centralized registrar. Once you claim a name, it's yours forever or until you transfer it to someone else.</p>
+</blockquote>
+<h3 id=""><a class="header" href="#"></a></h3>
+<figure><img src="realm-names/../assets/WhatsApp Image 2023-12-12 at 9.35.08 AM (1).jpeg" alt=""><figcaption></figcaption></figure>
+<h3 id="mint-realm"><a class="header" href="#mint-realm">Mint Realm</a></h3>
+<p>Before using the commands below you must first create a local wallet using the <code>wallet-init</code> command. For convenience the commands.</p>
+<h4 id="step-1-download-and-install-atomicals-js-cli"><a class="header" href="#step-1-download-and-install-atomicals-js-cli">Step 1. Download and Install atomicals-js CLI</a></h4>
+<p>Download and install the <a href="https://github.com/atomicals/atomicals-js">atomicals-js</a> CLI.</p>
+<pre><code><strong>git clone https://github.com/atomicals/atomicals-js.git
+</strong><strong>cd atomicals-js
+</strong><strong>yarn install
+</strong><strong>yarn build
+</strong></code></pre>
+<h4 id="step-2-wallet-initialize"><a class="header" href="#step-2-wallet-initialize">Step 2. Wallet Initialize</a></h4>
+<p>The purpose of the wallet is to create p2tr (pay-to-taproot) spend scripts and to receive change from the transactions made for the various operations. <em>Do not put more funds than you can afford to lose, as this is still beta!</em></p>
+<p>To initialize a new <code>wallet.json</code> file that will store your address for receiving change use the <code>wallet-init</code> command.</p>
+<pre><code>yarn cli wallet-init
+
+&gt;&gt;&gt;
+
+Wallet created at wallet.json
+phrase: maple maple maple maple maple maple maple maple maple maple maple maple
+Legacy address (for change): 1FXL2CJ9nAC...u3e9Evdsa2pKrPhkag
+Derive Path: m/44'/0'/0'/0/0
+WIF: L5Sa65gNR6QsBjqK.....r6o4YzcqNRnJ1p4a6GPxqQQ
+------------------------------------------------------
+</code></pre>
+<h4 id="step-3-mint-realm"><a class="header" href="#step-3-mint-realm">Step 3. Mint Realm</a></h4>
+<p>The basic format to mint a Realm name using the <a href="realm-names/../reference-and-tools/javascript-library-cli.html">Atomicals CLI </a>is:</p>
+<pre><code><strong>yarn cli mint-realm "myrealmname"
+</strong>
+Optional flags:
+--satsbyte=&#x3C;number>
+</code></pre>
+<p>The realm mint function <code>mint-realm</code> allows minting for Realm <code>myrealmname</code> as long as you are the first to claim it.</p>
+<p>Follow the on-screen instructions to pay and mint.</p>
+<p><strong>Required Parameters:</strong></p>
+<p><em>realmname:</em> The globally unique realm name</p>
+<p><strong>Optional Flags:</strong></p>
+<p><em>--satsbyte=&lt;number&gt;</em></p>
+<p>Set the satoshis per byte for the transaction and override the default.</p>
+<h4 id="step-4-query-realm-name"><a class="header" href="#step-4-query-realm-name">Step 4. Query Realm name</a></h4>
+<p>You must wait 3 confirmations for the name to be claimed and registered correctly. After it is claimed, you can query the realm name with the command:</p>
+<pre><code><strong>yarn cli get +myrealmname
+</strong></code></pre>
+<p>You may also query and search Realm names on <a href="https://realm.name">https://realm.name</a></p>
+<h4 id="step-5-query-global-feed-optional"><a class="header" href="#step-5-query-global-feed-optional">Step 5. Query global feed (optional)</a></h4>
+<p>You can query the global feed of registered Realms and Atomicals:</p>
+<pre><code><strong>yarn cli list
+</strong></code></pre>
+<details>
+<summary>⚡ Get started and mint your first Atomical Digital Object</summary>
+<p><a href="https://github.com/atomicals/atomicals-js">Download and install the Atomicals Javascript CLI tool</a> and follow the quick start instructions to mint your NFT, Collection, or Realm name in less than 2 minutes.</p>
+</details>
+<p>\</p>
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<hr />
+<h2>description: &gt;-
+Send and receive crypto with human readable payment names powered by the
+Atomicals Realms Protocol.</h2>
+<h1 id="payname-format"><a class="header" href="#payname-format">Payname Format</a></h1>
+<h3 id="format-convention"><a class="header" href="#format-convention">Format Convention</a></h3>
+<pre><code>+[inbox]@[realm_name]
+
+Where:
++ is always required at the front to denote it is a Realm user recipient
+
+inbox: The name of the inbox associated with the Realm payment name
+
+<strong>@ is required to indicate the inbox is located at the Realm
+</strong><strong>
+</strong>realm_name: The fully qualified Realm or Subrealm name
+</code></pre>
+<p><strong>Examples</strong></p>
+<pre><code>+hello@samplerealm
++main@samplerealm
++support@samplerealm
+</code></pre>
+<p>Note: The <em>inbox</em> can be data representing the cryptocurrencies or payment methods accepted there, it can also be configured to delegate to another NFT to handle the data updates.</p>
+<h2 id="on-chain-data-object-format"><a class="header" href="#on-chain-data-object-format">On-Chain Data Object Format</a></h2>
+<p>To see how to store the data for a Realm, consider the following format layout for a Realm/NFT.</p>
+<pre><code>{
+  "paynames": {
+    "delegate": "atom:btc:id:&lt;atomical_id&gt;/paynames",
+    "hello": {
+      "delegate": "atom:btc:id:&lt;atomical_id&gt;/paynames/hello"
+    },
+    "main": {
+      "types": {
+         "btc": {
+           "value": "bitcoin btc address"
+         },
+         "ltc": {
+           "value": "litecoin ltc address",
+           "notes": "optional notes",
+           "instructions": "optional instructions"
+         }
+      }
+    }
+  }
+}
+</code></pre>
+<h3 id="fields"><a class="header" href="#fields">Fields</a></h3>
+<p><strong>paynames</strong>: The top level field that will store the paynames settings and configuration data for the Realm, which can contain additional keys which will identify the inboxes. Only characters /a-z0-9\./ should be considered valid. Maximum 64 character names.</p>
+<p><strong>types:</strong> The tickers for the various cryptocurrencies and payment types accepted</p>
+<p><strong>delegate:</strong> It is possible to delegate the entire pay names available for a Realm to an NFT, and it is also possible to delegate an individual inbox.  When <em>delegate</em> is set at the top directly underneath <em>paynames</em> field, then it takes precedence and the rest of the data is ignored (since the entire paynames settings are delegated elsewhere)</p>
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<hr />
+<h2>description: &gt;-
+Every Realm and Sub-Realm has the ability to mint any number of Sub-Realms
+below them.</h2>
+<h1 id="mint-sub-realms"><a class="header" href="#mint-sub-realms">Mint Sub-Realms</a></h1>
+<figure><img src="realm-names/../assets/WhatsApp Image 2023-12-12 at 9.35.07 AM.jpeg" alt=""><figcaption></figcaption></figure>
+<h2 id="method-1-mint-with-sub-realm-rules"><a class="header" href="#method-1-mint-with-sub-realm-rules">Method 1: Mint with Sub-Realm Rules</a></h2>
+<p>The first way to allow users to mint subrealms is to define the minting rules at the <code>subrealms</code> namespace in the Realm or Subrealm data structure.  We will demonstrate below how to configure a realm (or subrealm) to allow users to mint subrealms autonomously.  We start with the sample realm name <code>+mycoolrealm</code> and walk through the steps required to enable subrealm minting.</p>
+<h3 id="pre-requisites"><a class="header" href="#pre-requisites">Pre-Requisites</a></h3>
+<ul>
+<li>You have a Realm or Sub-Realm already claimed</li>
+<li>Decide how you will allow user's to mint subrealms (more on this below)</li>
+</ul>
+<h3 id="step-1-create-initial-subrealm-minting-rules-file"><a class="header" href="#step-1-create-initial-subrealm-minting-rules-file">Step 1. Create initial Subrealm Minting Rules File</a></h3>
+<p><a href="realm-names/../rules-subrealms-and-dmint.html">See Rules Guide for more details</a> for more details on the format of the rules file. Below we will demonstrate how to configure a sample rules configuration for our example Realm <code>+mycoolrealm</code></p>
+<p>The  example demo Realm<code>+mycoolrealm</code> exists on testnet at atomical_id<code>285051d51bb9d045d24dc0816d6f29bfe72b1c91e479702ec866c724a0f4aa56i0</code></p>
+<p><strong>Sample Rules File (Save as rules.json)</strong></p>
+<pre><code>```json
+{
+  "subrealms": {
+    "rules": [
+        {
+          "p": "^[a-z0-9]{6,64}$",
+          "bitworkc": "8888.8"
+        },
+        {
+          "p": ".*",
+           "o": {
+            "0014383fb23c5b1b40025b0e1dd3e310d6e1ee6d316e": {
+              "v": 1000
+            }
+          }
+        }
+    ]
+  }
+}
+```
+</code></pre>
+<p>The rules file above allows anyone to mint a subrealm of length 6 to 64 characters in length for free as long as the user mines the Subrealm with <a href="realm-names/../bitwork-mining.html">Bitwork</a>  of <code>"bitworkc": "8888.8"</code> (about 1-2 minutes of CPU time). There is a second additional rule entry that allows subrealms to be minted less than 6 characters in length as long as a payment of 10,000 satoshis is made to the address.</p>
+<p>Recall that you can convert between output script hex format to addresses and vice versa using the CLI tool. See <a href="realm-names/../rules-subrealms-and-dmint.html">Rules Guide</a> for more details.</p>
+<h3 id="step-2-set-the-minting-rules-with-enable-subrealms-for-your-realm"><a class="header" href="#step-2-set-the-minting-rules-with-enable-subrealms-for-your-realm">Step 2. Set the Minting Rules with "enable-subrealms" for your Realm</a></h3>
+<p>With the rules file you have created above in Step 1, we will enable it for your particular Realm.</p>
+<p>Using the CLI, execute the following command to enable subrealm minting:</p>
+<pre><code>yarn cli enable-subrealms +mycoolrealm file.json --satsbyte=100
+</code></pre>
+<p>Then follow the on-screen instructions to deposit the funds into your funding address, and after the transaction is confirmed your rules will become activated and anyone can mint subrealms according to the rules you have created.</p>
+<h3 id="step-3-query-realm-info-to-see-activated-rules"><a class="header" href="#step-3-query-realm-info-to-see-activated-rules">Step 3. Query "realm-info" to see activated rules</a></h3>
+<p>After the transaction in Step 2. is completed successfully and confirmed in at least 1 block, then you may query the activated rules for your realm with the command:</p>
+<pre><code>yarn cli realm-info mycoolrealm
+</code></pre>
+<p>It will display the relevant information about the Realm and the activated rules.</p>
+<blockquote>
+<p><strong>⭐ Congratulations! You have successfully enabled Subrealm Minting on your Realm or Subrealms.</strong> Read below on how your users can participate and claim subrealms</p>
+</blockquote>
+<h3 id="mint-and-claim-subrealm"><a class="header" href="#mint-and-claim-subrealm">Mint and Claim Subrealm</a></h3>
+<p>To mint and claim a subrealm according to the rules created above, the users can use the following commands to query if a Subrealm name is available, and determine the minting rules that are applicable and check the status of their request.</p>
+<h4 id="step-1-query-the-subrealm-to-claim-to-check-if-is-available"><a class="header" href="#step-1-query-the-subrealm-to-claim-to-check-if-is-available">Step 1. Query the Subrealm to claim to check if is available</a></h4>
+<p>Query the subrealm <code>+mycoolrealm.nicesubrealm</code> to see if it is available and if it's taken. The command <code>realm-info</code> like the DNS <code>WHOIS</code> command to report back information about a realm name.</p>
+<pre><code>yarn cli realm-info mycoolrealm.nicesubrealm
+</code></pre>
+<h4 id="step-2-mint-the-subrealm-request"><a class="header" href="#step-2-mint-the-subrealm-request">Step 2. Mint the Subrealm Request</a></h4>
+<pre><code>yarn cli mint-subrealm +mycoolrealm.nicesubrealm --satsbyte=100
+</code></pre>
+<p>Then follow the on-screen instructions. In the case of a mint that requires a payment, then you must use a tool that allows payments.</p>
+<h4 id="step-3--if-payment-is-required-make-payment-for-subrealm-during-payment-window"><a class="header" href="#step-3--if-payment-is-required-make-payment-for-subrealm-during-payment-window">Step 3.  (If payment is required) Make payment for Subrealm during payment window.</a></h4>
+<p>The CLI has the operation to see which Subrealms are ready to be paid and also help pay with regular Satoshis:</p>
+<pre><code>yarn cli pending-subrealms 
+</code></pre>
+<p>Then follow the on-screen instructions to make regular Satoshi payments.</p>
+<p><mark style="color:red;"><strong>⚠️ WARNING: It is not recommended to use the CLI to make payments for high value items and/or paying with ARC20. The tool is experimental and it is not advised to use the tool unless you are an advanced user. It is better to use one of the upcoming wallets to handle the payment complexity on your behalf.</strong></mark></p>
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<hr />
+<h2 id="description-overview-of-the-rules-system-for-claiming-subrealms-and-dmint"><a class="header" href="#description-overview-of-the-rules-system-for-claiming-subrealms-and-dmint">description: Overview of the Rules system for claiming Subrealms and DMINT</a></h2>
+<h1 id="rules-subrealms--dmint"><a class="header" href="#rules-subrealms--dmint">Rules (Subrealms &amp; DMINT)</a></h1>
+<p>Subrealms and NFT items (with DMINT - Decentralized Mints) can be minted (or "claimed") according to the <code>rules</code> set up by the owner of the parent realm or in in the case of DMINT, the creator of the container.</p>
+<p>It is possible to pay for a subrealm or DMINT'ed item using only proof of work (Bitwork) and/or also paying any set of output addresses a certain amount of Satoshis or value in an <a href="arc20-tokens/">ARC20</a> token.</p>
+<h2 id="format-of-rules-data-structure"><a class="header" href="#format-of-rules-data-structure">Format of Rules Data-structure</a></h2>
+<p>The <code>rules</code> section in the <code>dmint</code> (for containers) and <code>subrealms</code> section for Realms is identical and has the same syntax and semantics.</p>
+<p>We demonstrate the use of the rules, by building upon simple examples and gradually increasing complexity.</p>
+<p><mark style="color:red;">Warning:</mark> The regex standard being used is the one in Python 3.9. This means that all regex patterns are matched in "full string mode" - meaning that the match is always from the very beginning of a string to the very end even in the absence of <code>^</code> or <code>$</code></p>
+<h3 id="example-1-require-only-bitworkc-mining-to-claim-mint"><a class="header" href="#example-1-require-only-bitworkc-mining-to-claim-mint">Example 1: Require only Bitworkc mining to claim mint</a></h3>
+<p>Require the use of Bitwork to mine on the commit transaction (<code>bitworkc</code>). The pattern <code>"p": ".*"</code> means to match any subrealm name or any dmint item id, then the only form of "payment" required is that the item must be minted with <code>"bitworkc": "1234"</code> on the commit transaction to claim.</p>
+<pre><code>```json
+{
+  "rules": [
+      {
+        "p": ".*",
+        "bitworkc": "1234"
+      }
+  ]
+}
+```
+</code></pre>
+<h3 id="example-2-require-both-bitworkc-and-bitworkr-mining-to-claim-mint"><a class="header" href="#example-2-require-both-bitworkc-and-bitworkr-mining-to-claim-mint">Example 2: Require both Bitworkc and Bitworkr mining to claim mint</a></h3>
+<p>Require the use of Bitwork to mine on the commit transaction (<code>bitworkc</code>). The pattern <code>"p": ".*"</code> means to match any subrealm name or any dmint item id, then the form of "payment" required is that the item must be minted with <code>"bitworkc": "1234"</code> on the commit transaction to claim. Additionally the reveal transaction must have <code>"bitworkr": "8888.10" which means it must match "8888.*"</code> for the transaction hash as long as the 5th hex character is greater than or equal to "a" (10 in hex).</p>
+<pre><code>```json
+{
+  "rules": [
+      {
+        "p": ".*",
+        "bitworkc": "1234",
+        "bitworkr": "8888.10"
+      }
+  ]
+}
+```
+</code></pre>
+<h3 id="example-3-require-different-bitworkc-based-on-the-name-of-the-item"><a class="header" href="#example-3-require-different-bitworkc-based-on-the-name-of-the-item">Example 3: Require different Bitworkc based on the name of the item</a></h3>
+<p>In the third example, we specify that if the item name starts with the number <code>"0"</code> or the name ends in <code>.gif</code> then the Bitwork required is about 16x harder (ie: 16x more CPU/GPU mining will be required)</p>
+<pre><code>```json
+{
+  "rules": [
+      {
+        "p": "^0|\.gif$",
+        "bitworkc": "77777"
+      },
+      {
+        "p": ".*",
+        "bitworkc": "7777"
+      }
+  ]
+}
+```
+</code></pre>
+<h3 id="example-4-require-a-payment-to-a-certain-address-to-claim-the-item"><a class="header" href="#example-4-require-a-payment-to-a-certain-address-to-claim-the-item">Example 4: Require a payment to a certain address to claim the item</a></h3>
+<p>To enable "pay to claim" use the <code>"o"</code> (output script) field to indicate what output must be paid in order to successfully claim.</p>
+<pre><code>```json
+{
+  "rules": [
+      {
+        "p": ".*",
+         "o": {
+          "5120a97636cf3492a546d976e053f61b50788ef57a10b28885275b60bb369e6290e4": {
+            "v": 1000
+          }
+        },
+      }
+  ]
+}
+```
+</code></pre>
+<p>The above means that the output script of 5120a97636cf3492a546d976e053f61b50788ef57a10b28885275b60bb369e6290e4 must be paid at least <code>"v": 1000</code> satoshis for the claim to succeed. The script decodes to address <code>bc1p49mrdne5j2j5dktkupflvx6s0z8027ssk2yg2f6mvzand8nzjrjqschm45</code></p>
+<p><strong>Note: Use the CLI utility commands "yarn cli script-address &lt;script&gt;" to get the address decoded. To perform the reverse and get the script for an address use "yarn cli address-script &lt;address&gt;"</strong></p>
+<p>The reason for the use of the hex encoded output script is because a project may want the user to post a message in the form of an OP_RETURN on the blockchain instead of payment. Additionally it is more flexible for future address types.</p>
+<h3 id="example-5-require-a-payment-to-multiple-address-to-claim-an-item"><a class="header" href="#example-5-require-a-payment-to-multiple-address-to-claim-an-item">Example 5: Require a payment to multiple address to claim an item</a></h3>
+<p>To enable "pay to claim" use the <code>"o"</code> (output script) field to indicate what outputs must be paid in order to successfully claim.  In the example below in order to claim the items that start with <code>"000\d"</code> (ie: items <code>0000 to 0009</code>") they must pay 5000 satoshis to output script <code>5120bd5ba4e806e8cf69eff55af83c9b910f82d1978bfac53ce48554ce291dd22bec</code> (address: <code>bc1ph4d6f6qxar8knml4tturexu3p7pdr9utltzneey92n8zj8wj90kqshxyqa</code>) and also at the same time pay output script <code>5120a97636cf3492a546d976e053f61b50788ef57a10b28885275b60bb369e6290e4</code> (address: <code>bc1p49mrdne5j2j5dktkupflvx6s0z8027ssk2yg2f6mvzand8nzjrjqschm45</code>) 1000 satoshis.</p>
+<pre><code>```json
+{
+  "rules": [
+      {
+        "p": "^000\d$",
+         "o": {
+          "5120bd5ba4e806e8cf69eff55af83c9b910f82d1978bfac53ce48554ce291dd22bec": {
+            "v": 5000
+          }
+        },
+        "p": ".*",
+         "o": {
+          "5120a97636cf3492a546d976e053f61b50788ef57a10b28885275b60bb369e6290e4": {
+            "v": 1000
+          }
+        }
+      }
+  ]
+}
+```
+
+</code></pre>
+<h3 id="example-5-require-a-payment-with-specific-arc20-token-to-claim-an-item"><a class="header" href="#example-5-require-a-payment-with-specific-arc20-token-to-claim-an-item">Example 5: Require a payment with specific ARC20 token to claim an item</a></h3>
+<p>To enable "pay to claim" use the <code>"o"</code> (output script) field to indicate what outputs must be paid in order to successfully claim.  In the example below in order to claim the items that start with <code>"000\d"</code> (ie: items <code>0000 to 0009</code>") they must  pay output script <code>5120a97636cf3492a546d976e053f61b50788ef57a10b28885275b60bb369e6290e4</code> (address: <code>bc1p49mrdne5j2j5dktkupflvx6s0z8027ssk2yg2f6mvzand8nzjrjqschm45</code>) with 1000 units of the <a href="arc20-tokens/">ARC20</a> token identified by id <code>2112003789d572f764ff91b273266997e3a1153e017dc8a4fca020eaff324301i0</code></p>
+<pre><code>```json
+{
+  "rules": [
+      {
+        "p": ".*",
+         "o": {
+          "5120a97636cf3492a546d976e053f61b50788ef57a10b28885275b60bb369e6290e4": {
+            "id": "2112003789d572f764ff91b273266997e3a1153e017dc8a4fca020eaff324301i0",
+            "v": 1000
+          }
+        }
+      }
+  ]
+}
+```
+</code></pre>
+<h3 id="example-6-require-bitworkc-mining-and-a-payment-with-specific-arc20-token-to-claim-an-item"><a class="header" href="#example-6-require-bitworkc-mining-and-a-payment-with-specific-arc20-token-to-claim-an-item">Example 6: Require Bitworkc mining and a payment with specific ARC20 token to claim an item</a></h3>
+<p>The example below combines Examples above to also require Bitworkc (commit txid) mining and also a payment of a specific token</p>
+<pre><code>```json
+{
+  "rules": [
+      {
+        "p": ".*",
+         "o": {
+          "5120a97636cf3492a546d976e053f61b50788ef57a10b28885275b60bb369e6290e4": {
+            "id": "2112003789d572f764ff91b273266997e3a1153e017dc8a4fca020eaff324301i0",
+            "v": 1000
+          }
+        },
+        "bitworkc": "7878"
+      }
+  ]
+}
+```
+
+</code></pre>
+<h2 id="when-to-make-a-payment-after-the-initial-claim-candidate"><a class="header" href="#when-to-make-a-payment-after-the-initial-claim-candidate">When to make a Payment after the initial claim candidate</a></h2>
+<p>When a payment rule includes a requirement to pay at least one address, then the user who minted the claim must wait 4 block confirmations to ensure they are the leading candidate to win the subrealm or item. Then they have an additional 11 block confirmations to make the payment according to the payment rules and must attach an <code>OP_RETURN</code> receipt which specifies which atomical id they are claiming and paying for.</p>
+<p>The reason for this 2 step process is that if it was not 2 steps, then a malicious NFT collection could front run valid payments and then cheat users out of their items by paying faster than the user.  Therefore we use the candidate system to ensure only 1 user has the leading candidate and the eligibility to make the payment. If the user does not complete the payment and confirmed on the blockchain within 15 blocks since their original commit transaction, then another user can take the candidate lead and issue their payment and be awarded the item.</p>
+<p><strong>We strongly recommend wallet and service implementors use a fee rate that is at least 50% to 100% higher than the prevaling Bitcoin network conditions to ensure the payment arrives on time and not delayed after ther 15 block confirmations</strong></p>
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<hr />
+<h2 id="description-proof-of-work-cpugpu-mineable-tokens"><a class="header" href="#description-proof-of-work-cpugpu-mineable-tokens">description: Proof of Work CPU/GPU Mineable Tokens</a></h2>
+<h1 id="bitwork-mining"><a class="header" href="#bitwork-mining">Bitwork Mining</a></h1>
+<p>Atomicals introduces GPU Mineable Tokens that demonstrates proof of work and energy burn. It is now possible to create provably rare and hard-to-find tokens. Easily encode an arbitrary string such as "hello" (In hex: "68656C6C6F") and have it be a requirement in the transaction id of the NFT or even to create a validate decentralized mint in the ARC-20 fungible token protocol.</p>
+<p>In our example, to encode "hello" we require 16^10 ~ approximately 1.1 <em>trillion hashes</em> to generate. That would take approximately 10 to 20 minutes on a modern GPU to generate (assuming 1 billion hashes per second).  Initially and more practically, one can simple require a smaller prefix such as "21e8" or "7777" which would require only 16^4 ~ 65,000 hashes and easily achievable on desktop computers and smartphones. This is enough to throttle spammers and provide contextual data information encoded right there in the transaction id.</p>
+<p>Taking the step further, it is now possible to create an unstoppable content ranking algorithm for upvoting NFTs, tokens, and posts. The Atomicals indexer automatically indexes and categories all proof of work for Atomicals Digital objects and arbitrary "dat" (simple data transactions) into a proof of work content rank index.   This allows a never before possible way to rank social media posts that will elevate highly <em>energized content in a way that cannot be merely bought by the highest bidder (without running out of energy!)</em></p>
+<p>The proof of work token mining system will solves the problem of content discovery, ranking and spam filtering. It will now be possible upvote content in marketplaces and NFT platforms and <em>know</em> for certainty that the rank was not manipulated or merely sold to the highest bidder. Welcome to the future.</p>
+<p>The ARC-20 token standard follows in the footsteps of BRC-20, and also has the option to require proof of work before awarding tokens for the decentralized mints. This allows the initial token ticker deployer to define how much energy burn must be expended before awarding the token the minters. And it makes for a very beautiful mint pattern -- because all initial supply will be minted from transaction ids that share the same common prefix such as "e7ee7" or "010101" or "21e8", etc...</p>
+<p>Atomicals introduces a novel way to mine proof of work vanity prefixes into token transaction ids.</p>
+<h2 id="fine-tuning-proof-of-work-bitwork-prefix"><a class="header" href="#fine-tuning-proof-of-work-bitwork-prefix">Fine Tuning Proof of Work Bitwork Prefix</a></h2>
+<p>You may also include a number from 1-15 after the prefix such as: '7777.1' or "7777.15" or anything in between. The number represents the allowable variations for that digit.</p>
+<p>The way it works is that the digit after the dot "." is interpretted as a semi wild card to match any of the 5th character starting from that number.</p>
+<p>Take "7777.10" as an example: The first 4 txid hex chars must match "7777" and the 5th character must match the 10th hex digit and up only. <strong>The 5th digit is allowed to be a, b, c, d, e, or f</strong></p>
+<p>0<br />
+1<br />
+2<br />
+3<br />
+4<br />
+5<br />
+6<br />
+7<br />
+8<br />
+9<br />
+a<br />
+b<br />
+c<br />
+d<br />
+e<br />
+f</p>
+<p>What this system allows is fine tuning and so we are not restricted to increasing the difficulty each time by  16x, but instead can chose a range between 2x to 16.</p>
+<details>
+<summary>⚡ Get started and mint your first Atomical Digital Object</summary>
+<p><a href="https://github.com/atomicals/atomicals-js">Download and install the Atomicals Javascript CLI tool</a> and follow the quick start instructions to mint your NFT, Collection, or Realm name in less than 2 minutes.</p>
+</details>
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<hr />
+<h2>description: &gt;-
+Create hierarchies and includes of Atomicals digital objects with recursion
+and references</h2>
+<h1 id="recursion-and-references"><a class="header" href="#recursion-and-references">Recursion and References</a></h1>
+<p>The following URNs are defined to simplify including and referencing different Atomicals resources.</p>
+<p>NOTE: When referring to references in an Atomical, it is recommended to. use the <code>ctx</code> top level field in the data to import or include references to other Atomicals and data files. The <code>ctx</code> top level is reserved specially for this reason.</p>
+<p>Examples of Recursion with References in the <code>ctx</code> field:</p>
+<pre><code>{
+  // Any Atomical data above...
+  "ctx": {
+     // Implied to always get the latest data for an atomical:
+     "resourcename": "atom:btc:id:&lt;atomical_id&gt;/mydata",
+     // Gets permanent data file image.png at the dat_id
+     "icon": "atom:btc:dat:&lt;dat_id&gt;/image.png",
+     // Gets the minted "name" property for a collection
+     "collection-name": "atom:btc:container:&lt;dat_id&gt;$name",
+     // Gets the latest version of import.js located at a realm name
+     "assetbuilder.js": "atom:btc:realm:&lt;realm_name&gt;/import.js",
+  },
+  // Another other Atomical data ...
+}
+</code></pre>
+<p><strong>Note:</strong> It is preferably to use the "dat" command to refer to on-chain assets where applicable. When using containers, realms or the dynamic references (using slash "/") it is possible the resource.</p>
+<h2 id="conventions"><a class="header" href="#conventions">Conventions</a></h2>
+<p>The convention is to use the prefix "atom:btc" to indicate the Atomicals Protocol on the Bitcoin (BTC) network. It is possible to reference digital objects by atomical_id, container name, or (sub)realms and immutable file data by the data_id.</p>
+<p>The basic form of the Atomicals Universal Resource Name (URN) is:</p>
+<p><strong>atom:&lt;chain&gt;:&lt;ref_type&gt;:&lt;identifier&gt;[$ or /[&lt;file&gt;]]</strong></p>
+<p>Where:</p>
+<p><strong>chain:</strong> The referenced blockchain, set to "BTC" for Bitcoin</p>
+<p><strong>ref_type:</strong> The type of reference. Currently supported "<strong>id", "container", "realm", and "dat"</strong></p>
+<p><strong>identifier</strong>: The identifier corresponding to the ref_type. Such as atomical_id, container name, realm name, or the reveal location of the immutable data in the case of "<em>dat"</em></p>
+<p><strong>$ or /:</strong> Whether to refer to the mint (original) data (using dollar sign <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.06em;vertical-align:-0.31em;"></span><span class="mclose">)</span><span class="mord mathnormal" style="margin-right:0.02778em;">or</span><span class="mord mathnormal">t</span><span class="mord mathnormal">h</span><span class="mord mathnormal">e</span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mord mathnormal">nami</span><span class="mord mathnormal">c</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span><span class="mord mathnormal">es</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mord mathnormal">d</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span><span class="mord mathnormal">a</span><span class="mopen">(</span><span class="mord mathnormal">u</span><span class="mord mathnormal">s</span><span class="mord mathnormal">in</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">s</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">a</span><span class="mord mathnormal">s</span><span class="mord mathnormal">h</span><span class="mord">/</span><span class="mclose">)</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal" style="margin-right:0.02778em;">or</span><span class="mord mathnormal">an</span><span class="mord mathnormal">A</span><span class="mord mathnormal">t</span><span class="mord mathnormal">o</span><span class="mord mathnormal">mi</span><span class="mord mathnormal">c</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord">.</span><span class="mord mathnormal" style="margin-right:0.22222em;">Y</span><span class="mord mathnormal">o</span><span class="mord mathnormal">u</span><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.01968em;">ll</span><span class="mord mathnormal">n</span><span class="mord mathnormal">o</span><span class="mord mathnormal">t</span><span class="mord mathnormal">i</span><span class="mord mathnormal">ce</span><span class="mord mathnormal">t</span><span class="mord mathnormal">ha</span><span class="mord mathnormal">t</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal" style="margin-right:0.02778em;">or</span><span class="mord mathnormal">t</span><span class="mord mathnormal">h</span><span class="mord mathnormal">e</span><span class="mord">‘</span><span class="mord mathnormal">d</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span><span class="mord">‘</span><span class="mord mathnormal">re</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathnormal">t</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mord mathnormal">p</span><span class="mord mathnormal">ee</span><span class="mord mathnormal">i</span><span class="mord mathnormal">t</span><span class="mord mathnormal">h</span><span class="mord mathnormal" style="margin-right:0.02778em;">er</span></span></span></span> or / is acceptable and will return the same data regardless.</p>
+<p><strong>file:</strong> The name of the file is optional, if omitted then general information about the resource is returned</p>
+<p>The philosophy is that we should be able to unambiguously reference Atomicals digital objects based on their types. At the base level every type such as container and realm can also be referenced by the atomical_id. Furthermore, we should always be able to get the original mint data, and also get the latest version of files stored, including every revision of that file either by txid, version number, or block height.</p>
+<h2 id="references-by-atomical-id"><a class="header" href="#references-by-atomical-id">References by Atomical ID</a></h2>
+<p><strong>Get general information</strong></p>
+<p>atom:btc:id:&lt;atomical_id&gt;</p>
+<p>Ex: atom:btc:id:14a0d7c98304bf5ac9a5addceb1de0ce4e840641f82d71d84cebbdac427c1fc3i0</p>
+<p><strong>Get original minted data as JSON</strong></p>
+<p>atom:btc:id:&lt;atomical_id&gt;$</p>
+<p><strong>Get original minted file</strong></p>
+<p>atom:btc:id:&lt;atomical_id&gt;$links</p>
+<p>atom:btc:id:&lt;atomical_id&gt;$info.pdf</p>
+<p><strong>Get latest dynamic data state</strong></p>
+<p>atom:btc:id:&lt;atomical_id&gt;/</p>
+<p><strong>Get latest version of a file</strong></p>
+<p>atom:btc:id:&lt;atomical_id&gt;/image.png</p>
+<p><strong>Get specific version of a file</strong></p>
+<p>atom:btc:id:&lt;atomical_id&gt;/image.png@[txid or version number or blockheight]</p>
+<p>The [txid or version number or blockheight] can be of the form:</p>
+<ul>
+<li>hexadecimal of the txid that was one of the valid updates to the file</li>
+<li>Version number starting with "v" such as "v1"</li>
+<li>Block height for the state of the file as of that block height</li>
+</ul>
+<h2 id="references-by-container-name"><a class="header" href="#references-by-container-name">References by Container Name</a></h2>
+<p><strong>Get general information</strong></p>
+<p>atom:btc:container:&lt;containerName&gt;</p>
+<p>Examples: <br />
+atom:btc:id:my-coolcontainer-name</p>
+<p><strong>Get original minted data</strong></p>
+<p>atom:btc:container:&lt;containerName&gt;$</p>
+<p><strong>Get latest dynamic data state</strong></p>
+<p>atom:btc:container:&lt;containerName&gt;/</p>
+<p><strong>Get original minted file</strong></p>
+<p>atom:btc:container:&lt;containerName&gt;$image.jpg</p>
+<p><strong>Get latest version of a file</strong></p>
+<p>atom:btc:container:&lt;containerName&gt;/items</p>
+<p><strong>Get specific version of a file</strong></p>
+<p>atom:btc:container:&lt;containerName&gt;/items@[txid or version number]</p>
+<h2 id="references-by-realms"><a class="header" href="#references-by-realms">References by Realms</a></h2>
+<p><strong>Get general information</strong></p>
+<p>atom:btc:realm:&lt;realmName&gt;</p>
+<p>Where realmName can be a Top Realm or any Sub Realm</p>
+<p>Examples: <br />
+atom:btc:realm:myrealm<br />
+atom:btc:realm:myrealm.somesubrealm<br />
+atom:btc:realm:myrealm.somesubrealm.thirdlevel-subrealm</p>
+<p><strong>Get latest version of a file</strong></p>
+<p>atom:btc:realm:&lt;realmName&gt;/profile</p>
+<p><strong>Get specific version of a file</strong></p>
+<p>atom:btc:realm:&lt;realmName&gt;/profile@[txid or version number]</p>
+<p>The [txid or version number or blockheight] can be of the form:</p>
+<ul>
+<li>hexadecimal of the txid that was one of the valid updates to the file</li>
+<li>Version number starting with "v" such as "v1"</li>
+<li>Block height for the state of the file as of that block height</li>
+</ul>
+<h2 id="references-by-arc20-fungible-tokens"><a class="header" href="#references-by-arc20-fungible-tokens">References by ARC20 (Fungible Tokens)</a></h2>
+<p><strong>Get general information</strong></p>
+<p>atom:btc:arc:&lt;ticker&gt;</p>
+<p>Where ticker can be a ticker name of an ARC20 token</p>
+<p><strong>Get mint original data</strong></p>
+<p>atom:btc:arc:&lt;ticker&gt;$</p>
+<p>atom:btc:arc:&lt;ticker&gt;/icon.png</p>
+<p><strong>Get event feed at ticker</strong></p>
+<p>atom:btc:arc:&lt;ticker&gt;/events (To be determined - TBD)</p>
+<h2 id="references-to-immutable-data"><a class="header" href="#references-to-immutable-data">References to Immutable Data</a></h2>
+<p>To store immutable (non digital object data) use the "dat" command (store-file) and reference it using the <em>dat</em> URN of the form:</p>
+<p>atom:btc:dat:&lt;data_id&gt;/image.png</p>
+<p>Notice that the <code>dat</code> immutable data storage can use either the $ or the / since there is only one version of the immutable data and both will return the same data.</p>
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<hr />
+<h2>description: &gt;-
+Store files and data immutably for the scenarios when it's not needed to
+create a dynamic Atomical Digital Object</h2>
+<h1 id="permanent-file-storage"><a class="header" href="#permanent-file-storage">Permanent File Storage</a></h1>
+<h2 id="example-storing-immutable-image-file-on-chain"><a class="header" href="#example-storing-immutable-image-file-on-chain">Example: Storing Immutable Image File on Chain</a></h2>
+<p>Using the command line utility, execute the following command to set the data for a sample image file. Use the <code>store-file</code> command line (<code>dat</code> operation on chain) to specify the path to the file and the <em>on-chain filename ("image.png" is the desired target name in the example below)</em></p>
+<pre><code>// immutably store an image on-chain to reference in the container metadata
+yarn cli store-file ./path/to/image.png image.png --satsbyte=10
+
+Success sent tx:  db8a761ed493627138c5733071558c4caa65912c5cba3e1061c02d6d7933461f
+{
+  "success": true,
+  "data": {
+    "commitTxid": "b57bad8c0b7f58a552574fafc16b6efbbb3bf966b9ccfb24f03580f9462b5997",
+    "revealTxid": "db8a761ed493627138c5733071558c4caa65912c5cba3e1061c02d6d7933461f",
+    "dataId": "db8a761ed493627138c5733071558c4caa65912c5cba3e1061c02d6d7933461fi0"
+  }
+}
+</code></pre>
+<p>We will use the <em>reveal location</em> (db8a761ed493627138c5733071558c4caa65912c5cba3e1061c02d6d7933461fi0) to refer to the image <em>image.png</em> below.</p>
+<p>Now that the file is on chain, use the <a href="recursion-and-references.html">recursion and references URN</a> syntax to refer to the file.</p>
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<hr />
+<h2>description: &gt;-
+Theory of Operations of how names, tickers and other assets are claimed First
+is First.</h2>
+<h1 id="first-is-first-candidate-system"><a class="header" href="#first-is-first-candidate-system">First is First Candidate System</a></h1>
+<p>Coming soon....</p>
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<hr />
+<h2 id="description-frequently-asked-questions-about-the-atomicals-protocol"><a class="header" href="#description-frequently-asked-questions-about-the-atomicals-protocol">description: Frequently Asked Questions About The Atomicals Protocol</a></h2>
+<h1 id="faq"><a class="header" href="#faq">FAQ</a></h1>
+<h2 id="what-is-the-atomicals-protocol-1"><a class="header" href="#what-is-the-atomicals-protocol-1">What is the Atomicals Protocol?</a></h2>
+<p>Atomicals Protocol is the most simple, flexible and secure way of creating digital objects on Bitcoin. Every Atomical is a self-evident and tamper resistant chain of digital signatures, it is a robust file format for every use imaginable. Everything on the internet can now potentially be owned digital property.</p>
+<h2 id="does-atomicals-require-a-separate-chain-additional-layers-or-any-changes-to-bitcoin"><a class="header" href="#does-atomicals-require-a-separate-chain-additional-layers-or-any-changes-to-bitcoin">Does Atomicals require a separate chain, additional layers or any changes to Bitcoin?</a></h2>
+<p>No! It's here now and works on native Bitcoin and existing wallets today. It leverages the key design of Bitcoin and requires no secondary layers, side-chains and no trusted services to operate.</p>
+<h2 id="what-can-atomicals-digital-objects-be-used-for"><a class="header" href="#what-can-atomicals-digital-objects-be-used-for">What can Atomicals Digital Objects be used for?</a></h2>
+<p>Atomicals is designed for the most demanding security requirements with zero room for error. Digital Objects perfect for everything from digital art, authentication schemes to virtual land and title registries and social media such as:</p>
+<ul>
+<li>Digital collectibles, media and art</li>
+<li>Digital identity, authentication and token-gated content</li>
+<li>Web hosting and file storage</li>
+<li>Peer to peer exchange and atomic swaps</li>
+<li>Digital namespace allocation</li>
+<li>Virtual land and title registries</li>
+<li>Dynamic objects and state for games</li>
+<li>Social media profiles, posts and communities</li>
+</ul>
+<p>The heart of Atomicals is a few key simple rules to follow for mint, transfer, and update operations, continue reading to the Protocol Overview to understand the high level flow before diving deeper.  If you like, you can just <a href="reference-and-tools/javascript-library-cli.html">skip all the theory and go straight to minting your first Atomical within a couple of minutes.</a></p>
+<h2 id="how-does-atomicals-protocol-work"><a class="header" href="#how-does-atomicals-protocol-work">How does Atomicals Protocol work?</a></h2>
+<p>Learn more about how the protocol works by visiting the Protocol Specification page.</p>
+<p>{% include "reference-and-tools/specification.md" %}</p>
+<h2 id="why-are-atomicals-called-digital-objects-instead-of-nfts"><a class="header" href="#why-are-atomicals-called-digital-objects-instead-of-nfts">Why are Atomicals called "digital objects" instead of "NFTs"?</a></h2>
+<p>A non-fungible token (NFT) is a highly technical term that does not convey the diverse set of usages available. Atomicals uses the term "digital objects" to elicit all of the potential uses of the protocol. It is far more familiar to the average person and is also very developer friendly in the sense that we already work with digital objects and understand their properties.</p>
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<hr />
+<h2 id="description-detailed-documentation-of-atomicals-protocol"><a class="header" href="#description-detailed-documentation-of-atomicals-protocol">description: Detailed Documentation of Atomicals Protocol</a></h2>
+<h1 id="specification"><a class="header" href="#specification">Specification</a></h1>
+<p>The heart of Atomicals Protocol is a <strong>few simple rules</strong> to follow for mint, transfer, update, delete and extract operations.
+After getting acquainted with the theory, jump to <a href="reference-and-tools/javascript-library-cli.html">minting your first Atomical Digital Object</a> in a few minutes</p>
+<h2 id="warning-the-specification-is-defined-in-code-review-the-commands-in-the-atomicals-js-cli-to-see-how-they-function-accurately"><a class="header" href="#warning-the-specification-is-defined-in-code-review-the-commands-in-the-atomicals-js-cli-to-see-how-they-function-accurately">⚠️Warning: The specification is defined in code. Review the commands in the <a href="https://github.com/atomicals/atomicals-js/tree/master/lib/commands">atomicals-js CLI</a> to see how they function accurately.</a></h2>
+<h2 id="envelope"><a class="header" href="#envelope">Envelope</a></h2>
+<p>All methods follows a "commit and reveal" scheme leveraging Taproot (P2TR) spend path scripts. In the witness script for an input, we put the Atomicals envelope which will contain the various operations that can be legally performed on an Atomical.</p>
+<p>The convention is to use an <code>OP_FALSE OP_IF ... OP_ENDIF</code> to place arbitrary non-executable content in a witness spend script. We use the bytes of "<em>atom</em>" (<code>61746F6D</code> in hex) to indicate this envelope belongs to the Atomicals Protocol.</p>
+<pre><code>OP_FALSE
+OP_IF
+ 0x0461746F6D // Push "atom" 4 bytes
+ &lt;Operation&gt;  // Followed by a single push to denote the operation type
+ &lt;Payload&gt;    // Payload (CBOR encoded) for the operation
+OP_ENDIF
+</code></pre>
+<p>The envelope can appear anywhere in the spend script, but it is recommended to put it after a pay-to-pubkey-hash (p2pkh), which would actually be:</p>
+<pre><code>&lt;pubkey-hash&gt;
+OP_CHECKSIG     // Perform a check signature against the pubkey-hash
+OP_FALSE
+OP_IF
+ 0x0461746F6D // Push "atom" 4 bytes
+ &lt;Operation&gt;  // Followed by a single push to denote the operation type
+ &lt;Payload&gt;    // Payload (CBOR encoded) for the operation
+OP_ENDIF
+</code></pre>
+<p>The format of the <code>&lt;Operation&gt;</code> field is a single push data representing the type of operation that follows. The <code>&lt;Payload&gt;</code> data is interpreted in the context of the operation type. The <code>&lt;Payload&gt;</code> is a <a href="https://cbor.io/">CBOR</a> encoded data structure and can be decoded in a variety of programming languages. CBOR provides a concise and expressive way to encode data and greatly simplifies parsing Atomicals protocol operations since there are only push datas that contain the necessary information for all the files and their metadata.</p>
+<h2 id="payload-format-description"><a class="header" href="#payload-format-description"><strong>Payload Format Description</strong></a></h2>
+<p>The payload format is intuitive and simple: Each top-level field is a file (or field) name and below it can be any valid JSON-like structure. In the case that there is a <code>"ct"</code> (content-type) field in the payload, then it is interpreted to be a file of that type with the bytes located at <code>"d"</code></p>
+<p>The payload is <a href="https://cbor.io/">CBOR encoded</a> and can be of any size in a single push data up to 520 bytes. If the payload is larger, then include subsequent push datas of size 520. It is understood that parsers will concatenate all chunks together and then perform a CBOR decode to obtain the data structure.</p>
+<p>If any point the payload is not CBOR encoded compliant, then it is assumed there is no data associated the NFT. The absence of a Payload field is valid, but also merely indicates there is no data. Some digital objects may not have explicit payload data as part of their mint event.</p>
+<p>A final note is that any field with a sub-key <code>"ct"</code> (content-type) is assumed to be a file if and only if the <code>"d"</code> bytes are also provided. If they are not provided, then the field is treated as a non-file metadata field.</p>
+<h3 id="sample-payload-format"><a class="header" href="#sample-payload-format">Sample Payload Format</a></h3>
+<pre><code>  {
+    "someimage.png": "binary data",
+    "meta": {
+      "some": "value",
+      "another: {
+        "fieldabc": 123
+      }
+    },
+    "args": {
+      "r": "abc"
+    }
+  }
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<hr />
+<h2 id="description-learn-about-the-decentralized-atomicals-electrumx-index-service"><a class="header" href="#description-learn-about-the-decentralized-atomicals-electrumx-index-service">description: Learn about the Decentralized Atomicals ElectrumX Index Service</a></h2>
+<h1 id="electrumx-api"><a class="header" href="#electrumx-api">ElectrumX API</a></h1>
+<p><a href="https://github.com/atomicals/atomicals-electrumx">Open The Atomicals ElectrumX API Documentation</a></p>
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<hr />
+<h2>description: &gt;-
+Interact with Atomicals using the Command Line Interface (CLI) Javascript
+Library</h2>
+<h1 id="javascript-library-cli"><a class="header" href="#javascript-library-cli">Javascript Library (CLI)</a></h1>
+<p>Get the Command Line Interface (CLI) from Github:</p>
+<p><a href="https://github.com/atomicals/atomicals-js">Atomicals GitHub Repository</a></p>
+<h4 id="-1"><a class="header" href="#-1"></a></h4>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </div>
+    </body>
+</html>

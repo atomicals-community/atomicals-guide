@@ -1,0 +1,241 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Bitwork Mining - Atomicals Protocol Guide</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="An Introduction to Atomicals Theory and Digital Objects on Bitcoin.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Atomicals Protocol Guide</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<hr />
+<h2 id="description-proof-of-work-cpugpu-mineable-tokens"><a class="header" href="#description-proof-of-work-cpugpu-mineable-tokens">description: Proof of Work CPU/GPU Mineable Tokens</a></h2>
+<h1 id="bitwork-mining"><a class="header" href="#bitwork-mining">Bitwork Mining</a></h1>
+<p>Atomicals introduces GPU Mineable Tokens that demonstrates proof of work and energy burn. It is now possible to create provably rare and hard-to-find tokens. Easily encode an arbitrary string such as "hello" (In hex: "68656C6C6F") and have it be a requirement in the transaction id of the NFT or even to create a validate decentralized mint in the ARC-20 fungible token protocol.</p>
+<p>In our example, to encode "hello" we require 16^10 ~ approximately 1.1 <em>trillion hashes</em> to generate. That would take approximately 10 to 20 minutes on a modern GPU to generate (assuming 1 billion hashes per second).  Initially and more practically, one can simple require a smaller prefix such as "21e8" or "7777" which would require only 16^4 ~ 65,000 hashes and easily achievable on desktop computers and smartphones. This is enough to throttle spammers and provide contextual data information encoded right there in the transaction id.</p>
+<p>Taking the step further, it is now possible to create an unstoppable content ranking algorithm for upvoting NFTs, tokens, and posts. The Atomicals indexer automatically indexes and categories all proof of work for Atomicals Digital objects and arbitrary "dat" (simple data transactions) into a proof of work content rank index.   This allows a never before possible way to rank social media posts that will elevate highly <em>energized content in a way that cannot be merely bought by the highest bidder (without running out of energy!)</em></p>
+<p>The proof of work token mining system will solves the problem of content discovery, ranking and spam filtering. It will now be possible upvote content in marketplaces and NFT platforms and <em>know</em> for certainty that the rank was not manipulated or merely sold to the highest bidder. Welcome to the future.</p>
+<p>The ARC-20 token standard follows in the footsteps of BRC-20, and also has the option to require proof of work before awarding tokens for the decentralized mints. This allows the initial token ticker deployer to define how much energy burn must be expended before awarding the token the minters. And it makes for a very beautiful mint pattern -- because all initial supply will be minted from transaction ids that share the same common prefix such as "e7ee7" or "010101" or "21e8", etc...</p>
+<p>Atomicals introduces a novel way to mine proof of work vanity prefixes into token transaction ids.</p>
+<h2 id="fine-tuning-proof-of-work-bitwork-prefix"><a class="header" href="#fine-tuning-proof-of-work-bitwork-prefix">Fine Tuning Proof of Work Bitwork Prefix</a></h2>
+<p>You may also include a number from 1-15 after the prefix such as: '7777.1' or "7777.15" or anything in between. The number represents the allowable variations for that digit.</p>
+<p>The way it works is that the digit after the dot "." is interpretted as a semi wild card to match any of the 5th character starting from that number.</p>
+<p>Take "7777.10" as an example: The first 4 txid hex chars must match "7777" and the 5th character must match the 10th hex digit and up only. <strong>The 5th digit is allowed to be a, b, c, d, e, or f</strong></p>
+<p>0<br />
+1<br />
+2<br />
+3<br />
+4<br />
+5<br />
+6<br />
+7<br />
+8<br />
+9<br />
+a<br />
+b<br />
+c<br />
+d<br />
+e<br />
+f</p>
+<p>What this system allows is fine tuning and so we are not restricted to increasing the difficulty each time by  16x, but instead can chose a range between 2x to 16.</p>
+<details>
+<summary>⚡ Get started and mint your first Atomical Digital Object</summary>
+<p><a href="https://github.com/atomicals/atomicals-js">Download and install the Atomicals Javascript CLI tool</a> and follow the quick start instructions to mint your NFT, Collection, or Realm name in less than 2 minutes.</p>
+</details>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="rules-subrealms-and-dmint.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="recursion-and-references.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="rules-subrealms-and-dmint.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="recursion-and-references.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
