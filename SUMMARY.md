@@ -1,6 +1,7 @@
-# Table of contents
+# Summary
 
-* [Introduction](README.md)
+[Introduction](README.md)
+
 * [NFTs](nfts/README.md)
   * [Normal Transfer Rules](nfts/normal-transfer-rules.md)
   * [Swap Transfer Rules](nfts/swap-transfer-rules.md)

@@ -1,0 +1,10 @@
+[book]
+title = "Atomicals Protocol Guide"
+description = "An Introduction to Atomicals Theory and Digital Objects on Bitcoin."
+authors = ["Atomicals Community"]
+language = "en"
+multilingual = false
+src = "."
+
+[preprocessor.katex]
+after = ["links"]
