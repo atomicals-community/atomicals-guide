@@ -16,7 +16,8 @@ A decentralized is initialized with a ticker, per mint award, total mints allowe
 
 ### Initialize (init-dft)
 
-The basic format of the decentralized initialization using the [Atomicals CLI ](../reference-and-tools/javascript-library-cli.md)is given as:
+The basic format of the decentralized initialization using the
+[Atomicals CLI](../reference-and-tools/javascript-library-cli.md) is given as:
 
 ```
 yarn cli init-dft <tick> <per_mint_amt> <mint_count> 
@@ -65,6 +66,52 @@ _Note:_ it could be any digit in the range `a-f0-9`, we use all `7's` for illust
 _--satsbyte=\<number>_
 
 Set the satoshis per byte for the transaction and override the default.
+
+#### Initialize a Perpetual Minting token
+
+```
+yarn cli init-dft-perpetual <ticker>
+```
+
+**Important Optional Parameters:**
+- `max_mints`: The number of mints allowed per mint phase. (Defaults to `2000`)
+- `maxglobalmints`: The number of global max mints.
+- `mint_amount`: The number of tokens per mint. (Defaults to `10000`)
+- `mint_height`: The starting mint height.
+- `mintbitworkvec`: The base vector of the bitwork prefix.
+- `mintbitworkcinc`: The amount of `bitworkc` to increase for each phase of `max_mints`. (Defaults to `1`)
+- `mintbitworkrinc`: The amount of `bitworkr` to increase for each phase of `max_mints`.
+- `mintbitworkcincstart`: The starting amount of `bitworkc` to increase for each phase of `max_mints`.
+- `mintbitworkrincstart`: The starting amount of `bitworkr` to increase for each phase of `max_mints`.
+
+> See the complete arguments list using the command `yarn cli init-dft-perpetual -h`.
+
+Below is an example of how to initialize a token with the same configuration of $infinity.
+
+```shell
+yarn cli init-dft-perpetual infinity2 \
+  --max_mints=3333 \
+  --mint_amount=9999 \
+  --mintbitworkvec="888888888888888888888888" \
+  --mintbitworkcinc=1
+```
+
+In mathematical terms, the relationship between the arguments in the function can be expressed as follows:
+
+1. **Target Calculation**:
+    - \( T_{\text{steps}} = \lfloor \frac{\text{actual\_mints}}{\text{max\_mints}} \rfloor \)
+    - \( T_{\text{current}} = \text{starting\_target} + (T_{\text{steps}} \cdot \text{target\_increment}) \)
+
+   The current target, \( T_{\text{current}} \), is computed based on the number of minted tokens relative to the maximum allowable mints, scaled by the target increment.
+
+2. **Bitwork Prefix Derivation**:
+    - \( \text{multiples} = \frac{T_{\text{current}}}{16} \)
+    - \( F_{\text{amount}} = \lfloor \text{multiples} \rfloor \)
+    - \( \text{modulo} = T_{\text{current}} \mod 16 \)
+
+   The resulting bitwork prefix string is derived from the base vector \( \text{bitwork\_vec} \), padded to 32 characters, with:
+    - The first \( F_{\text{amount}} \) characters forming the primary prefix.
+    - If \( \text{modulo} > 0 \), it appends \(".\text{modulo}"\) to the prefix.
 
 ### Mint (mint-dft)
 
